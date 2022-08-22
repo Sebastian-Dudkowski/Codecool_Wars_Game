@@ -8,6 +8,10 @@ public class Cell implements Drawable {
     private GameMap gameMap;
     private int x, y;
 
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
     Cell(GameMap gameMap, int x, int y, CellType type) {
         this.gameMap = gameMap;
         this.x = x;
@@ -32,7 +36,13 @@ public class Cell implements Drawable {
     }
 
     public Cell getNeighbor(int dx, int dy) {
-        return gameMap.getCell(x + dx, y + dy);
+        Cell cell;
+        try {
+            cell = gameMap.getCell(x + dx, y + dy);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+        return cell;
     }
 
     @Override
