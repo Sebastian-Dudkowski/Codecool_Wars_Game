@@ -3,6 +3,6 @@ module com.example.dungen111 {
     requires javafx.fxml;
 
 
-    opens com.example.dungen111 to javafx.fxml;
-    exports com.example.dungen111;
+    opens com.example.tibia to javafx.fxml;
+    exports com.example.tibia;
 }

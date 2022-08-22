@@ -1,4 +1,4 @@
-package com.example.dungen111;
+package com.example.tibia;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
