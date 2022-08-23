@@ -31,13 +31,13 @@ public class Tiles {
         tileMap.put(ActorName.SKELETON.getName(), new Tile(29, 6));
         tileMap.put(ActorName.DROID.getName(), new Tile(26, 3));
         tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
-
     }
 
-    public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
+    public static GraphicsContext drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
                 x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+        return context;
     }
 
 }

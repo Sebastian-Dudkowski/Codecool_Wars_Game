@@ -1,8 +1,9 @@
 package com.example.tibia.actors;
 
+import com.example.tibia.Drawable;
 import com.example.tibia.map.Field;
 
-public abstract class Actor {
+public abstract class Actor implements Drawable {
 
 // attributes
     private String name;
@@ -28,4 +29,8 @@ public abstract class Actor {
         return false;
     }
 
+    @Override
+    public String getTileName() {
+        return name;
+    }
 }
