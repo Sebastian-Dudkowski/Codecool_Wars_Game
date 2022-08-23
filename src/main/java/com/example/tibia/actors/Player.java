@@ -7,10 +7,13 @@ public class Player extends Actor{
 
     private Inventory inventory;
 
+    private String nickName;
+
 // constructors
 
-    public Player(String name, Field field) {
-        super(name, field);
+    public Player(String nickName, Field field) {
+        super(ActorName.PLAYER.getName(), field);
+        this.nickName = nickName;
     }
 
 // getters & setters
