@@ -5,4 +5,6 @@ module com.example.dungen111 {
 
     opens com.example.tibia to javafx.fxml;
     exports com.example.tibia;
+    exports com.example.tibia.controller;
+    opens com.example.tibia.controller to javafx.fxml;
 }
