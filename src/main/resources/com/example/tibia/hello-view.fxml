@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#startNewGameKeyboard" prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="com.example.tibia.controller.HelloController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          onKeyPressed="#startNewGameKeyboard" prefHeight="400.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/18" fx:controller="com.example.tibia.controller.HelloController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="750.0" minWidth="10.0" prefWidth="516.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="768.0" minWidth="10.0" prefWidth="284.0" />
