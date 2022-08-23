@@ -13,6 +13,11 @@ public class GameMap {
         this.height = height;
         this.width = width;
         this.fields = new Field[height][width];
+        for (int x = 0; x < height; x++) {
+            for (int y = 0; y < width; y++) {
+                fields[x][y] = new Field(FieldType.EMPTY);
+            }
+        }
     }
 
 // getters & setters
@@ -30,5 +35,7 @@ public class GameMap {
 
 // methods
 
+    private void createFields(){
 
+    }
 }

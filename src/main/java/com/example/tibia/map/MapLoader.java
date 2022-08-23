@@ -15,10 +15,10 @@ public class MapLoader {
 
         scanner.nextLine(); // empty line
 
-        GameMap map = new GameMap(width, height);
-        for (int y = 0; y < height; y++) {
+        GameMap map = new GameMap(height, width);
+        for (int x = 0; x < height; x++) {
             String line = scanner.nextLine();
-            for (int x = 0; x < width; x++) {
+            for (int y = 0; y < width; y++) {
                 if (x < line.length()) {
                     Field field = map.getField(x, y);
                     switch (line.charAt(x)) {
