@@ -1,12 +1,15 @@
 package com.example.tibia.controller;
 
 import com.example.tibia.Tiles;
+import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
+import com.example.tibia.items.Item;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
 import com.example.tibia.map.MapLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
@@ -23,7 +26,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class GameController {
-    private Player player = new Player(HelloController.getUserName(), null);
+    private Player player = new Player(HelloController.getUserName(), null, 100, 10);
+
     GameMap map = MapLoader.loadMap(player);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
@@ -35,15 +39,20 @@ public class GameController {
     @FXML
     private GridPane gpBoard;
 
+//    @FXML
+//    private ListView<String> inventoryList;
+
     @FXML
     private Label playerName;
+
+    String[] inventory = {"sword", "potion", "rope"};
 
 
 
     public void initialize() throws IOException{
         System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
-
+//        inventoryList.getItems().addAll(inventory);
         displayMap(map);
 
     }
