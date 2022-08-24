@@ -119,7 +119,7 @@ public class GameController {
     public void test3(GameMap gameMap) throws IOException {
         for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; j++){
-                ImageView imageView = convertToFxImage(getImage(gameMap.getField(i, j+6).getTileName()));
+                ImageView imageView = convertToFxImage(getImage(gameMap.getField(j+1, i).getTileName()));
                 gpBoard.add(imageView, i, j) ;
             }
         }

@@ -33,12 +33,12 @@ public class MapLoader {
                             field.setType(FieldType.FLOOR);
                             break;
                         case 's':
-                            field.setType(FieldType.FLOOR);
                             field.setActor(new Skeleton(field));
+                            field.setType(FieldType.FLOOR);
                             break;
                         case '@':
-                            field.setType(FieldType.FLOOR);
                             field.setActor(player);
+                            field.setType(FieldType.FLOOR);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

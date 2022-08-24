@@ -20,24 +20,23 @@ public class Field implements Drawable {
     public FieldType getType() {
         return type;
     }
-
     public void setType(FieldType type) {
         this.type = type;
     }
     public void setActor(Actor actor) {
         this.actor = actor;
     }
+    public Actor getActor() {
+        return this.actor;
+    }
 
 // methods
     @Override
     public String getTileName(){
-        if (this.getActor() == null){
-            return type.getTileName();
+        if (actor != null){
+            return actor.getTileName();
         }
-        return actor.getTileName();
+        return type.getTileName();
     }
 
-    public Actor getActor() {
-        return this.actor;
-    }
 }

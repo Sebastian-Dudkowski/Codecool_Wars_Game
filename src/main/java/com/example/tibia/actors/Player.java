@@ -6,7 +6,6 @@ public class Player extends Actor{
 // attributes
 
     private Inventory inventory;
-
     private String nickName;
 
 // constructors
