@@ -21,6 +21,10 @@ public class HelloController {
     @FXML
     private TextField textFieldName;
 
+    public static String getUserName() {
+        return userName;
+    }
+
     @FXML
     void startNewGame(ActionEvent event) throws IOException {
         getNewGame();
@@ -32,18 +36,13 @@ public class HelloController {
             getNewGame();
         }
     }
-
-    public static String getUserName() {
-        return userName;
-    }
-
-    private static String userName;
+    public static String userName;
 
     public void getNewGame () throws IOException {
         userName = textFieldName.getText();
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 800, 400);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();

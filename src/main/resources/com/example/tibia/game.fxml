@@ -13,7 +13,7 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tibia.controller.GameController">
    <children>
-      <VBox alignment="TOP_RIGHT" prefHeight="576.0" prefWidth="200.0" style="-fx-background-color: grey;">
+      <VBox alignment="TOP_RIGHT" prefHeight="576.0" prefWidth="200.0">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="203.0" text="Player" textAlignment="CENTER">
                <padding>
@@ -53,7 +53,7 @@
                 <RowConstraints maxHeight="64.0" minHeight="64.0" prefHeight="64.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="field00" fitHeight="64.0" fitWidth="64.0" opacity="0.65" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: yellow;">
+                  <ImageView fx:id="field00" fitHeight="64.0" fitWidth="64.0" opacity="0.65" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../../../../../../motors-v5.png" />
                      </image>

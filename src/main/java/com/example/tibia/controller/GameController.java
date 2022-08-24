@@ -91,7 +91,7 @@ public class GameController {
     }
 
     public void test2(BufferedImage image) throws IOException {
-        File pathFile = new File("/testimage01.png");
+        File pathFile = new File("testimage01.png");
         ImageIO.write(image,"png", pathFile);
     }
 
