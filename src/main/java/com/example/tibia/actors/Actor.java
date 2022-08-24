@@ -28,7 +28,12 @@ public abstract class Actor implements Drawable {
 
 // methods
 
-    public void move(){}
+    public void move(int dx, int dy) {
+        Field nextField = field.getNeighbor(dx, dy);
+        field.setActor(null);
+        nextField.setActor(this);
+        field = nextField;
+    }
 
     private boolean moveValidation(){
         return false;

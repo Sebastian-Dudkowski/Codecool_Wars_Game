@@ -1,16 +1,23 @@
 package com.example.tibia.controller;
 
+import com.example.tibia.HelloApplication;
 import com.example.tibia.Tiles;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
 import com.example.tibia.map.MapLoader;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -38,52 +45,33 @@ public class GameController {
     @FXML
     private Label playerName;
 
-
-
-    public void initialize() throws IOException{
+    public void initialize() throws IOException {
         System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
-
         displayMap(map);
-
+    }
+    public void up(ActionEvent actionEvent) throws IOException {
+        map.getPlayer().move(-1,0);
+                displayMap(map);
     }
 
-    private void refresh() {
-        context.setFill(Color.BLACK);
-        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
-                Field field = map.getField(x, y);
-                if (field.getActor() != null) {
-                    context = Tiles.drawTile(context, field.getActor(), x, y);
-                } else {
-                    context = Tiles.drawTile(context, field, x, y);
-                }
-            }
-        }
-//        healthLabel.setText("" + map.getPlayer().getHealth());
+
+    public void down(ActionEvent actionEvent) throws IOException {
+        map.getPlayer().move(1,0);
+                displayMap(map);
     }
 
-    public void start(Stage primaryStage) throws Exception {
-        Pane root = new Pane();
-        root.setPrefSize(600, 800);
-        Canvas canvas = new Canvas();
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        Image original = new Image(getClass().getResourceAsStream("/images/tiles.png"));
-
-        root.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
-            canvas.setWidth(newValue.getWidth());
-            canvas.setHeight(newValue.getHeight());
-            gc.drawImage(original, 0, 0);
-        });
-
-        root.getChildren().add(canvas);
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+    public void left(ActionEvent actionEvent) throws IOException {
+        map.getPlayer().move(0,-1);
+                displayMap(map);
     }
+
+    public void right(ActionEvent actionEvent) throws IOException {
+        map.getPlayer().move(0,1);
+                displayMap(map);
+    }
+
+
 
     public BufferedImage getImage(String tileName) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
