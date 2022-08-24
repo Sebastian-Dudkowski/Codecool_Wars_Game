@@ -30,6 +30,9 @@ public class GameMap {
         return width;
     }
     public Field getField(int x, int y){
+        if (x >= width || y >= height){
+            return new Field(FieldType.EMPTY);
+        }
         return fields[x][y];
     }
 
