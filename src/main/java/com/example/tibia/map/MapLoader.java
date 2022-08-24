@@ -20,9 +20,9 @@ public class MapLoader {
         for (int x = 0; x < height; x++) {
             String line = scanner.nextLine();
             for (int y = 0; y < width; y++) {
-                if (x < line.length()) {
+                if (y < line.length()) {
                     Field field = map.getField(x, y);
-                    switch (line.charAt(x)) {
+                    switch (line.charAt(y)) {
                         case ' ':
                             field.setType(FieldType.EMPTY);
                             break;

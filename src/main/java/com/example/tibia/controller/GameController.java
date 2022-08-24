@@ -1,8 +1,6 @@
 package com.example.tibia.controller;
 
-import com.example.tibia.Drawable;
 import com.example.tibia.Tiles;
-import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -24,7 +22,6 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class GameController {
@@ -49,7 +46,7 @@ public class GameController {
         System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
 
-        test3(map);
+        displayMap(map);
 
 
 
@@ -96,7 +93,7 @@ public class GameController {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
         switch (tileName){
             case "player":
-                return bufferedImage.getSubimage(25*17, 7*17, 16, 16);
+                return bufferedImage.getSubimage(24*17, 6*17, 16, 16);
             case "sith":
                 return bufferedImage.getSubimage(30*17, 3*17, 16, 16);
             case "skeleton":
@@ -109,18 +106,16 @@ public class GameController {
                 return bufferedImage.getSubimage(2*17, 0, 16, 16);
             case "empty":
                 return bufferedImage.getSubimage(0, 0, 16, 16);
-            default:
-                return bufferedImage.getSubimage(0, 0, 16, 16);
         }
-
+        return null;
 
     }
 
-    public void test3(GameMap gameMap) throws IOException {
-        for (int i = 0; i < 9; i++){
-            for (int j = 0; j < 9; j++){
-                ImageView imageView = convertToFxImage(getImage(gameMap.getField(j+1, i).getTileName()));
-                gpBoard.add(imageView, i, j) ;
+    public void displayMap(GameMap gameMap) throws IOException {
+        for (int i = 0; i < 20; i++){
+            for (int j = 0; j < 25; j++){
+                ImageView imageView = convertToFxImage(getImage(gameMap.getField(i, j).getTileName()));
+                gpBoard.add(imageView, j, i) ;
             }
         }
     }
