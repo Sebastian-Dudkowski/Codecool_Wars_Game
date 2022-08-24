@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -16,6 +18,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -45,7 +48,7 @@ public class GameController {
         playerName.setText(HelloController.getUserName());
 //        gpBoard.add(new ImageView("C:\\Users\\PC\\Desktop\\motors-v5.png"), 7,7);
         BufferedImage ddd = test();
-        test2(ddd);
+        test3(ddd);
     }
 
     private void refresh() {
@@ -87,13 +90,37 @@ public class GameController {
 
     public BufferedImage test() throws IOException {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));;
-        return bufferedImage.getSubimage(0, 0, 16, 16);
+        return bufferedImage.getSubimage(0, 34, 16, 16);
     }
 
     public void test2(BufferedImage image) throws IOException {
         File pathFile = new File("testimage01.png");
         ImageIO.write(image,"png", pathFile);
     }
+
+    public void test3(BufferedImage image){
+        gpBoard.add(convertToFxImage(image), 0,1);
+    }
+
+    private ImageView convertToFxImage(BufferedImage image) {
+    WritableImage wr = null;
+    if (image != null) {
+        wr = new WritableImage(image.getWidth(), image.getHeight());
+        PixelWriter pw = wr.getPixelWriter();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                pw.setArgb(x, y, image.getRGB(x, y));
+            }
+        }
+    }
+        ImageView imageView = new ImageView(wr);
+        imageView.setFitHeight(64);
+        imageView.setFitWidth(64);
+
+    return imageView;
+
+    }
+
 
 
 }
