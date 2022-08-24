@@ -10,15 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -76,7 +70,7 @@ public class GameController {
         Canvas canvas = new Canvas();
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        Image original = new Image(getClass().getResourceAsStream("/tiles.png"));
+        Image original = new Image(getClass().getResourceAsStream("/images/tiles.png"));
 
         root.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
             canvas.setWidth(newValue.getWidth());
@@ -92,8 +86,7 @@ public class GameController {
     }
 
     public BufferedImage test() throws IOException {
-        File imageFile = new File("/tiles.png");
-        BufferedImage bufferedImage = ImageIO.read(imageFile);
+        BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));;
         return bufferedImage.getSubimage(0, 0, 16, 16);
     }
 
