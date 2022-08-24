@@ -1,5 +1,6 @@
 package com.example.tibia.map;
 
+import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Skeleton;
 

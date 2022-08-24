@@ -1,6 +1,8 @@
 package com.example.tibia.controller;
 
+import com.example.tibia.Drawable;
 import com.example.tibia.Tiles;
+import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -46,9 +48,11 @@ public class GameController {
     public void initialize() throws IOException{
         System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
-//        gpBoard.add(new ImageView("C:\\Users\\PC\\Desktop\\motors-v5.png"), 7,7);
-        BufferedImage ddd = test();
-        test3(ddd);
+
+        test3(map);
+
+
+
     }
 
     private void refresh() {
@@ -88,18 +92,37 @@ public class GameController {
 
     }
 
-    public BufferedImage test() throws IOException {
-        BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));;
-        return bufferedImage.getSubimage(0, 34, 16, 16);
+    public BufferedImage getImage(String tileName) throws IOException {
+        BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
+        switch (tileName){
+            case "player":
+                return bufferedImage.getSubimage(25*17, 7*17, 16, 16);
+            case "sith":
+                return bufferedImage.getSubimage(30*17, 3*17, 16, 16);
+            case "skeleton":
+                return bufferedImage.getSubimage(29*17, 6*17, 16, 16);
+            case "droid":
+                return bufferedImage.getSubimage(26*17, 3*17, 16, 16);
+            case "wall":
+                return bufferedImage.getSubimage(10*17, 17*17, 16, 16);
+            case "floor":
+                return bufferedImage.getSubimage(2*17, 0, 16, 16);
+            case "empty":
+                return bufferedImage.getSubimage(0, 0, 16, 16);
+            default:
+                return bufferedImage.getSubimage(0, 0, 16, 16);
+        }
+
+
     }
 
-    public void test2(BufferedImage image) throws IOException {
-        File pathFile = new File("testimage01.png");
-        ImageIO.write(image,"png", pathFile);
-    }
-
-    public void test3(BufferedImage image){
-        gpBoard.add(convertToFxImage(image), 0,1);
+    public void test3(GameMap gameMap) throws IOException {
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9; j++){
+                ImageView imageView = convertToFxImage(getImage(gameMap.getField(i, j+6).getTileName()));
+                gpBoard.add(imageView, i, j) ;
+            }
+        }
     }
 
     private ImageView convertToFxImage(BufferedImage image) {

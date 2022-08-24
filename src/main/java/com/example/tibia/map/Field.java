@@ -31,7 +31,10 @@ public class Field implements Drawable {
 // methods
     @Override
     public String getTileName(){
-        return type.getTileName();
+        if (this.getActor() == null){
+            return type.getTileName();
+        }
+        return actor.getTileName();
     }
 
     public Actor getActor() {
