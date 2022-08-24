@@ -6,14 +6,17 @@ import com.example.tibia.actors.Actor;
 public class Field implements Drawable {
 
 // attributes
-    private final int X;
-    private final int Y;
+    private int X;
+    private int Y;
     private FieldType type;
     private Actor actor;
 
+    private GameMap gameMap;
+
 // constructors
 
-    public Field(FieldType type, int x, int y){
+    public Field(GameMap gameMap,FieldType type, int x, int y){
+        this.gameMap = gameMap;
         this.type = type;
         this.X = x;
         this.Y = y;
@@ -41,13 +44,25 @@ public class Field implements Drawable {
         return Y;
     }
 
-// methods
+    public void setX(int x) {
+        X = x;
+    }
+
+    public void setY(int y) {
+        Y = y;
+    }
+
+    // methods
     @Override
     public String getTileName(){
         if (actor != null){
             return actor.getTileName();
         }
         return type.getTileName();
+    }
+
+    public Field getNeighbor(int dx, int dy) {
+        return gameMap.getField(X + dx, Y + dy);
     }
 
 }

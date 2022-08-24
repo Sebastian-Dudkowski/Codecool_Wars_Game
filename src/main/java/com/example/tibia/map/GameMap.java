@@ -18,7 +18,7 @@ public class GameMap {
         this.fields = new Field[height][width];
         for (int x = 0; x < height; x++) {
             for (int y = 0; y < width; y++) {
-                fields[x][y] = new Field(FieldType.EMPTY, x, y);
+                fields[x][y] = new Field(this, FieldType.EMPTY, x, y);
             }
         }
     }
@@ -42,7 +42,7 @@ public class GameMap {
         if (x >= 0 && x < height && y >= 0 && y < width) {
             return fields[x][y];
         }
-        return new Field(FieldType.EMPTY, x, y);
+        return new Field(this, FieldType.EMPTY, x, y);
     }
 
 // methods
