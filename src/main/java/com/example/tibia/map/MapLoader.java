@@ -17,6 +17,7 @@ public class MapLoader {
         scanner.nextLine(); // empty line
 
         GameMap map = new GameMap(height, width);
+        map.setPlayer(player);
         for (int x = 0; x < height; x++) {
             String line = scanner.nextLine();
             for (int y = 0; y < width; y++) {
@@ -38,6 +39,7 @@ public class MapLoader {
                             break;
                         case '@':
                             field.setActor(player);
+                            player.setField(field);
                             field.setType(FieldType.FLOOR);
                             break;
                         default:

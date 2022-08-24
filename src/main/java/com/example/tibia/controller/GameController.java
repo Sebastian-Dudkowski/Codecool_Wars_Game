@@ -18,8 +18,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -47,8 +45,6 @@ public class GameController {
         playerName.setText(HelloController.getUserName());
 
         displayMap(map);
-
-
 
     }
 
@@ -112,9 +108,13 @@ public class GameController {
     }
 
     public void displayMap(GameMap gameMap) throws IOException {
-        for (int i = 0; i < 20; i++){
-            for (int j = 0; j < 25; j++){
-                ImageView imageView = convertToFxImage(getImage(gameMap.getField(i, j).getTileName()));
+        // TODO: get rid of magic number (9 and 4)
+        Field center = gameMap.getPlayer().getField();
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9; j++){
+                Field field = gameMap.getField(i + center.getX() - 4, j + center.getY() - 4);
+                BufferedImage image = getImage(field.getTileName());
+                ImageView imageView = convertToFxImage(image);
                 gpBoard.add(imageView, j, i) ;
             }
         }

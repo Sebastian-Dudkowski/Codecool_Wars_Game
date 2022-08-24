@@ -4,15 +4,19 @@ import com.example.tibia.Drawable;
 import com.example.tibia.actors.Actor;
 
 public class Field implements Drawable {
-// attributes
 
+// attributes
+    private final int X;
+    private final int Y;
     private FieldType type;
     private Actor actor;
 
 // constructors
 
-    public Field(FieldType type){
+    public Field(FieldType type, int x, int y){
         this.type = type;
+        this.X = x;
+        this.Y = y;
     }
 
 // getters & setters
@@ -28,6 +32,13 @@ public class Field implements Drawable {
     }
     public Actor getActor() {
         return this.actor;
+    }
+    public int getX() {
+        return X;
+    }
+
+    public int getY() {
+        return Y;
     }
 
 // methods

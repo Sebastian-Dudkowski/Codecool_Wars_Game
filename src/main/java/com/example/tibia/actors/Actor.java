@@ -21,6 +21,11 @@ public abstract class Actor implements Drawable {
 
 // getters & setters
 
+    public Field getField() { return this.field; }
+    public void setField(Field field) {
+        this.field = field;
+    }
+
 // methods
 
     public void move(){}
