@@ -3,7 +3,10 @@ package com.example.tibia.actors;
 import com.example.tibia.map.Field;
 
 public class Player extends Actor{
-// attributes
+
+    // attributes
+    // size of the displayed grid
+    private int viewRange = 9;
 
     private Inventory inventory;
     private String nickName;
@@ -16,6 +19,10 @@ public class Player extends Actor{
     }
 
 // getters & setters
+
+    public int getViewRange() {
+        return viewRange;
+    }
 
 // methods
 

@@ -108,11 +108,12 @@ public class GameController {
     }
 
     public void displayMap(GameMap gameMap) throws IOException {
-        // TODO: get rid of magic number (9 and 4)
         Field center = gameMap.getPlayer().getField();
-        for (int i = 0; i < 9; i++){
-            for (int j = 0; j < 9; j++){
-                Field field = gameMap.getField(i + center.getX() - 4, j + center.getY() - 4);
+        for (int i = 0; i < player.getViewRange(); i++){
+            for (int j = 0; j < player.getViewRange(); j++){
+                int x = i + center.getX() - player.getViewRange() / 2;
+                int y = j + center.getY() - player.getViewRange() / 2;
+                Field field = gameMap.getField(x, y);
                 BufferedImage image = getImage(field.getTileName());
                 ImageView imageView = convertToFxImage(image);
                 gpBoard.add(imageView, j, i) ;
