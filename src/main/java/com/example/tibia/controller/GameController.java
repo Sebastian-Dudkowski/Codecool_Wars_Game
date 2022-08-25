@@ -1,5 +1,6 @@
 package com.example.tibia.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import com.example.tibia.Tiles;
 import com.example.tibia.actors.Actor;
@@ -35,22 +36,6 @@ public class GameController {
             map.getHeight() * Tiles.TILE_WIDTH);
 
     private GraphicsContext context = canvas.getGraphicsContext2D();
-
-    private class MoveNpcs extends Thread {
-
-        @Override
-        public void run(){
-            while (true){
-                for (Actor npc : map.getNpcs()){
-                    moveNPC(npc);
-                }
-            try {
-
-                Thread.sleep(1000);
-            } catch (InterruptedException e){}
-            }
-        }
-    }
 
     @FXML
     private ImageView field00;
@@ -122,8 +107,30 @@ public class GameController {
         displayEmptyHolders();
         displayMap(map);
         startNpcMovement();
+        refreshMap();
     }
 
+    private void refreshMap(){
+        Thread refresh = new Thread(() -> {
+
+            while (true){
+                try {
+                    Thread.sleep(100);
+                    Platform.runLater(() -> {
+                        try {
+                            displayMap(map);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        refresh.start();
+    }
     public BufferedImage getImage(String tileName) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
         switch (tileName) {
@@ -217,7 +224,20 @@ public class GameController {
     }
 
     private void startNpcMovement(){
-        MoveNpcs moveNpcs = new MoveNpcs();
+        Thread moveNpcs = new Thread(() -> {
+
+            while (true){
+                for (Actor npc : map.getNpcs()){
+                    moveNPC(npc);
+                }
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+
+        });
         moveNpcs.start();
     }
 
