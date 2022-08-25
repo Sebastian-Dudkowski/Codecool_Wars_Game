@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#moveKeyboard" prefHeight="576.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tibia.controller.GameController">
+<HBox fx:id="hbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#moveKeyboard" prefHeight="576.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tibia.controller.GameController">
    <children>
       <GridPane fx:id="gpBoard" alignment="CENTER" prefHeight="466.0" prefWidth="541.0">
         <columnConstraints>
@@ -47,7 +47,7 @@
                   <Insets left="20.0" right="20.0" top="5.0" />
                </padding>
             </Label>
-            <GridPane disable="true">
+            <GridPane>
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -59,22 +59,22 @@
                 <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="up" minWidth="50.0" mnemonicParsing="false" onAction="#up" text="UP" GridPane.columnIndex="1">
+                  <Button fx:id="up" minWidth="50.0" mnemonicParsing="false" onAction="#up" onKeyPressed="#upKey" text="UP" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="down" minWidth="50.0" mnemonicParsing="false" onAction="#down" text="DOWN" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="down" minWidth="50.0" mnemonicParsing="false" onAction="#down" onKeyPressed="#downKey" text="DOWN" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="right" minWidth="50.0" mnemonicParsing="false" onAction="#right" text="Right" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button fx:id="right" minWidth="50.0" mnemonicParsing="false" onAction="#right" onKeyPressed="#rightKey" text="Right" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="left" minWidth="50.0" mnemonicParsing="false" onAction="#left" text="Left" GridPane.rowIndex="1">
+                  <Button fx:id="left" minWidth="50.0" mnemonicParsing="false" onAction="#left" onKeyPressed="#leftKey" text="Left" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>

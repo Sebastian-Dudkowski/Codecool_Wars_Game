@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
@@ -30,6 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GameController {
+    private Scene scene;
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     GameMap map = MapLoader.loadMap(player);
     Canvas canvas = new Canvas(
@@ -99,10 +101,42 @@ public class GameController {
         }
     }
 
-    public void initialize() throws IOException {
-        Scene scene = up.getScene();
-        System.out.println(HelloController.getUserName());
+    @FXML
+    void upKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.UP){
+            map.getPlayer().move(-1, 0);
+        displayMap(map);
+        }
 
+    }
+    @FXML
+    void downKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.DOWN){
+            map.getPlayer().move(1, 0);
+        displayMap(map);
+        }
+
+    }
+    @FXML
+    void leftKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.LEFT){
+            map.getPlayer().move(0, -1);
+        displayMap(map);
+        }
+
+    }
+    @FXML
+    void rightKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.RIGHT){
+            map.getPlayer().move(0, 1);
+        displayMap(map);
+        }
+
+    }
+
+    public void initialize() throws IOException {
+        scene = up.getScene();
+        System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
@@ -129,6 +163,28 @@ public class GameController {
         map.getPlayer().move(0, 1);
         displayMap(map);
 
+    }
+
+    private void onKeyPressed(KeyEvent event) throws IOException {
+        switch (event.getCode()) {
+            case ENTER:
+                System.out.println("up");
+                map.getPlayer().move(-1, 0);
+                displayMap(map);
+                break;
+            case DOWN:
+                map.getPlayer().move(0, 1);
+                displayMap(map);
+                break;
+            case LEFT:
+                map.getPlayer().move(0, -1);
+                displayMap(map);
+                break;
+            case RIGHT:
+                map.getPlayer().move(1, 0);
+                displayMap(map);
+                break;
+        }
     }
 
 
