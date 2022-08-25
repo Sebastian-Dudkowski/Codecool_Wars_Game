@@ -66,9 +66,10 @@ public class GameController {
 
     @FXML
     void upKey(KeyEvent event) throws IOException {
+
         if (event.getCode() == KeyCode.UP){
             map.getPlayer().move(-1, 0);
-        displayMap(map);
+            displayMap(map);
         }
 
     }
@@ -107,30 +108,29 @@ public class GameController {
         displayEmptyHolders();
         displayMap(map);
         startNpcMovement();
-        refreshMap();
     }
 
-    private void refreshMap(){
-        Thread refresh = new Thread(() -> {
-
-            while (true){
-                try {
-                    Thread.sleep(100);
-                    Platform.runLater(() -> {
-                        try {
-                            displayMap(map);
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-
-        });
-        refresh.start();
-    }
+//    private void refreshMap(){
+//        Thread refresh = new Thread(() -> {
+//
+//            while (true){
+//                try {
+//                    Thread.sleep(100);
+//                    Platform.runLater(() -> {
+//                        try {
+//                            displayMap(map);
+//                        } catch (IOException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                    });
+//                } catch (InterruptedException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//        });
+//        refresh.start();
+//    }
     public BufferedImage getImage(String tileName) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
         switch (tileName) {
@@ -231,7 +231,14 @@ public class GameController {
                     moveNPC(npc);
                 }
                 try {
-                    Thread.sleep(500);
+                    Platform.runLater(() -> {
+                        try {
+                            displayMap(map);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    Thread.sleep(1000);
                 } catch (InterruptedException e){
                     e.printStackTrace();
                 }
