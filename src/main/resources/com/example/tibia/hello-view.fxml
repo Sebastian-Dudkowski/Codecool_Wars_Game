@@ -40,29 +40,40 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="240.0" minHeight="10.0" prefHeight="240.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <TextField fx:id="textFieldName" maxWidth="150.0" minWidth="50.0" prefHeight="25.0" prefWidth="150.0" promptText="Enter your name:" GridPane.rowIndex="1">
                      <GridPane.margin>
-                        <Insets left="75.0" top="50.0" />
+                        <Insets left="75.0" top="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="250.0" minWidth="150.0" prefHeight="39.0" prefWidth="250.0" text="START NEW GAME" textAlignment="CENTER" textFill="#1e1e1d" textOverrun="CLIP" wrapText="true">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="250.0" minWidth="150.0" prefHeight="47.0" prefWidth="250.0" text="START NEW GAME" textAlignment="CENTER" textFill="#1e1e1d" textOverrun="CLIP" wrapText="true">
                      <GridPane.margin>
-                        <Insets left="25.0" top="75.0" />
+                        <Insets left="25.0" top="100.0" />
                      </GridPane.margin>
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="startButton" maxWidth="100.0" minWidth="50.0" mnemonicParsing="false" onAction="#startNewGame" text="START" textAlignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="startButton" maxHeight="20.0" maxWidth="100.0" minHeight="50.0" minWidth="20.0" mnemonicParsing="false" onAction="#startNewGame" prefHeight="20.0" prefWidth="100.0" style="-fx-background-color: blue; -fx-border-color: yellow; -fx-border: 5;" text="START" textAlignment="CENTER" textFill="#fceb09" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="100.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
                   </Button>
+                  <ImageView fitHeight="124.0" fitWidth="301.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/Tibia.png" />
+                     </image>
+                     <GridPane.margin>
+                        <Insets bottom="135.0" />
+                     </GridPane.margin>
+                  </ImageView>
                </children>
             </GridPane>
          </children>
