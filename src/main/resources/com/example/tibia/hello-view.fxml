@@ -25,9 +25,9 @@
       <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="89.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <Pane prefHeight="138.0" prefWidth="300.0">
          <children>
-            <ImageView fitHeight="457.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="410.0" fitWidth="301.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/babyjoda.png" />
                </image>
@@ -50,7 +50,7 @@
                         <Insets left="75.0" top="20.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="250.0" minWidth="150.0" prefHeight="47.0" prefWidth="250.0" text="START NEW GAME" textAlignment="CENTER" textFill="#1e1e1d" textOverrun="CLIP" wrapText="true">
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="250.0" minWidth="150.0" prefHeight="47.0" prefWidth="250.0" text="START NEW GAME" textAlignment="CENTER" textFill="#f8f80b" textOverrun="CLIP" wrapText="true">
                      <GridPane.margin>
                         <Insets left="25.0" top="100.0" />
                      </GridPane.margin>
