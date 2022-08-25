@@ -1,6 +1,9 @@
 package com.example.tibia.map;
 
+import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
+
+import java.util.List;
 
 public class GameMap {
 // attributes
@@ -9,6 +12,8 @@ public class GameMap {
     private int width;
     private Field[][] fields;
     private Player player;
+
+    private List<Actor> npcs;
 
 // constructors
 
@@ -47,7 +52,7 @@ public class GameMap {
 
 // methods
 
-    private void createFields(){
-
+    public void addNpc(Actor npc){
+        npcs.add(npc);
     }
 }

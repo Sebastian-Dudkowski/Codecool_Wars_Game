@@ -1,6 +1,7 @@
 package com.example.tibia.controller;
 
 import com.example.tibia.Tiles;
+import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -198,6 +199,11 @@ public class GameController {
         imageView.setFitWidth(fieldSize);
 
         return imageView;
+
+    }
+
+    private void moveNPC(Actor npc){
+        Field currentPosition = npc.getField();
 
     }
 

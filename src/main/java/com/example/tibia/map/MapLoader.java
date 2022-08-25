@@ -1,5 +1,6 @@
 package com.example.tibia.map;
 
+import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Skeleton;
@@ -34,7 +35,9 @@ public class MapLoader {
                             field.setType(FieldType.FLOOR);
                             break;
                         case 's':
-                            field.setActor(new Skeleton(field));
+                            Actor skeleton = new Skeleton(field);
+                            field.setActor(skeleton);
+                            map.addNpc(skeleton);
                             field.setType(FieldType.FLOOR);
                             break;
                         case '@':
