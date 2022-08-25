@@ -3,6 +3,7 @@ package com.example.tibia.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import com.example.tibia.Tiles;
+import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
@@ -29,6 +30,10 @@ import java.util.List;
 public class GameController {
 
     private Scene scene;
+    private Inventory inventory = new Inventory();
+
+
+    List<GridPane> holders = new ArrayList<>();
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     private GameMap map = MapLoader.loadMap(player);
     private Canvas canvas = new Canvas(
@@ -39,21 +44,38 @@ public class GameController {
 
     @FXML
     private ImageView field00;
+    GraphicsContext context = canvas.getGraphicsContext2D();
+
 
     @FXML
-    private GridPane gpBoard,
-            shieldField,
-            shoesField,
-            swordField,
-            armorField,
-            magicBeanField,
-            potionField,
-            potionField2,
-            potionField3;
+    private GridPane gpBoard;
+
+    @FXML
+    private GridPane shieldField;
+
+    @FXML
+    private GridPane shoesField;
+
+    @FXML
+    private GridPane swordField;
+    @FXML
+    private GridPane armorField;
+    @FXML
+    private GridPane helmetField;
+    @FXML
+    private GridPane cardField;
 
     @FXML
     private Label playerName;
 
+    @FXML
+    private GridPane healthPotionField;
+
+    @FXML
+    private GridPane manaPotionField;
+
+    @FXML
+    private Button pickUpButton;
     @FXML
     private Button up;
 
@@ -66,26 +88,29 @@ public class GameController {
 
     @FXML
     void upKey(KeyEvent event) throws IOException {
-
-        if (event.getCode() == KeyCode.UP){
+        if (event.getCode() == KeyCode.UP) {
             map.getPlayer().move(-1, 0);
             displayMap(map);
+            pickUp();
         }
 
     }
+
     @FXML
     void downKey(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.DOWN){
+        if (event.getCode() == KeyCode.DOWN) {
             map.getPlayer().move(1, 0);
-        displayMap(map);
+            displayMap(map);
+            pickUp();
         }
-
     }
+
     @FXML
     void leftKey(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.LEFT){
+        if (event.getCode() == KeyCode.LEFT) {
             map.getPlayer().move(0, -1);
-        displayMap(map);
+            displayMap(map);
+            pickUp();
         }
 
     }
@@ -93,9 +118,10 @@ public class GameController {
     void rightKey(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.RIGHT){
             map.getPlayer().move(0, 1);
-        displayMap(map);
-        }
+            displayMap(map);
+            pickUp();
 
+        }
     }
 
     /**
@@ -104,33 +130,15 @@ public class GameController {
      */
     public void initialize() throws IOException {
         scene = up.getScene();
+        System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
-        startNpcMovement();
+
     }
 
-//    private void refreshMap(){
-//        Thread refresh = new Thread(() -> {
-//
-//            while (true){
-//                try {
-//                    Thread.sleep(100);
-//                    Platform.runLater(() -> {
-//                        try {
-//                            displayMap(map);
-//                        } catch (IOException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                    });
-//                } catch (InterruptedException e){
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        });
-//        refresh.start();
-//    }
+
+
     public BufferedImage getImage(String tileName) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
         switch (tileName) {
@@ -149,7 +157,25 @@ public class GameController {
             case "empty":
                 return bufferedImage.getSubimage(0, 0, 16, 16);
             case "sword":
-                return bufferedImage.getSubimage(2 * 15, 0, 16, 16);
+                return bufferedImage.getSubimage(3 * 17, 24 * 17, 16, 16);
+            case "shoes":
+                return bufferedImage.getSubimage(8 * 17, 22 * 17, 16, 16);
+            case "shield":
+                return bufferedImage.getSubimage(7 * 17, 26 * 17, 16, 16);
+            case "armor":
+                return bufferedImage.getSubimage(3 * 17, 23 * 17, 16, 16);
+            case "helmet":
+                return bufferedImage.getSubimage(2 * 17, 22 * 17, 16, 16);
+            case "manaPotion":
+                return bufferedImage.getSubimage(16 * 17, 25 * 17, 16, 16);
+            case "healthPotion":
+                return bufferedImage.getSubimage(17 * 17, 25 * 17, 16, 16);
+            case "card":
+                return bufferedImage.getSubimage(22 * 17, 4 * 17, 16, 16);
+            case "door":
+                return bufferedImage.getSubimage(8 * 17, 11 * 17, 16, 16);
+            case "bench":
+                return bufferedImage.getSubimage(8 * 17, 5 * 17, 16, 16);
         }
         return null;
 
@@ -169,25 +195,41 @@ public class GameController {
             }
         }
     }
-
-    //    List<GridPane> holders = new ArrayList<>(Arrays.asList(swordField, shoesField, armorField,
-//            shieldField, potionField, potionField2, potionField3, magicBeanField));
-    List<GridPane> holders = new ArrayList<>();
-
-    public void addElementsToHolders() {
-
-    }
-
+    ImageView swordImageView;
     public void displayEmptyHolders() throws IOException {
-        holders = new ArrayList<>(Arrays.asList(swordField, shoesField, armorField,
-                shieldField, potionField, potionField2, potionField3, magicBeanField));
         int fieldSize = 48;
-        for (int i = 0; i < holders.size(); i++) {
-            BufferedImage image = getImage("empty");
-            ImageView imageView = convertToFxImage(image, fieldSize);
-            holders.get(i).add(imageView, 0, 0);
-
-        }
+        BufferedImage swordImage = getImage("sword");
+        swordImageView = convertToFxImage(swordImage, fieldSize);
+        swordImageView.setOpacity(0.2);
+        swordField.add(swordImageView, 0, 0);
+        BufferedImage shoeImage = getImage("shoes");
+        ImageView shoesImageView = convertToFxImage(shoeImage, fieldSize);
+        shoesImageView.setOpacity(0.2);
+        shoesField.add(shoesImageView, 0, 0);
+        BufferedImage shieldImage = getImage("shield");
+        ImageView shieldImageView = convertToFxImage(shieldImage, fieldSize);
+        shieldImageView.setOpacity(0.2);
+        shieldField.add(shieldImageView, 0, 0);
+        BufferedImage armorImage = getImage("armor");
+        ImageView armorImageView = convertToFxImage(armorImage, fieldSize);
+        armorImageView.setOpacity(0.2);
+        armorField.add(armorImageView, 0, 0);
+        BufferedImage helmetImage = getImage("helmet");
+        ImageView helmetImageView = convertToFxImage(helmetImage, fieldSize);
+        helmetImageView.setOpacity(0.2);
+        helmetField.add(helmetImageView, 0, 0);
+        BufferedImage healthPotionImage = getImage("healthPotion");
+        ImageView healthPotionImageView = convertToFxImage(healthPotionImage, fieldSize);
+        healthPotionImageView.setOpacity(0.2);
+        healthPotionField.add(healthPotionImageView, 0, 0);
+        BufferedImage manaPotionImage = getImage("manaPotion");
+        ImageView manaPotionImageView = convertToFxImage(manaPotionImage, fieldSize);
+        manaPotionImageView.setOpacity(0.2);
+        manaPotionField.add(manaPotionImageView, 0, 0);
+        BufferedImage cardImage = getImage("card");
+        ImageView cardImageView = convertToFxImage(cardImage, fieldSize);
+        cardImageView.setOpacity(0.2);
+        cardField.add(cardImageView, 0, 0);
     }
 
 

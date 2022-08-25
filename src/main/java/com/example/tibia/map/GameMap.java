@@ -2,6 +2,7 @@ package com.example.tibia.map;
 
 import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
+import com.example.tibia.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class GameMap {
     private Field[][] fields;
     private Player player;
     private List<Actor> npcs;
+    private Item item;
 
 // constructors
 
@@ -30,7 +32,9 @@ public class GameMap {
     }
 
 // getters & setters
-
+    public Item getItem() {
+        return item;
+    }
     public int getHeight() {
         return height;
     }

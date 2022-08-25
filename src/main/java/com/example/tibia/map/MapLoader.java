@@ -4,6 +4,7 @@ import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Skeleton;
+import com.example.tibia.items.Sword;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -34,10 +35,20 @@ public class MapLoader {
                         case '.':
                             field.setType(FieldType.FLOOR);
                             break;
+                        case 'D':
+                            field.setType(FieldType.DOOR);
+                            break;
+                        case 'L':
+                            field.setType(FieldType.BENCH);
+                            break;
                         case 's':
                             Actor skeleton = new Skeleton(field);
                             field.setActor(skeleton);
                             map.addNpc(skeleton);
+                            field.setType(FieldType.FLOOR);
+                            break;
+                        case '$':
+                            field.setItem(new Sword(field));
                             field.setType(FieldType.FLOOR);
                             break;
                         case '@':
@@ -46,7 +57,7 @@ public class MapLoader {
                             field.setType(FieldType.FLOOR);
                             break;
                         default:
-                            throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
+                            throw new RuntimeException("Unrecognized character: '" + line.charAt(y) + "'");
                     }
                 }
             }
