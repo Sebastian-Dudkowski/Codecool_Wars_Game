@@ -5,6 +5,7 @@ import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
 import com.example.tibia.map.MapLoader;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -23,7 +24,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class GameController {
-    private Player player = new Player(HelloController.getUserName(), null);
+    private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     GameMap map = MapLoader.loadMap(player);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
