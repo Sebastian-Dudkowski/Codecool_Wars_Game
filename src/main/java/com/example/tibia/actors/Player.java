@@ -4,9 +4,8 @@ import com.example.tibia.map.Field;
 
 public class Player extends Actor {
 
-    // attributes
-    // size of the displayed grid
-    private int viewRange = 9;
+// attributes
+    private int viewRange = 9; // size of the displayed grid
 
     private Inventory inventory;
     private String nickName;

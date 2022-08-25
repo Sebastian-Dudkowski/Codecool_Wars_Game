@@ -33,6 +33,12 @@ public class MapLoader {
                         case '.':
                             field.setType(FieldType.FLOOR);
                             break;
+                        case 'D':
+                            field.setType(FieldType.DOOR);
+                            break;
+                        case 'L':
+                            field.setType(FieldType.BENCH);
+                            break;
                         case 's':
                             field.setActor(new Skeleton(field));
                             field.setType(FieldType.FLOOR);
@@ -43,7 +49,7 @@ public class MapLoader {
                             field.setType(FieldType.FLOOR);
                             break;
                         default:
-                            throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
+                            throw new RuntimeException("Unrecognized character: '" + line.charAt(y) + "'");
                     }
                 }
             }

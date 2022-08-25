@@ -2,6 +2,7 @@ package com.example.tibia.actors;
 
 import com.example.tibia.Drawable;
 import com.example.tibia.map.Field;
+import com.example.tibia.map.FieldType;
 
 public abstract class Actor implements Drawable {
 
@@ -30,6 +31,9 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Field nextField = field.getNeighbor(dx, dy);
+        if (nextField.getActor() != null || nextField.getType() != FieldType.FLOOR){
+            return;
+        }
         field.setActor(null);
         nextField.setActor(this);
         field = nextField;

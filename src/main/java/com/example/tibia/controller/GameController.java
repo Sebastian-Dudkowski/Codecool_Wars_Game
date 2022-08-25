@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
@@ -80,25 +81,37 @@ public class GameController {
     private Button right;
 
     @FXML
-    void moveKeyboard(KeyEvent event) throws IOException {
-        switch (event.getCode()) {
-            case ENTER:
-                System.out.println("up");
-                map.getPlayer().move(-1, 0);
-                displayMap(map);
-                break;
-            case DOWN:
-                map.getPlayer().move(0, 1);
-                displayMap(map);
-                break;
-            case LEFT:
-                map.getPlayer().move(0, -1);
-                displayMap(map);
-                break;
-            case RIGHT:
-                map.getPlayer().move(1, 0);
-                displayMap(map);
-                break;
+    void upKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.UP) {
+            map.getPlayer().move(-1, 0);
+            displayMap(map);
+        }
+
+    }
+
+    @FXML
+    void downKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.DOWN) {
+            map.getPlayer().move(1, 0);
+            displayMap(map);
+        }
+
+    }
+
+    @FXML
+    void leftKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.LEFT) {
+            map.getPlayer().move(0, -1);
+            displayMap(map);
+        }
+
+    }
+
+    @FXML
+    void rightKey(KeyEvent event) throws IOException {
+        if (event.getCode() == KeyCode.RIGHT) {
+            map.getPlayer().move(0, 1);
+            displayMap(map);
         }
     }
 
@@ -108,27 +121,6 @@ public class GameController {
         displayEmptyHolders();
         displayMap(map);
 
-    }
-
-    public void up(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(-1, 0);
-        displayMap(map);
-    }
-
-
-    public void down(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(1, 0);
-        displayMap(map);
-    }
-
-    public void left(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(0, -1);
-        displayMap(map);
-    }
-
-    public void right(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(0, 1);
-        displayMap(map);
     }
 
 
@@ -165,7 +157,10 @@ public class GameController {
                 return bufferedImage.getSubimage(17 * 17, 25 * 17, 16, 16);
             case "card":
                 return bufferedImage.getSubimage(22 * 17, 4 * 17, 16, 16);
-
+            case "door":
+                return bufferedImage.getSubimage(8 * 17, 11*17, 16, 16);
+            case "bench":
+                return bufferedImage.getSubimage(8 * 17, 5*17, 16, 16);
         }
         return null;
 
