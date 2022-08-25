@@ -80,33 +80,36 @@ public class GameController {
 
     @FXML
     void upKey(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.UP){
+        if (event.getCode() == KeyCode.UP) {
             map.getPlayer().move(-1, 0);
-        displayMap(map);
+            displayMap(map);
         }
 
     }
+
     @FXML
     void downKey(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.DOWN){
+        if (event.getCode() == KeyCode.DOWN) {
             map.getPlayer().move(1, 0);
-        displayMap(map);
+            displayMap(map);
         }
 
     }
+
     @FXML
     void leftKey(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.LEFT){
+        if (event.getCode() == KeyCode.LEFT) {
             map.getPlayer().move(0, -1);
-        displayMap(map);
+            displayMap(map);
         }
 
     }
+
     @FXML
     void rightKey(KeyEvent event) throws IOException {
-        if (event.getCode() == KeyCode.RIGHT){
+        if (event.getCode() == KeyCode.RIGHT) {
             map.getPlayer().move(0, 1);
-        displayMap(map);
+            displayMap(map);
         }
 
     }
@@ -119,7 +122,6 @@ public class GameController {
         displayMap(map);
 
     }
-
 
 
     public BufferedImage getImage(String tileName) throws IOException {
@@ -141,6 +143,10 @@ public class GameController {
                 return bufferedImage.getSubimage(0, 0, 16, 16);
             case "sword":
                 return bufferedImage.getSubimage(2 * 15, 0, 16, 16);
+            case "door":
+                return bufferedImage.getSubimage(8 * 17, 11*17, 16, 16);
+            case "bench":
+                return bufferedImage.getSubimage(8 * 17, 5*17, 16, 16);
         }
         return null;
 

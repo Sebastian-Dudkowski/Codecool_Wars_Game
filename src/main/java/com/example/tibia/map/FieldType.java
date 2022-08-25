@@ -3,7 +3,9 @@ package com.example.tibia.map;
 public enum FieldType {
     EMPTY("empty"),
     FLOOR("floor"),
-    WALL("wall");
+    WALL("wall"),
+    DOOR("door"),
+    BENCH("bench");
 
     private final String tileName;
 
