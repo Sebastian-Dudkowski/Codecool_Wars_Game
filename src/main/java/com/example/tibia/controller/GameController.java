@@ -128,6 +128,7 @@ public class GameController {
     public void right(ActionEvent actionEvent) throws IOException {
         map.getPlayer().move(0, 1);
         displayMap(map);
+
     }
 
 
