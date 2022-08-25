@@ -32,13 +32,33 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GameController {
+
     private Scene scene;
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
-    GameMap map = MapLoader.loadMap(player);
-    Canvas canvas = new Canvas(
+    private GameMap map = MapLoader.loadMap(player);
+    private Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
-    GraphicsContext context = canvas.getGraphicsContext2D();
+
+    private GraphicsContext context = canvas.getGraphicsContext2D();
+
+    private class MoveNpcs extends Thread {
+
+        @Override
+        public void run(){
+            while (true){
+                for (Actor npc : map.getNpcs()){
+                    moveNPC(npc);
+                }
+            System.out.println("Thread running");
+            try {
+//                displayMap(map);
+                Thread.sleep(1000);
+            } catch (InterruptedException e){}
+            }
+        }
+    }
+
     @FXML
     private ImageView field00;
 
@@ -112,16 +132,18 @@ public class GameController {
 
     }
 
+    /**
+     * INITIALIZE
+     * @throws IOException
+     */
     public void initialize() throws IOException {
         scene = up.getScene();
         System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
-
+        startNpcMovement();
     }
-
-
 
     public BufferedImage getImage(String tileName) throws IOException {
         BufferedImage bufferedImage = ImageIO.read(getClass().getResource("/images/tiles.png"));
@@ -203,9 +225,21 @@ public class GameController {
     }
 
     private void moveNPC(Actor npc){
-        Field currentPosition = npc.getField();
-
+        int npcX = npc.getField().getX();
+        int npcY = npc.getField().getY();
+        int playerX = map.getPlayer().getField().getX();
+        int playerY = map.getPlayer().getField().getY();
+        // TODO: get rid of magic number (4)
+        if ( Math.abs(playerX - npcX) <= 4 && Math.abs(playerY - npcY) <= 4 ){
+            int nextX = (npcX > playerX) ? -1 : (npcX < playerX) ? 1 : 0;
+            int nextY = (npcY > playerY) ? -1 : (npcY < playerY) ? 1 : 0;
+            npc.move(nextX, nextY);
+        }
     }
 
+    private void startNpcMovement(){
+        MoveNpcs moveNpcs = new MoveNpcs();
+        moveNpcs.start();
+    }
 
 }

@@ -3,6 +3,7 @@ package com.example.tibia.map;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameMap {
@@ -12,7 +13,6 @@ public class GameMap {
     private int width;
     private Field[][] fields;
     private Player player;
-
     private List<Actor> npcs;
 
 // constructors
@@ -21,6 +21,7 @@ public class GameMap {
         this.height = height;
         this.width = width;
         this.fields = new Field[height][width];
+        this.npcs = new ArrayList<>();
         for (int x = 0; x < height; x++) {
             for (int y = 0; y < width; y++) {
                 fields[x][y] = new Field(this, FieldType.EMPTY, x, y);
@@ -49,6 +50,10 @@ public class GameMap {
         }
         return new Field(this, FieldType.EMPTY, x, y);
     }
+    public List<Actor> getNpcs() {
+        return npcs;
+    }
+
 
 // methods
 
