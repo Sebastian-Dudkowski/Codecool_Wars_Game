@@ -167,6 +167,7 @@ public class GameController {
 
     }
 
+
     public void displayMap(GameMap gameMap) throws IOException {
         int fieldSize = 64;
         Field center = gameMap.getPlayer().getField();
