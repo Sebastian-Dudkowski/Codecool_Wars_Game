@@ -3,6 +3,7 @@ package com.example.tibia.map;
 import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Skeleton;
+import com.example.tibia.items.Sword;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -41,6 +42,10 @@ public class MapLoader {
                             break;
                         case 's':
                             field.setActor(new Skeleton(field));
+                            field.setType(FieldType.FLOOR);
+                            break;
+                        case '$':
+                            field.setItem(new Sword(field));
                             field.setType(FieldType.FLOOR);
                             break;
                         case '@':

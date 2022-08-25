@@ -1,20 +1,33 @@
 package com.example.tibia.items;
 
-public abstract class Item {
+import com.example.tibia.Drawable;
+import com.example.tibia.map.Field;
+
+public abstract class Item implements Drawable {
 // attributes
 
 
-
     private String name;
+    private Field field;
 
 // constructors
 
-    public Item(){}
-    public Item(String name){
+
+    public Item(String name, Field field) {
         this.name = name;
+        this.field = field;
     }
 
-// getters & setters
+
+    // getters & setters
+    public Field getField() {
+        return this.field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,8 +37,12 @@ public abstract class Item {
     }
 // methods
 
-    public void use(){
+    public void use() {
 
     }
 
+    @Override
+    public String getTileName() {
+        return name;
+    }
 }
