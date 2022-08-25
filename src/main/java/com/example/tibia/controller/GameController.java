@@ -1,6 +1,7 @@
 package com.example.tibia.controller;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import com.example.tibia.Tiles;
 import com.example.tibia.actors.Inventory;
@@ -43,48 +44,25 @@ public class GameController {
     private GraphicsContext context = canvas.getGraphicsContext2D();
 
     @FXML
-    private ImageView field00;
-    GraphicsContext context = canvas.getGraphicsContext2D();
-
-
-    @FXML
-    private GridPane gpBoard;
-
-    @FXML
-    private GridPane shieldField;
-
-    @FXML
-    private GridPane shoesField;
+    private GridPane gpBoard,
+            shieldField,
+            shoesField,
+            swordField,
+            armorField,
+            helmetField,
+            cardField,
+            healthPotionField,
+            manaPotionField;
 
     @FXML
-    private GridPane swordField;
-    @FXML
-    private GridPane armorField;
-    @FXML
-    private GridPane helmetField;
-    @FXML
-    private GridPane cardField;
+    private Button pickUpButton,
+            up,
+            down,
+            left,
+            right;
 
     @FXML
     private Label playerName;
-
-    @FXML
-    private GridPane healthPotionField;
-
-    @FXML
-    private GridPane manaPotionField;
-
-    @FXML
-    private Button pickUpButton;
-    @FXML
-    private Button up;
-
-    @FXML
-    private Button down;
-    @FXML
-    private Button left;
-    @FXML
-    private Button right;
 
     @FXML
     void upKey(KeyEvent event) throws IOException {
@@ -124,6 +102,22 @@ public class GameController {
         }
     }
 
+    public void pick(ActionEvent actionEvent) {
+        inventory.addItem(map.getPlayer().getField().getItem());
+        swordImageView.setOpacity(1);
+        map.getPlayer().getField().setItem(null);
+    }
+
+    public void pickUp() {
+        if (map.getPlayer().getField().getItem() != null) {
+            pickUpButton.setDisable(false);
+
+
+        } else {
+            pickUpButton.setDisable(true);
+        }
+    }
+
     /**
      * INITIALIZE
      * @throws IOException
@@ -134,6 +128,7 @@ public class GameController {
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
+        startNpcMovement();
 
     }
 
@@ -289,5 +284,4 @@ public class GameController {
         });
         moveNpcs.start();
     }
-
 }
