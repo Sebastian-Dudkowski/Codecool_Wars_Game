@@ -143,10 +143,10 @@ public class GameController {
 
     }
 
-    public void up(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(-1, 0);
-        displayMap(map);
-    }
+//    public void up(ActionEvent actionEvent) throws IOException {
+//        map.getPlayer().move(-1, 0);
+//        displayMap(map);
+//    }
 
 
     public void down(ActionEvent actionEvent) throws IOException {

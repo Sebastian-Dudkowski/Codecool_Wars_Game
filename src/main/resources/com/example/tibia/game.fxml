@@ -59,22 +59,22 @@
                 <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="up" minWidth="50.0" mnemonicParsing="false" onAction="#up" onKeyPressed="#upKey" text="UP" GridPane.columnIndex="1">
+                  <Button fx:id="up" minWidth="50.0" mnemonicParsing="false" onKeyReleased="#upKey" text="UP" GridPane.columnIndex="1">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="down" minWidth="50.0" mnemonicParsing="false" onAction="#down" onKeyPressed="#downKey" text="DOWN" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="down" minWidth="50.0" mnemonicParsing="false" onAction="#down" onKeyReleased="#downKey" text="DOWN" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="right" minWidth="50.0" mnemonicParsing="false" onAction="#right" onKeyPressed="#rightKey" text="Right" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button fx:id="right" minWidth="50.0" mnemonicParsing="false" onAction="#right" onKeyReleased="#rightKey" text="Right" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="20.0" />
                      </GridPane.margin>
                   </Button>
-                  <Button fx:id="left" minWidth="50.0" mnemonicParsing="false" onAction="#left" onKeyPressed="#leftKey" text="Left" GridPane.rowIndex="1">
+                  <Button fx:id="left" minWidth="50.0" mnemonicParsing="false" onAction="#left" onKeyReleased="#leftKey" text="Left" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
