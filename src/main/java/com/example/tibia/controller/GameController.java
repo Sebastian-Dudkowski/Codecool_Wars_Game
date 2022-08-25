@@ -1,16 +1,14 @@
 package com.example.tibia.controller;
 
+import javafx.fxml.FXML;
 import com.example.tibia.Tiles;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
 import com.example.tibia.map.MapLoader;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -20,10 +18,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -50,9 +44,8 @@ public class GameController {
                 for (Actor npc : map.getNpcs()){
                     moveNPC(npc);
                 }
-            System.out.println("Thread running");
             try {
-//                displayMap(map);
+
                 Thread.sleep(1000);
             } catch (InterruptedException e){}
             }
@@ -63,32 +56,19 @@ public class GameController {
     private ImageView field00;
 
     @FXML
-    private GridPane gpBoard;
-
-    @FXML
-    private GridPane shieldField;
-
-    @FXML
-    private GridPane shoesField;
-
-    @FXML
-    private GridPane swordField;
-    @FXML
-    private GridPane armorField;
-    @FXML
-    private GridPane magicBeanField;
+    private GridPane gpBoard,
+            shieldField,
+            shoesField,
+            swordField,
+            armorField,
+            magicBeanField,
+            potionField,
+            potionField2,
+            potionField3;
 
     @FXML
     private Label playerName;
 
-    @FXML
-    private GridPane potionField;
-
-    @FXML
-    private GridPane potionField2;
-
-    @FXML
-    private GridPane potionField3;
     @FXML
     private Button up;
 
@@ -138,7 +118,6 @@ public class GameController {
      */
     public void initialize() throws IOException {
         scene = up.getScene();
-        System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
@@ -231,8 +210,8 @@ public class GameController {
         int playerY = map.getPlayer().getField().getY();
         // TODO: get rid of magic number (4)
         if ( Math.abs(playerX - npcX) <= 4 && Math.abs(playerY - npcY) <= 4 ){
-            int nextX = (npcX > playerX) ? -1 : (npcX < playerX) ? 1 : 0;
-            int nextY = (npcY > playerY) ? -1 : (npcY < playerY) ? 1 : 0;
+            int nextX = Integer.compare(playerX, npcX);
+            int nextY = Integer.compare(playerY, npcY);
             npc.move(nextX, nextY);
         }
     }
