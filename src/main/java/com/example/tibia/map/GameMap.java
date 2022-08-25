@@ -1,6 +1,7 @@
 package com.example.tibia.map;
 
 import com.example.tibia.actors.Player;
+import com.example.tibia.items.Item;
 
 public class GameMap {
 // attributes
@@ -9,6 +10,7 @@ public class GameMap {
     private int width;
     private Field[][] fields;
     private Player player;
+    private Item item;
 
 // constructors
 
@@ -24,7 +26,9 @@ public class GameMap {
     }
 
 // getters & setters
-
+    public Item getItem() {
+        return item;
+    }
     public int getHeight() {
         return height;
     }

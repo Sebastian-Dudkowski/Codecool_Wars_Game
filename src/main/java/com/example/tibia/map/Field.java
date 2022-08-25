@@ -20,7 +20,7 @@ public class Field implements Drawable {
 
 // constructors
 
-    public Field(GameMap gameMap,FieldType type, int x, int y){
+    public Field(GameMap gameMap,FieldType type, int x, int y) {
         this.gameMap = gameMap;
         this.type = type;
         this.X = x;

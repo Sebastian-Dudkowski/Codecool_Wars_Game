@@ -5,7 +5,8 @@ public enum FieldType {
     FLOOR("floor"),
     WALL("wall"),
     DOOR("door"),
-    BENCH("bench");
+    BENCH("bench"),
+    ITEM("item");
 
     private final String tileName;
 

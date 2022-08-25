@@ -1,6 +1,7 @@
 package com.example.tibia.controller;
 
 import com.example.tibia.Tiles;
+import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -32,6 +33,8 @@ import java.util.List;
 
 public class GameController {
     private Scene scene;
+    private Inventory inventory = new Inventory();
+
 
     List<GridPane> holders = new ArrayList<>();
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
@@ -69,7 +72,8 @@ public class GameController {
     @FXML
     private GridPane manaPotionField;
 
-
+    @FXML
+    private Button pickUpButton;
     @FXML
     private Button up;
 
@@ -85,6 +89,7 @@ public class GameController {
         if (event.getCode() == KeyCode.UP) {
             map.getPlayer().move(-1, 0);
             displayMap(map);
+            pickUp();
         }
 
     }
@@ -94,8 +99,11 @@ public class GameController {
         if (event.getCode() == KeyCode.DOWN) {
             map.getPlayer().move(1, 0);
             displayMap(map);
+            System.out.println("getItem" + map.getItem());
+            System.out.println("getPlayer get Field" + map.getPlayer().getField());
+            System.out.println("get player" + map.getPlayer());
+                    pickUp();
         }
-
     }
 
     @FXML
@@ -103,6 +111,7 @@ public class GameController {
         if (event.getCode() == KeyCode.LEFT) {
             map.getPlayer().move(0, -1);
             displayMap(map);
+            pickUp();
         }
 
     }
@@ -112,6 +121,8 @@ public class GameController {
         if (event.getCode() == KeyCode.RIGHT) {
             map.getPlayer().move(0, 1);
             displayMap(map);
+            pickUp();
+
         }
     }
 
@@ -120,7 +131,17 @@ public class GameController {
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
+    }
 
+    void pickUp() {
+        if (map.getPlayer().getField().getItem() != null) {
+            pickUpButton.setDisable(false);
+            inventory.addItem(map.getPlayer().getField().getItem());
+            System.out.println(inventory.getItems());
+            map.getPlayer().getField().setItem(null) ;
+        } else {
+            pickUpButton.setDisable(true);
+        }
     }
 
 
@@ -158,9 +179,9 @@ public class GameController {
             case "card":
                 return bufferedImage.getSubimage(22 * 17, 4 * 17, 16, 16);
             case "door":
-                return bufferedImage.getSubimage(8 * 17, 11*17, 16, 16);
+                return bufferedImage.getSubimage(8 * 17, 11 * 17, 16, 16);
             case "bench":
-                return bufferedImage.getSubimage(8 * 17, 5*17, 16, 16);
+                return bufferedImage.getSubimage(8 * 17, 5 * 17, 16, 16);
         }
 
         return null;
@@ -171,6 +192,7 @@ public class GameController {
     public void displayMap(GameMap gameMap) throws IOException {
         int fieldSize = 64;
         Field center = gameMap.getPlayer().getField();
+        System.out.println(center.toString());
         for (int i = 0; i < player.getViewRange(); i++) {
             for (int j = 0; j < player.getViewRange(); j++) {
                 int x = i + center.getX() - player.getViewRange() / 2;
@@ -187,28 +209,36 @@ public class GameController {
         int fieldSize = 48;
         BufferedImage swordImage = getImage("sword");
         ImageView swordImageView = convertToFxImage(swordImage, fieldSize);
-        swordField.add(swordImageView,0,0);
+        swordImageView.setOpacity(0.2);
+        swordField.add(swordImageView, 0, 0);
         BufferedImage shoeImage = getImage("shoes");
         ImageView shoesImageView = convertToFxImage(shoeImage, fieldSize);
-        shoesField.add(shoesImageView,0,0);
+        shoesImageView.setOpacity(0.2);
+        shoesField.add(shoesImageView, 0, 0);
         BufferedImage shieldImage = getImage("shield");
         ImageView shieldImageView = convertToFxImage(shieldImage, fieldSize);
-        shieldField.add(shieldImageView,0,0);
+        shieldImageView.setOpacity(0.2);
+        shieldField.add(shieldImageView, 0, 0);
         BufferedImage armorImage = getImage("armor");
         ImageView armorImageView = convertToFxImage(armorImage, fieldSize);
-        armorField.add(armorImageView,0,0);
+        armorImageView.setOpacity(0.2);
+        armorField.add(armorImageView, 0, 0);
         BufferedImage helmetImage = getImage("helmet");
         ImageView helmetImageView = convertToFxImage(helmetImage, fieldSize);
-        helmetField.add(helmetImageView,0,0);
+        helmetImageView.setOpacity(0.2);
+        helmetField.add(helmetImageView, 0, 0);
         BufferedImage healthPotionImage = getImage("healthPotion");
         ImageView healthPotionImageView = convertToFxImage(healthPotionImage, fieldSize);
-        healthPotionField.add(healthPotionImageView,0,0);
+        healthPotionImageView.setOpacity(0.2);
+        healthPotionField.add(healthPotionImageView, 0, 0);
         BufferedImage manaPotionImage = getImage("manaPotion");
         ImageView manaPotionImageView = convertToFxImage(manaPotionImage, fieldSize);
-        manaPotionField.add(manaPotionImageView,0,0);
+        manaPotionImageView.setOpacity(0.2);
+        manaPotionField.add(manaPotionImageView, 0, 0);
         BufferedImage cardImage = getImage("card");
         ImageView cardImageView = convertToFxImage(cardImage, fieldSize);
-        cardField.add(cardImageView,0,0);
+        cardImageView.setOpacity(0.2);
+        cardField.add(cardImageView, 0, 0);
     }
 
 
