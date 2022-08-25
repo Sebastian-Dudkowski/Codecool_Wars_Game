@@ -102,7 +102,7 @@ public class GameController {
             System.out.println("getItem" + map.getItem());
             System.out.println("getPlayer get Field" + map.getPlayer().getField());
             System.out.println("get player" + map.getPlayer());
-                    pickUp();
+            pickUp();
         }
     }
 
@@ -127,18 +127,25 @@ public class GameController {
     }
 
     public void initialize() throws IOException {
+
         scene = up.getScene();
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
     }
 
+    @FXML
+    void pick(ActionEvent event) {
+        inventory.addItem(map.getPlayer().getField().getItem());
+        swordImageView.setOpacity(1);
+        map.getPlayer().getField().setItem(null);
+    }
+
     void pickUp() {
         if (map.getPlayer().getField().getItem() != null) {
             pickUpButton.setDisable(false);
-            inventory.addItem(map.getPlayer().getField().getItem());
-            System.out.println(inventory.getItems());
-            map.getPlayer().getField().setItem(null) ;
+
+
         } else {
             pickUpButton.setDisable(true);
         }
@@ -204,11 +211,11 @@ public class GameController {
             }
         }
     }
-
+    ImageView swordImageView;
     public void displayEmptyHolders() throws IOException {
         int fieldSize = 48;
         BufferedImage swordImage = getImage("sword");
-        ImageView swordImageView = convertToFxImage(swordImage, fieldSize);
+        swordImageView = convertToFxImage(swordImage, fieldSize);
         swordImageView.setOpacity(0.2);
         swordField.add(swordImageView, 0, 0);
         BufferedImage shoeImage = getImage("shoes");
