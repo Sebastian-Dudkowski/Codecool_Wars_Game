@@ -79,29 +79,6 @@ public class GameController {
     private Button right;
 
     @FXML
-    void moveKeyboard(KeyEvent event) throws IOException {
-        switch (event.getCode()) {
-            case ENTER:
-                System.out.println("up");
-                map.getPlayer().move(-1, 0);
-                displayMap(map);
-                break;
-            case DOWN:
-                map.getPlayer().move(0, 1);
-                displayMap(map);
-                break;
-            case LEFT:
-                map.getPlayer().move(0, -1);
-                displayMap(map);
-                break;
-            case RIGHT:
-                map.getPlayer().move(1, 0);
-                displayMap(map);
-                break;
-        }
-    }
-
-    @FXML
     void upKey(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.UP){
             map.getPlayer().move(-1, 0);
@@ -143,49 +120,6 @@ public class GameController {
 
     }
 
-//    public void up(ActionEvent actionEvent) throws IOException {
-//        map.getPlayer().move(-1, 0);
-//        displayMap(map);
-//    }
-
-
-    public void down(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(1, 0);
-        displayMap(map);
-    }
-
-    public void left(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(0, -1);
-        displayMap(map);
-    }
-
-    public void right(ActionEvent actionEvent) throws IOException {
-        map.getPlayer().move(0, 1);
-        displayMap(map);
-
-    }
-
-    private void onKeyPressed(KeyEvent event) throws IOException {
-        switch (event.getCode()) {
-            case ENTER:
-                System.out.println("up");
-                map.getPlayer().move(-1, 0);
-                displayMap(map);
-                break;
-            case DOWN:
-                map.getPlayer().move(0, 1);
-                displayMap(map);
-                break;
-            case LEFT:
-                map.getPlayer().move(0, -1);
-                displayMap(map);
-                break;
-            case RIGHT:
-                map.getPlayer().move(1, 0);
-                displayMap(map);
-                break;
-        }
-    }
 
 
     public BufferedImage getImage(String tileName) throws IOException {
