@@ -2,6 +2,7 @@ package com.example.tibia.map;
 
 import com.example.tibia.Drawable;
 import com.example.tibia.actors.Actor;
+import com.example.tibia.items.Item;
 
 public class Field implements Drawable {
 
@@ -10,6 +11,10 @@ public class Field implements Drawable {
     private int Y;
     private FieldType type;
     private Actor actor;
+
+
+
+    private Item item;
 
     private GameMap gameMap;
 
@@ -23,6 +28,13 @@ public class Field implements Drawable {
     }
 
 // getters & setters
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
     public FieldType getType() {
         return type;
@@ -57,7 +69,10 @@ public class Field implements Drawable {
     public String getTileName(){
         if (actor != null){
             return actor.getTileName();
+        } else if ( item != null) {
+            return item.getTileName();
         }
+
         return type.getTileName();
     }
 

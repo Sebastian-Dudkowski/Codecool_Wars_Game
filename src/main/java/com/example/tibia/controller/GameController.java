@@ -32,14 +32,15 @@ import java.util.List;
 
 public class GameController {
     private Scene scene;
+
+    List<GridPane> holders = new ArrayList<>();
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     GameMap map = MapLoader.loadMap(player);
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
-    @FXML
-    private ImageView field00;
+
 
     @FXML
     private GridPane gpBoard;
@@ -55,19 +56,20 @@ public class GameController {
     @FXML
     private GridPane armorField;
     @FXML
-    private GridPane magicBeanField;
+    private GridPane helmetField;
+    @FXML
+    private GridPane cardField;
 
     @FXML
     private Label playerName;
 
     @FXML
-    private GridPane potionField;
+    private GridPane healthPotionField;
 
     @FXML
-    private GridPane potionField2;
+    private GridPane manaPotionField;
 
-    @FXML
-    private GridPane potionField3;
+
     @FXML
     private Button up;
 
@@ -111,12 +113,10 @@ public class GameController {
             map.getPlayer().move(0, 1);
             displayMap(map);
         }
-
     }
 
     public void initialize() throws IOException {
         scene = up.getScene();
-        System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();
         displayMap(map);
@@ -142,7 +142,21 @@ public class GameController {
             case "empty":
                 return bufferedImage.getSubimage(0, 0, 16, 16);
             case "sword":
-                return bufferedImage.getSubimage(2 * 15, 0, 16, 16);
+                return bufferedImage.getSubimage(3 * 17, 24 * 17, 16, 16);
+            case "shoes":
+                return bufferedImage.getSubimage(8 * 17, 22 * 17, 16, 16);
+            case "shield":
+                return bufferedImage.getSubimage(7 * 17, 26 * 17, 16, 16);
+            case "armor":
+                return bufferedImage.getSubimage(3 * 17, 23 * 17, 16, 16);
+            case "helmet":
+                return bufferedImage.getSubimage(2 * 17, 22 * 17, 16, 16);
+            case "manaPotion":
+                return bufferedImage.getSubimage(16 * 17, 25 * 17, 16, 16);
+            case "healthPotion":
+                return bufferedImage.getSubimage(17 * 17, 25 * 17, 16, 16);
+            case "card":
+                return bufferedImage.getSubimage(22 * 17, 4 * 17, 16, 16);
             case "door":
                 return bufferedImage.getSubimage(8 * 17, 11*17, 16, 16);
             case "bench":
@@ -168,24 +182,32 @@ public class GameController {
         }
     }
 
-    //    List<GridPane> holders = new ArrayList<>(Arrays.asList(swordField, shoesField, armorField,
-//            shieldField, potionField, potionField2, potionField3, magicBeanField));
-    List<GridPane> holders = new ArrayList<>();
-
-    public void addElementsToHolders() {
-
-    }
-
     public void displayEmptyHolders() throws IOException {
-        holders = new ArrayList<>(Arrays.asList(swordField, shoesField, armorField,
-                shieldField, potionField, potionField2, potionField3, magicBeanField));
         int fieldSize = 48;
-        for (int i = 0; i < holders.size(); i++) {
-            BufferedImage image = getImage("empty");
-            ImageView imageView = convertToFxImage(image, fieldSize);
-            holders.get(i).add(imageView, 0, 0);
-
-        }
+        BufferedImage swordImage = getImage("sword");
+        ImageView swordImageView = convertToFxImage(swordImage, fieldSize);
+        swordField.add(swordImageView,0,0);
+        BufferedImage shoeImage = getImage("shoes");
+        ImageView shoesImageView = convertToFxImage(shoeImage, fieldSize);
+        shoesField.add(shoesImageView,0,0);
+        BufferedImage shieldImage = getImage("shield");
+        ImageView shieldImageView = convertToFxImage(shieldImage, fieldSize);
+        shieldField.add(shieldImageView,0,0);
+        BufferedImage armorImage = getImage("armor");
+        ImageView armorImageView = convertToFxImage(armorImage, fieldSize);
+        armorField.add(armorImageView,0,0);
+        BufferedImage helmetImage = getImage("helmet");
+        ImageView helmetImageView = convertToFxImage(helmetImage, fieldSize);
+        helmetField.add(helmetImageView,0,0);
+        BufferedImage healthPotionImage = getImage("healthPotion");
+        ImageView healthPotionImageView = convertToFxImage(healthPotionImage, fieldSize);
+        healthPotionField.add(healthPotionImageView,0,0);
+        BufferedImage manaPotionImage = getImage("manaPotion");
+        ImageView manaPotionImageView = convertToFxImage(manaPotionImage, fieldSize);
+        manaPotionField.add(manaPotionImageView,0,0);
+        BufferedImage cardImage = getImage("card");
+        ImageView cardImageView = convertToFxImage(cardImage, fieldSize);
+        cardField.add(cardImageView,0,0);
     }
 
 
