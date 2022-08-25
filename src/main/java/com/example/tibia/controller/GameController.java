@@ -148,6 +148,7 @@ public class GameController {
             case "bench":
                 return bufferedImage.getSubimage(8 * 17, 5*17, 16, 16);
         }
+
         return null;
 
     }
