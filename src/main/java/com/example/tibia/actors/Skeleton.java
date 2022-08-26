@@ -11,6 +11,7 @@ public class Skeleton extends Actor{
 
     public Skeleton(Field field){
         super(ActorName.SKELETON.getName(), field);
+        super.viewRange = 5;
     }
 
 // getters & setters

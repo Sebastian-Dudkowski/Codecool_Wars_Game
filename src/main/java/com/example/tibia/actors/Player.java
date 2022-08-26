@@ -5,20 +5,18 @@ import com.example.tibia.map.Field;
 public class Player extends Actor {
 
 // attributes
-    private int viewRange = 9; // size of the displayed grid
+
 
     private Inventory inventory;
     private String nickName;
-
     private int health;
-
-
     private int attackPower;
 
 // constructors
 
     public Player(String nickName, Field field, int health, int attackPower) {
         super(ActorName.PLAYER.getName(), field);
+        super.viewRange = 9;
         this.nickName = nickName;
         this.health = health;
         this.attackPower = attackPower;
@@ -37,6 +35,8 @@ public class Player extends Actor {
         return viewRange;
     }
 
+    public void setViewRange(int range) { this.viewRange = range; }
+
     public int getAttackPower() {
         return attackPower;
     }
@@ -44,6 +44,7 @@ public class Player extends Actor {
     public void setAttackPower(int attackPower) {
         this.attackPower = attackPower;
     }
+
 // methods
 
     public void attack() {

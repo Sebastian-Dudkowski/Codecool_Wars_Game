@@ -10,6 +10,7 @@ public abstract class Actor implements Drawable {
     private String name;
     private int health;
     private Field field;
+    protected int viewRange = 9;
 
 // constructors
 
@@ -33,6 +34,8 @@ public abstract class Actor implements Drawable {
     public int getY() {
         return field.getY();
     }
+
+    public int getViewRange() { return viewRange; }
 
 // methods
 
