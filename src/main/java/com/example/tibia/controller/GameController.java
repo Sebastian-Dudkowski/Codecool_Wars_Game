@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class GameController {
 
@@ -50,14 +51,15 @@ public class GameController {
     void pick(ActionEvent event) {
 
     }
+
     @FXML
-    private BorderPane borderpane = new BorderPane();
+    private BorderPane borderpane;
     public Canvas getCanvas() {
         return canvas;
     }
+
     public BorderPane getBorderpane() {
         return borderpane;
     }
-
 }
 

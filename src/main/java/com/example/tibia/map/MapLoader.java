@@ -20,12 +20,12 @@ public class MapLoader {
 
         GameMap map = new GameMap(height, width);
         map.setPlayer(player);
-        for (int x = 0; x < height; x++) {
+        for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
-            for (int y = 0; y < width; y++) {
-                if (y < line.length()) {
+            for (int x = 0; x < width; x++) {
+                if (x < line.length()) {
                     Field field = map.getField(x, y);
-                    switch (line.charAt(y)) {
+                    switch (line.charAt(x)) {
                         case ' ':
                             field.setType(FieldType.EMPTY);
                             break;
@@ -57,7 +57,7 @@ public class MapLoader {
                             field.setType(FieldType.FLOOR);
                             break;
                         default:
-                            throw new RuntimeException("Unrecognized character: '" + line.charAt(y) + "'");
+                            throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
                 }
             }
