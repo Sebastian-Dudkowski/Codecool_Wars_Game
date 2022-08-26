@@ -1,6 +1,7 @@
 package com.example.tibia;
 
 
+import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
 import com.example.tibia.map.MapLoader;
@@ -80,6 +81,7 @@ public class Main extends Application {
         gc.getBorderpane().setCenter(gc.getCanvas());
         primaryStage.setScene(scene);
         displayMap();
+        startNpcMovement();
         scene.setOnKeyPressed(this::onKeyPressed);
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
@@ -127,8 +129,39 @@ public class Main extends Application {
 //                int y = j + center.getY() - player.getViewRange() / 2;
                 Field field = map.getField(map.getPlayer().getX() + x - (SCREEN_SIZE / 2), map.getPlayer().getY() + y - (SCREEN_SIZE / 2));
                 Tiles.drawTile(context, field.getTileName(), x, y);
-                System.out.println(field.getTileName());
             }
         }
+    }
+
+     private void moveNPC(Actor npc){
+        int npcX = npc.getField().getX();
+        int npcY = npc.getField().getY();
+        int playerX = map.getPlayer().getField().getX();
+        int playerY = map.getPlayer().getField().getY();
+        // TODO: get rid of magic number (4)
+        if ( Math.abs(playerX - npcX) <= 4 && Math.abs(playerY - npcY) <= 4 ){
+            int nextX = Integer.compare(playerX, npcX);
+            int nextY = Integer.compare(playerY, npcY);
+            npc.move(nextX, nextY);
+        }
+    }
+
+    private void startNpcMovement(){
+        Thread moveNpcs = new Thread(() -> {
+
+            while (true){
+                for (Actor npc : map.getNpcs()){
+                    moveNPC(npc);
+                }
+                displayMap();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        });
+        moveNpcs.start();
     }
 }
