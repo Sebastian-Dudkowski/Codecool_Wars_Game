@@ -22,6 +22,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import com.example.tibia.controller.GameController;
 import java.io.IOException;
+import java.util.Random;
 
 
 public class Main extends Application {
@@ -133,6 +134,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Make npc try to get close to the player,
+     * and attack him if adjacent to
+     * @param npc - npc to be moved
+     */
      private void moveNPC(Actor npc){
         int npcX = npc.getField().getX();
         int npcY = npc.getField().getY();
@@ -140,10 +146,19 @@ public class Main extends Application {
         int playerY = map.getPlayer().getField().getY();
         int viewRange = npc.getViewRange();
         if ( Math.abs(playerX - npcX) <= viewRange && Math.abs(playerY - npcY) <= viewRange ){
+            Field originalField = npc.getField();
             int nextX = Integer.compare(playerX, npcX);
             int nextY = Integer.compare(playerY, npcY);
+            if (playerX == npcX + nextX && playerY == npcY + nextY) {
+                // placeholder for attack function
+                System.out.println("ATTACK!");
+                return;
+            }
             npc.move(nextX, nextY);
-
+            // try to go around obstacles
+            while (npc.getField().equals(originalField)){
+                npc.move(new Random().nextInt((1 + 1) + 1) -1, new Random().nextInt((1 + 1) + 1) -1);
+            }
         }
     }
 
