@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Tiles {
     public static int TILE_WIDTH = 32;
-    private static Image tileset = new Image("D:\\Projekty Java\\dungeon-crawl-1-java-Sebastian-Dudkowski\\src\\main\\resources\\images\\tiles.png", 543 * 2, 543 * 2, true, false);
+    private static Image tileset = new Image("tiles.png", 543 * 2, 543 * 2, true, false);
     private static Map<String, Tile> tileMap = new HashMap<>();
     public static class Tile {
         public final int x, y, w, h;
