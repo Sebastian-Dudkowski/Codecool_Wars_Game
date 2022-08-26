@@ -30,11 +30,7 @@ import java.util.List;
 
 public class GameController {
 
-    private Scene scene;
     private Inventory inventory = new Inventory();
-
-
-    List<GridPane> holders = new ArrayList<>();
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     private GameMap map = MapLoader.loadMap(player);
     private Canvas canvas = new Canvas(
@@ -44,7 +40,7 @@ public class GameController {
     private GraphicsContext context = canvas.getGraphicsContext2D();
 
     @FXML
-    private GridPane gpBoard,
+    private ImageView gpBoard,
             shieldField,
             shoesField,
             swordField,
@@ -123,7 +119,6 @@ public class GameController {
      * @throws IOException
      */
     public void initialize() throws IOException {
-        scene = up.getScene();
         System.out.println(HelloController.getUserName());
         playerName.setText(HelloController.getUserName());
         displayEmptyHolders();

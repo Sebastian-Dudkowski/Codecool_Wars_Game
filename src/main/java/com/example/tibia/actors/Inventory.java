@@ -8,14 +8,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Inventory {
-    public List<Item> getItems() {
-        return items;
-    }
 
     // attributes
     private List<Item> items;
     private List<String> itemNames;
     private Field field;
+
 // constructors
 
     public Inventory() {
@@ -23,6 +21,10 @@ public class Inventory {
     }
 
 // getters & setters
+
+    public List<Item> getItems() {
+        return items;
+    }
 
     // methods
     public void addItem(Item item) {

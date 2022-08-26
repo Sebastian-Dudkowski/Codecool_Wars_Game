@@ -2,6 +2,7 @@ package com.example.tibia.controller;
 
 import com.example.tibia.HelloApplication;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -46,7 +47,13 @@ public class HelloController {
         Scene scene2 = new Scene(fxmlLoader.load());
         stage.setTitle("Hello2!");
         stage.setScene(scene2);
-
+//        GameController gameController = fxmlLoader.getController();
+//        scene2.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent keyEvent) {
+//                gameController.
+//            }
+//        });
         stage.show();
 
         Stage stageToClose = (Stage) textFieldName.getScene().getWindow();
