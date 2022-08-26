@@ -33,7 +33,7 @@ public class Main extends Application {
     public static String userName;
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     private GameMap map = MapLoader.loadMap(player);
-    private final int SCREEN_SIZE = 20;
+    private final int SCREEN_SIZE = 9;
 
     Canvas canvas = new Canvas(
             SCREEN_SIZE * Tiles.TILE_WIDTH,
@@ -73,9 +73,8 @@ public class Main extends Application {
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
-        hideButton();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(), 1100, 650);
         gc = fxmlLoader.getController();
         context = gc.getCanvas().getGraphicsContext2D();
         gc.getBorderpane().setCenter(gc.getCanvas());
@@ -121,12 +120,12 @@ public class Main extends Application {
     public void displayMap(){
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-        Field center = map.getPlayer().getField();
-        for (int i = 0; i < player.getViewRange(); i++) {
-            for (int j = 0; j < player.getViewRange(); j++) {
-                int x = i + center.getX() - player.getViewRange() / 2;
-                int y = j + center.getY() - player.getViewRange() / 2;
-                Field field = map.getField(x, y);
+//        Field center = map.getPlayer().getField();
+        for (int x = -SCREEN_SIZE; x < SCREEN_SIZE; x++) {
+            for (int y = -SCREEN_SIZE; y < SCREEN_SIZE; y++) {
+//                int x = i + center.getX() - player.getViewRange() / 2;
+//                int y = j + center.getY() - player.getViewRange() / 2;
+                Field field = map.getField(map.getPlayer().getX() + x - (SCREEN_SIZE / 2), map.getPlayer().getY() + y - (SCREEN_SIZE / 2));
                 Tiles.drawTile(context, field.getTileName(), x, y);
                 System.out.println(field.getTileName());
             }

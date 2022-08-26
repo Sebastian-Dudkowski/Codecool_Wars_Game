@@ -153,7 +153,7 @@
       </VBox>
       <BorderPane fx:id="borderpane" prefHeight="200.0" prefWidth="200.0">
          <center>
-            <Canvas fx:id="canvas" height="578.0" width="578.0" BorderPane.alignment="CENTER" />
+            <Canvas fx:id="canvas" height="576.0" width="576.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

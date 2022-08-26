@@ -40,14 +40,7 @@ public class HelloController {
 
 
     public void getNewGame () throws IOException {
-        userName = textFieldName.getText();
-        Stage stage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("game.fxml"));
-        Scene scene2 = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello2!");
-        stage.setScene(scene2);
 
-        stage.show();
 
         Stage stageToClose = (Stage) textFieldName.getScene().getWindow();
         stageToClose.close();
