@@ -5,10 +5,12 @@ import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import com.example.tibia.map.Field;
@@ -22,7 +24,13 @@ import java.io.IOException;
 
 
 public class Main extends Application {
+@FXML
+    private TextField textFieldName;
 
+    public static String getUserName() {
+        return userName;
+    }
+    public static String userName;
     private Player player = new Player(HelloController.getUserName(), null, 100, 10);
     private GameMap map = MapLoader.loadMap(player);
     private final int SCREEN_SIZE = 20;
