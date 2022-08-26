@@ -122,12 +122,12 @@ public class Main extends Application {
     public void displayMap(){
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-//        Field center = map.getPlayer().getField();
-        for (int x = -SCREEN_SIZE; x < SCREEN_SIZE; x++) {
-            for (int y = -SCREEN_SIZE; y < SCREEN_SIZE; y++) {
-//                int x = i + center.getX() - player.getViewRange() / 2;
-//                int y = j + center.getY() - player.getViewRange() / 2;
-                Field field = map.getField(map.getPlayer().getX() + x - (SCREEN_SIZE / 2), map.getPlayer().getY() + y - (SCREEN_SIZE / 2));
+        for (int x = 0; x < player.getViewRange(); x++) {
+            for (int y = 0; y < player.getViewRange(); y++) {
+                Field field = map.getField(
+                        map.getPlayer().getX() + x - (player.getViewRange() / 2),
+                        map.getPlayer().getY() + y - (player.getViewRange() / 2)
+                );
                 Tiles.drawTile(context, field.getTileName(), x, y);
             }
         }
@@ -138,17 +138,17 @@ public class Main extends Application {
         int npcY = npc.getField().getY();
         int playerX = map.getPlayer().getField().getX();
         int playerY = map.getPlayer().getField().getY();
-        // TODO: get rid of magic number (4)
-        if ( Math.abs(playerX - npcX) <= 4 && Math.abs(playerY - npcY) <= 4 ){
+        int viewRange = npc.getViewRange();
+        if ( Math.abs(playerX - npcX) <= viewRange && Math.abs(playerY - npcY) <= viewRange ){
             int nextX = Integer.compare(playerX, npcX);
             int nextY = Integer.compare(playerY, npcY);
             npc.move(nextX, nextY);
+
         }
     }
 
     private void startNpcMovement(){
         Thread moveNpcs = new Thread(() -> {
-
             while (true){
                 for (Actor npc : map.getNpcs()){
                     moveNPC(npc);
@@ -160,7 +160,6 @@ public class Main extends Application {
                     throw new RuntimeException(e);
                 }
             }
-
         });
         moveNpcs.start();
     }

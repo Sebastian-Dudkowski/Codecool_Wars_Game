@@ -18,7 +18,7 @@ public class MapLoader {
 
         scanner.nextLine(); // empty line
 
-        GameMap map = new GameMap(height, width);
+        GameMap map = new GameMap(width, height);
         map.setPlayer(player);
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
