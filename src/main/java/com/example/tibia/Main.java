@@ -1,148 +1,127 @@
 package com.example.tibia;
 
+
+import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
+import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import com.example.tibia.Tiles;
-import com.example.tibia.actors.Inventory;
-import com.example.tibia.actors.Actor;
-import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
-import com.example.tibia.map.MapLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import java.awt.image.BufferedImage;
+import com.example.tibia.controller.GameController;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Main extends Application {
+
+    private Player player = new Player(HelloController.getUserName(), null, 100, 10);
+    private GameMap map = MapLoader.loadMap(player);
+    private final int SCREEN_SIZE = 20;
+
+    Canvas canvas = new Canvas(
+            SCREEN_SIZE * Tiles.TILE_WIDTH,
+            SCREEN_SIZE * Tiles.TILE_WIDTH);
+    GraphicsContext context = canvas.getGraphicsContext2D();
+    GameController gc;
+    Button pickUpItemBtn = new Button("Pick up");
+
     public static void main(String[] args) {
         launch(args);
     }
 
-     @Override
+    public void printMenu() {
+        try {
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            Scene scene2 = new Scene(fxmlLoader.load());
+            stage.setTitle("Hello!");
+            stage.setScene(scene2);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void hideButton() {
+        pickUpItemBtn.setVisible(false);
+    }
+
+    public void showButton() {
+        pickUpItemBtn.setVisible(true);
+    }
+
+    @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        playerName.setText(HelloController.getUserName());
-//        displayEmptyHolders();
+        printMenu();
         GridPane ui = new GridPane();
         ui.setPrefWidth(200);
         ui.setPadding(new Insets(10));
-
-        BorderPane borderPane = new BorderPane();
-        borderPane.setCenter(canvas);
-        borderPane.setRight(ui);
-
+        hideButton();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        gc = fxmlLoader.getController();
+        context = gc.getCanvas().getGraphicsContext2D();
+        gc.getBorderpane().setCenter(gc.getCanvas());
         primaryStage.setScene(scene);
         displayMap();
-        startNpcMovement();
+        scene.setOnKeyPressed(this::onKeyPressed);
+        primaryStage.setTitle("Dungeon Crawl");
+        primaryStage.show();
+        primaryStage.setScene(scene);
+
     }
 
-    private Scene scene;
-    private Inventory inventory = new Inventory();
 
+    private void onKeyPressed(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case W:
+            case UP:
+                map.getPlayer().move(0, -1);
+                displayMap();
+                break;
+            case S:
+            case DOWN:
+                map.getPlayer().move(0, 1);
+                displayMap();
+                break;
+            case A:
+            case LEFT:
+                map.getPlayer().move(-1, 0);
+                displayMap();
+                break;
+            case D:
+            case RIGHT:
+                map.getPlayer().move(1, 0);
+                displayMap();
+                break;
 
-    List<GridPane> holders = new ArrayList<>();
-    private Player player = new Player(HelloController.getUserName(), null, 100, 10);
-    private GameMap map = MapLoader.loadMap(player);
-
-
-    public void pick(ActionEvent actionEvent) {
-        inventory.addItem(map.getPlayer().getField().getItem());
-//        swordImageView.setOpacity(1);
-        map.getPlayer().getField().setItem(null);
-    }
-
-    public void pickUp() {
-        if (map.getPlayer().getField().getItem() != null) {
-            pickUpButton.setDisable(false);
-
-
-        } else {
-            pickUpButton.setDisable(true);
+            default:
+                break;
         }
     }
+
 
     public void displayMap(){
         context.setFill(Color.BLACK);
-        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
+        context.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        Field center = map.getPlayer().getField();
+        for (int i = 0; i < player.getViewRange(); i++) {
+            for (int j = 0; j < player.getViewRange(); j++) {
+                int x = i + center.getX() - player.getViewRange() / 2;
+                int y = j + center.getY() - player.getViewRange() / 2;
                 Field field = map.getField(x, y);
                 Tiles.drawTile(context, field.getTileName(), x, y);
+                System.out.println(field.getTileName());
             }
         }
-    }
-
-    private ImageView convertToFxImage(BufferedImage image, int fieldSize) {
-        WritableImage wr = null;
-        if (image != null) {
-            wr = new WritableImage(image.getWidth(), image.getHeight());
-            PixelWriter pw = wr.getPixelWriter();
-            for (int x = 0; x < image.getWidth(); x++) {
-                for (int y = 0; y < image.getHeight(); y++) {
-                    pw.setArgb(x, y, image.getRGB(x, y));
-                }
-            }
-        }
-        ImageView imageView = new ImageView(wr);
-        imageView.setFitHeight(fieldSize);
-        imageView.setFitWidth(fieldSize);
-
-        return imageView;
-
-    }
-
-    private void moveNPC(Actor npc){
-        int npcX = npc.getField().getX();
-        int npcY = npc.getField().getY();
-        int playerX = map.getPlayer().getField().getX();
-        int playerY = map.getPlayer().getField().getY();
-        // TODO: get rid of magic number (4)
-        if ( Math.abs(playerX - npcX) <= 4 && Math.abs(playerY - npcY) <= 4 ){
-            int nextX = Integer.compare(playerX, npcX);
-            int nextY = Integer.compare(playerY, npcY);
-            npc.move(nextX, nextY);
-        }
-    }
-
-    private void startNpcMovement(){
-        Thread moveNpcs = new Thread(() -> {
-
-            while (true){
-                for (Actor npc : map.getNpcs()){
-                    moveNPC(npc);
-                }
-                try {
-                    Platform.runLater(() -> {
-                        displayMap();
-                    });
-                    Thread.sleep(1000);
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-
-        });
-        moveNpcs.start();
     }
 }
