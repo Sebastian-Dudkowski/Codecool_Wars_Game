@@ -5,6 +5,8 @@ import com.example.tibia.map.Field;
 public class Skeleton extends Actor{
 // attributes
 
+
+
 // constructors
 
     public Skeleton(Field field){
