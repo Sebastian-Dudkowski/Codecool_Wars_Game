@@ -6,44 +6,22 @@ public class Player extends Actor {
 
 // attributes
 
-
     private Inventory inventory;
     private String nickName;
-    private int health;
-    private int attackPower;
 
 // constructors
 
     public Player(String nickName, Field field, int health, int attackPower) {
         super(ActorName.PLAYER.getName(), field);
-        super.viewRange = 9;
         this.nickName = nickName;
+        this.viewRange = 15;
         this.health = health;
-        this.attackPower = attackPower;
+        this.strength = attackPower;
     }
 
-    // getters & setters
-    public int getHealth() {
-        return health;
-    }
+// getters & setters
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
-    public int getViewRange() {
-        return viewRange;
-    }
-
-    public void setViewRange(int range) { this.viewRange = range; }
-
-    public int getAttackPower() {
-        return attackPower;
-    }
-
-    public void setAttackPower(int attackPower) {
-        this.attackPower = attackPower;
-    }
 
 // methods
 

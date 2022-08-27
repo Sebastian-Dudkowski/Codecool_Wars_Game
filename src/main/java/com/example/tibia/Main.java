@@ -146,19 +146,26 @@ public class Main extends Application {
         int playerY = map.getPlayer().getField().getY();
         int viewRange = npc.getViewRange();
         if ( Math.abs(playerX - npcX) <= viewRange && Math.abs(playerY - npcY) <= viewRange ){
-            Field originalField = npc.getField();
+            npc.setAlert(true);
             int nextX = Integer.compare(playerX, npcX);
             int nextY = Integer.compare(playerY, npcY);
             if (playerX == npcX + nextX && playerY == npcY + nextY) {
                 // placeholder for attack function
-                System.out.println("ATTACK!");
+                npc.attack(player);
                 return;
             }
-            npc.move(nextX, nextY);
             // try to go around obstacles
-            while (npc.getField().equals(originalField)){
-                npc.move(new Random().nextInt((1 + 1) + 1) -1, new Random().nextInt((1 + 1) + 1) -1);
-            }
+            moveNpcRandomly(npc);
+        } else {
+            npc.setAlert(false);
+            moveNpcRandomly(npc);
+        }
+    }
+
+    private void moveNpcRandomly(Actor npc){
+        Field originalField = npc.getField();
+        while (npc.getField().equals(originalField)){
+            npc.move(new Random().nextInt((1 + 1) + 1) -1, new Random().nextInt((1 + 1) + 1) -1);
         }
     }
 
