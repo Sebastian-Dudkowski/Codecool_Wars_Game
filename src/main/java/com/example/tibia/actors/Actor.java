@@ -44,6 +44,10 @@ public abstract class Actor implements Drawable {
         this.health = health;
     }
     public void setAlert(boolean alert) { this.alert = alert; }
+    public boolean isAlert() {
+        return alert;
+    }
+
 
 // methods
 

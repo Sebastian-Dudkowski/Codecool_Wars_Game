@@ -57,7 +57,7 @@ public class Field implements Drawable {
     @Override
     public String getTileName(){
         if (actor != null){
-            return actor.getTileName();
+            return (actor.isAlert()) ? actor.getTileName() + " alert" : actor.getTileName();
         } else if ( item != null) {
             return item.getTileName();
         }

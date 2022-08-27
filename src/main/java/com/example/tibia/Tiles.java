@@ -31,6 +31,7 @@ public class Tiles {
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
         tileMap.put(ActorName.PLAYER.getName(), new Tile(27, 0));
         tileMap.put(ActorName.SKELETON.getName(), new Tile(29, 6));
+        tileMap.put(ActorName.SKELETON.getName() + " alert", new Tile(28, 6));
         tileMap.put(ActorName.DROID.getName(), new Tile(26, 3));
         tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
         tileMap.put(ItemName.ARMOR.getName(), new Tile(3, 23));

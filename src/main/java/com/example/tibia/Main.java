@@ -158,15 +158,17 @@ public class Main extends Application {
                 return;
             }
             // try to go around obstacles
-            moveNpcRandomly(npc);
+            Field originalField = npc.getField();
+            npc.move(nextX, nextY);
+            moveNpcRandomly(npc, originalField);
         } else {
             npc.setAlert(false);
-            moveNpcRandomly(npc);
+            Field originalField = npc.getField();
+            moveNpcRandomly(npc, originalField);
         }
     }
 
-    private void moveNpcRandomly(Actor npc){
-        Field originalField = npc.getField();
+    private void moveNpcRandomly(Actor npc, Field originalField){
         while (npc.getField().equals(originalField)){
             npc.move(new Random().nextInt((1 + 1) + 1) -1, new Random().nextInt((1 + 1) + 1) -1);
         }
