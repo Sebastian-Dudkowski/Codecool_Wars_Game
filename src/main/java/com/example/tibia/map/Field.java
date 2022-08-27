@@ -11,11 +11,7 @@ public class Field implements Drawable {
     private int Y;
     private FieldType type;
     private Actor actor;
-
-
-
     private Item item;
-
     private GameMap gameMap;
 
 // constructors
@@ -31,11 +27,9 @@ public class Field implements Drawable {
     public Item getItem() {
         return item;
     }
-
     public void setItem(Item item) {
         this.item = item;
     }
-
     public FieldType getType() {
         return type;
     }
@@ -51,20 +45,15 @@ public class Field implements Drawable {
     public int getX() {
         return X;
     }
-
     public int getY() {
         return Y;
     }
-
-    public void setX(int x) {
-        X = x;
+    public GameMap getGameMap() {
+        return gameMap;
     }
 
-    public void setY(int y) {
-        Y = y;
-    }
 
-    // methods
+// methods
     @Override
     public String getTileName(){
         if (actor != null){

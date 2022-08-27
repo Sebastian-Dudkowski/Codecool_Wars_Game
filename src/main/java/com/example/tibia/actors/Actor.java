@@ -8,9 +8,11 @@ public abstract class Actor implements Drawable {
 
 // attributes
     private String name;
-    private int health;
     private Field field;
-    protected int viewRange = 9;
+    protected int viewRange;
+    protected int strength;
+    protected int health;
+    protected boolean alert;
 
 // constructors
 
@@ -30,12 +32,18 @@ public abstract class Actor implements Drawable {
     public int getX() {
         return field.getX();
     }
-
     public int getY() {
         return field.getY();
     }
-
     public int getViewRange() { return viewRange; }
+    public void setViewRange(int range) { this.viewRange = range; }
+    public int getHealth() {
+        return health;
+    }
+    public void setHealth(int health) {
+        this.health = health;
+    }
+    public void setAlert(boolean alert) { this.alert = alert; }
 
 // methods
 
@@ -47,6 +55,18 @@ public abstract class Actor implements Drawable {
         field.setActor(null);
         nextField.setActor(this);
         field = nextField;
+    }
+
+    public void attack(Actor target){
+        target.setHealth(target.getHealth() - this.strength);
+        if (target.getHealth() <= 0) {
+            target.kill();
+        }
+    }
+
+    public void kill(){
+        this.field.getGameMap().removeNpc(this);
+        this.field.setActor(null);
     }
 
     private boolean moveValidation(){

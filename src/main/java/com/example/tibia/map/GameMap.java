@@ -15,7 +15,6 @@ public class GameMap {
     private Field[][] fields;
     private Player player;
     private List<Actor> npcs;
-    private Item item;
 
 // constructors
 
@@ -32,13 +31,10 @@ public class GameMap {
     }
 
 // getters & setters
-    public Item getItem() {
-        return item;
-    }
+
     public int getHeight() {
         return height;
     }
-
     public int getWidth() {
         return width;
     }
@@ -64,4 +60,6 @@ public class GameMap {
     public void addNpc(Actor npc){
         npcs.add(npc);
     }
+
+    public void removeNpc(Actor npc) { npcs.remove(npc); }
 }
