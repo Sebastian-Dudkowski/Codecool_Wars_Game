@@ -10,8 +10,8 @@ public class Skeleton extends Actor{
     public Skeleton(Field field){
         super(ActorName.SKELETON.getName(), field);
         this.viewRange = 4;
-        this.health = 10;
-        this.strength = 20;
+        this.health = 100;
+        this.strength = 1;
     }
 
 // getters & setters

@@ -33,7 +33,7 @@ public class Main extends Application {
         return userName;
     }
     public static String userName;
-    private Player player = new Player(HelloController.getUserName(), null, 100, 10);
+    private Player player = new Player(HelloController.getUserName(), null, 100, 35);
     private GameMap map = MapLoader.loadMap(player);
     private final int SCREEN_SIZE = 9;
 
@@ -113,7 +113,10 @@ public class Main extends Application {
                 map.getPlayer().move(1, 0);
                 displayMap();
                 break;
-
+            case SPACE:
+                map.getPlayer().attack();
+                displayMap();
+                break;
             default:
                 break;
         }
