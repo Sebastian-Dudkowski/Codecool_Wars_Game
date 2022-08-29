@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 
+import static com.example.tibia.music.MusicPlayer.*;
 
 public class Main extends Application {
     private int maxHealth;
@@ -96,7 +97,7 @@ public class Main extends Application {
         scene.setOnKeyPressed(this::onKeyPressed);
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
-        primaryStage.setScene(scene);
+        playSound(opening, (float) 0.4);
 
     }
 
