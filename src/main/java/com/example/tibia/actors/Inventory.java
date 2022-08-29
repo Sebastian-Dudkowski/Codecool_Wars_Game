@@ -1,5 +1,6 @@
 package com.example.tibia.actors;
 
+import com.example.tibia.Drawable;
 import com.example.tibia.items.Item;
 import com.example.tibia.map.Field;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Inventory {
+public class Inventory{
     public List<Item> getItems() {
         return items;
     }
@@ -33,5 +34,11 @@ public class Inventory {
     public void removeItem(Item item) {
         items.remove(item);
     }
+
+    @Override
+    public String toString() {
+        return items.toString();
+    }
+
 
 }

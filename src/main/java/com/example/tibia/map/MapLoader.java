@@ -4,6 +4,7 @@ import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Skeleton;
+import com.example.tibia.items.Helmet;
 import com.example.tibia.items.Sword;
 
 import java.io.InputStream;
@@ -32,6 +33,9 @@ public class MapLoader {
                         case '#':
                             field.setType(FieldType.WALL);
                             break;
+                        case '^':
+                            field.setType(FieldType.WALL2);
+                            break;
                         case '.':
                             field.setType(FieldType.FLOOR);
                             break;
@@ -49,6 +53,10 @@ public class MapLoader {
                             break;
                         case '$':
                             field.setItem(new Sword(field));
+                            field.setType(FieldType.FLOOR);
+                            break;
+                        case 'H':
+                            field.setItem(new Helmet(field));
                             field.setType(FieldType.FLOOR);
                             break;
                         case '@':

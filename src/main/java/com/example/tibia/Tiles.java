@@ -27,6 +27,7 @@ public class Tiles {
         tileMap.put(FieldType.EMPTY.getTileName(), new Tile(0, 0));
         tileMap.put(FieldType.WALL.getTileName(), new Tile(10, 17));
         tileMap.put(FieldType.FLOOR.getTileName(), new Tile(2, 0));
+        tileMap.put("floor", new Tile(2, 0));
         tileMap.put(FieldType.DOOR.getTileName(), new Tile(8, 11));
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
         tileMap.put(ActorName.PLAYER.getName(), new Tile(27, 0));
@@ -34,7 +35,7 @@ public class Tiles {
         tileMap.put(ActorName.SKELETON.getName() + " alert", new Tile(28, 6));
         tileMap.put(ActorName.DROID.getName(), new Tile(26, 3));
         tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
-        tileMap.put(ItemName.ARMOR.getName(), new Tile(3, 23));
+        tileMap.put("armor", new Tile(3, 23));
         tileMap.put(ItemName.CARD.getName(), new Tile(22, 4));
         tileMap.put(ItemName.SWORD.getName(), new Tile(3, 24));
         tileMap.put(ItemName.SHOES.getName(), new Tile(8, 22));
@@ -42,6 +43,7 @@ public class Tiles {
         tileMap.put(ItemName.HELMET.getName(), new Tile(2, 22));
         tileMap.put(ItemName.MANA_POTION.getName(), new Tile(16, 25));
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));
+        tileMap.put("player2", new Tile(2, 22));
 
     }
 

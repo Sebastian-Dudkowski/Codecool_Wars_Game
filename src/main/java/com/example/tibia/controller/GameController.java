@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 
 public class GameController {
 
@@ -18,38 +15,34 @@ public class GameController {
     @FXML
     private Label playerName;
 
-    @FXML
-    private GridPane swordField;
-
-    @FXML
-    private GridPane healthPotionField;
-
-    @FXML
-    private GridPane helmetField;
-
-    @FXML
-    private GridPane armorField;
-
-    @FXML
-    private GridPane shoesField;
-
-    @FXML
-    private GridPane cardField;
-
-    @FXML
-    private GridPane shieldField;
-
-    @FXML
-    private GridPane manaPotionField;
 
     @FXML
     private Button pickUpButton;
     @FXML
     private Canvas canvas = new Canvas(576, 576);
 
-    @FXML
-    void pick(ActionEvent event) {
 
+
+
+@FXML
+    private VBox playerMenu;
+
+    @FXML
+    private BorderPane borderPaneEQ;
+
+    public BorderPane getBorderPaneEQ() {
+        return borderPaneEQ;
+    }
+
+    @FXML
+    private Canvas canvasEQ;
+
+    public Canvas getCanvasEQ() {
+        return canvasEQ;
+    }
+
+    public Button getPickUpButton() {
+        return pickUpButton;
     }
 
     @FXML
@@ -61,5 +54,7 @@ public class GameController {
     public BorderPane getBorderpane() {
         return borderpane;
     }
+
+
 }
 

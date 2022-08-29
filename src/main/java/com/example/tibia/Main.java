@@ -1,9 +1,14 @@
 package com.example.tibia;
 
 
+import com.example.tibia.EQ.Cell;
+import com.example.tibia.EQ.EQLoader;
+import com.example.tibia.EQ.EQMap;
 import com.example.tibia.actors.Actor;
+import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
+import com.example.tibia.items.ItemName;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -12,6 +17,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import com.example.tibia.map.Field;
@@ -21,26 +27,35 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import com.example.tibia.controller.GameController;
+
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 
 public class Main extends Application {
-@FXML
+    @FXML
     private TextField textFieldName;
 
     public static String getUserName() {
         return userName;
     }
+
     public static String userName;
+    private Inventory inventory = new Inventory();
     private Player player = new Player(HelloController.getUserName(), null, 100, 35);
     private GameMap map = MapLoader.loadMap(player);
+    private EQMap eq = EQLoader.loadEQ(player);
     private final int SCREEN_SIZE = 9;
 
     Canvas canvas = new Canvas(
             SCREEN_SIZE * Tiles.TILE_WIDTH,
             SCREEN_SIZE * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
+    GraphicsContext contextEQ = canvas.getGraphicsContext2D();
+    Canvas canvasEQ = new Canvas(
+            SCREEN_SIZE * Tiles.TILE_WIDTH,
+            SCREEN_SIZE * Tiles.TILE_WIDTH);
     GameController gc;
     Button pickUpItemBtn = new Button("Pick up");
 
@@ -61,26 +76,28 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-    public void hideButton() {
-        pickUpItemBtn.setVisible(false);
-    }
 
-    public void showButton() {
-        pickUpItemBtn.setVisible(true);
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         printMenu();
-        GridPane ui = new GridPane();
-        ui.setPrefWidth(200);
-        ui.setPadding(new Insets(10));
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1100, 650);
         gc = fxmlLoader.getController();
+        contextEQ = gc.getCanvasEQ().getGraphicsContext2D();
         context = gc.getCanvas().getGraphicsContext2D();
+        gc.getBorderPaneEQ().setCenter(gc.getCanvasEQ());
         gc.getBorderpane().setCenter(gc.getCanvas());
+        displayEQ();
+        gc.getPickUpButton().addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> {
+            inventory.addItem(map.getPlayer().getField().getItem());
+            map.getPlayer().getField().setItem(null);
+
+            displayEQ();
+            System.out.println(inventory);
+        });
         primaryStage.setScene(scene);
+
         displayMap();
         startNpcMovement();
         scene.setOnKeyPressed(this::onKeyPressed);
@@ -90,6 +107,13 @@ public class Main extends Application {
 
     }
 
+    void pickUp() {
+        if (map.getPlayer().getField().getItem() != null) {
+            gc.getPickUpButton().setDisable(false);
+        } else {
+            gc.getPickUpButton().setDisable(true);
+        }
+    }
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -122,8 +146,39 @@ public class Main extends Application {
         }
     }
 
+    public void displayEQ() {
+        contextEQ.setFill(Color.BLACK);
+        contextEQ.fillRect(0, 0, gc.getCanvasEQ().getWidth(), gc.getCanvasEQ().getHeight());
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < 3; y++) {
+                Cell cell = eq.getCell(x, y);
+                System.out.println(cell.getTileName());
+                if(inventory.getItems().size() >0){
+                    for (int i = 0; i < inventory.getItems().size(); i++) {
+                   if(cell.getTileName().equals(inventory.getItems().get(i).getTileName())) {
+                       Tiles.drawTile(contextEQ, "empty", x, y);
+                       Tiles2.drawTile(contextEQ, cell.getTileName(), x, y);
+                       break;
+                   }else {
+                       Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
+                   }
+                }
 
-    public void displayMap(){
+                }else {
+
+                    Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
+                }
+
+
+
+
+
+
+            }
+        }
+    }
+
+    public void displayMap() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
         for (int x = 0; x < player.getViewRange(); x++) {
@@ -132,23 +187,41 @@ public class Main extends Application {
                         map.getPlayer().getX() + x - (player.getViewRange() / 2),
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
-                Tiles.drawTile(context, field.getTileName(), x, y);
+                if (field.getActor() == player) {
+                    Tiles2.drawTile(context, "floor", x, y);
+                    Tiles2.drawTile(context, "player2", x, y - 1);
+                    Tiles2.drawTile(context, field.getTileName(), x, y);
+                }
+//                else if(Objects.equals(field.getTileName(), "wall")){
+//
+//                    Tiles2.drawTile(context, field.getTileName(), x, y-1);
+//                    Tiles2.drawTile(context, field.getTileName(), x, y);
+//
+//                }
+                else {
+                    Tiles2.drawTile(context, "floor", x, y);
+                    Tiles2.drawTile(context, field.getTileName(), x, y);
+                }
+
             }
         }
+        pickUp();
     }
+
 
     /**
      * Make npc try to get close to the player,
      * and attack him if adjacent to
+     *
      * @param npc - npc to be moved
      */
-     private void moveNPC(Actor npc){
+    private void moveNPC(Actor npc) {
         int npcX = npc.getField().getX();
         int npcY = npc.getField().getY();
         int playerX = map.getPlayer().getField().getX();
         int playerY = map.getPlayer().getField().getY();
         int viewRange = npc.getViewRange();
-        if ( Math.abs(playerX - npcX) <= viewRange && Math.abs(playerY - npcY) <= viewRange ){
+        if (Math.abs(playerX - npcX) <= viewRange && Math.abs(playerY - npcY) <= viewRange) {
             npc.setAlert(true);
             int nextX = Integer.compare(playerX, npcX);
             int nextY = Integer.compare(playerY, npcY);
@@ -168,16 +241,16 @@ public class Main extends Application {
         }
     }
 
-    private void moveNpcRandomly(Actor npc, Field originalField){
-        while (npc.getField().equals(originalField)){
-            npc.move(new Random().nextInt((1 + 1) + 1) -1, new Random().nextInt((1 + 1) + 1) -1);
+    private void moveNpcRandomly(Actor npc, Field originalField) {
+        while (npc.getField().equals(originalField)) {
+            npc.move(new Random().nextInt((1 + 1) + 1) - 1, new Random().nextInt((1 + 1) + 1) - 1);
         }
     }
 
-    private void startNpcMovement(){
+    private void startNpcMovement() {
         Thread moveNpcs = new Thread(() -> {
-            while (true){
-                for (Actor npc : map.getNpcs()){
+            while (true) {
+                for (Actor npc : map.getNpcs()) {
                     moveNPC(npc);
                 }
                 displayMap();
