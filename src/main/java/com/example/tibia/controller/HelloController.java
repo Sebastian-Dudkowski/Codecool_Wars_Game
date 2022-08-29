@@ -19,7 +19,7 @@ public class HelloController {
     private Button startButton;
 
     @FXML
-    private TextField textFieldName;
+    public TextField textFieldName;
 
     public static String getUserName() {
         return userName;
@@ -40,7 +40,7 @@ public class HelloController {
 
 
     public void getNewGame () throws IOException {
-
+        userName = textFieldName.getText();
 
         Stage stageToClose = (Stage) textFieldName.getScene().getWindow();
         stageToClose.close();

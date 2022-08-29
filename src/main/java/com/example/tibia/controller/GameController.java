@@ -1,10 +1,10 @@
 package com.example.tibia.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.*;
 
 public class GameController {
@@ -15,6 +15,13 @@ public class GameController {
     @FXML
     private Label playerName;
 
+    public Label getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(Label playerName) {
+        this.playerName = playerName;
+    }
 
     @FXML
     private Button pickUpButton;
@@ -32,6 +39,19 @@ public class GameController {
 
     public BorderPane getBorderPaneEQ() {
         return borderPaneEQ;
+    }
+  @FXML
+    private ProgressBar progressHealth;
+
+    public ProgressBar getProgressHealth() {
+        return progressHealth;
+    }
+
+    @FXML
+    private ProgressBar progressMana;
+
+    public ProgressBar getProgressMana() {
+        return progressMana;
     }
 
     @FXML

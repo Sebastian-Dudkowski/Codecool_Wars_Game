@@ -11,6 +11,8 @@ import com.example.tibia.controller.HelloController;
 import com.example.tibia.items.ItemName;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -34,20 +36,13 @@ import java.util.Random;
 
 
 public class Main extends Application {
-    @FXML
-    private TextField textFieldName;
-
-    public static String getUserName() {
-        return userName;
-    }
-
-    public static String userName;
+    private int maxHealth;
+    private int maxMana;
     private Inventory inventory = new Inventory();
-    private Player player = new Player(HelloController.getUserName(), null, 100, 35);
+    private Player player = new Player(HelloController.getUserName(), null, 100,100, 35);
     private GameMap map = MapLoader.loadMap(player);
     private EQMap eq = EQLoader.loadEQ(player);
     private final int SCREEN_SIZE = 9;
-
     Canvas canvas = new Canvas(
             SCREEN_SIZE * Tiles.TILE_WIDTH,
             SCREEN_SIZE * Tiles.TILE_WIDTH);
@@ -57,8 +52,6 @@ public class Main extends Application {
             SCREEN_SIZE * Tiles.TILE_WIDTH,
             SCREEN_SIZE * Tiles.TILE_WIDTH);
     GameController gc;
-    Button pickUpItemBtn = new Button("Pick up");
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -84,20 +77,20 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1100, 650);
         gc = fxmlLoader.getController();
+        gc.getPlayerName().setText(HelloController.getUserName());
         contextEQ = gc.getCanvasEQ().getGraphicsContext2D();
         context = gc.getCanvas().getGraphicsContext2D();
         gc.getBorderPaneEQ().setCenter(gc.getCanvasEQ());
         gc.getBorderpane().setCenter(gc.getCanvas());
+        maxHealth = player.getHealth();
+        maxMana = player.getMana();
         displayEQ();
         gc.getPickUpButton().addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> {
             inventory.addItem(map.getPlayer().getField().getItem());
             map.getPlayer().getField().setItem(null);
-
             displayEQ();
-            System.out.println(inventory);
         });
         primaryStage.setScene(scene);
-
         displayMap();
         startNpcMovement();
         scene.setOnKeyPressed(this::onKeyPressed);
@@ -152,28 +145,19 @@ public class Main extends Application {
         for (int x = 0; x < 3; x++) {
             for (int y = 0; y < 3; y++) {
                 Cell cell = eq.getCell(x, y);
-                System.out.println(cell.getTileName());
-                if(inventory.getItems().size() >0){
+                if (inventory.getItems().size() > 0) {
                     for (int i = 0; i < inventory.getItems().size(); i++) {
-                   if(cell.getTileName().equals(inventory.getItems().get(i).getTileName())) {
-                       Tiles.drawTile(contextEQ, "empty", x, y);
-                       Tiles2.drawTile(contextEQ, cell.getTileName(), x, y);
-                       break;
-                   }else {
-                       Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
-                   }
-                }
-
+                        if (cell.getTileName().equals(inventory.getItems().get(i).getTileName())) {
+                            Tiles.drawTile(contextEQ, "empty", x, y);
+                            Tiles2.drawTile(contextEQ, cell.getTileName(), x, y);
+                            break;
+                        } else {
+                            Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
+                        }
+                    }
                 }else {
-
                     Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
                 }
-
-
-
-
-
-
             }
         }
     }
@@ -191,21 +175,16 @@ public class Main extends Application {
                     Tiles2.drawTile(context, "floor", x, y);
                     Tiles2.drawTile(context, "player2", x, y - 1);
                     Tiles2.drawTile(context, field.getTileName(), x, y);
-                }
-//                else if(Objects.equals(field.getTileName(), "wall")){
-//
-//                    Tiles2.drawTile(context, field.getTileName(), x, y-1);
-//                    Tiles2.drawTile(context, field.getTileName(), x, y);
-//
-//                }
-                else {
+                }else {
                     Tiles2.drawTile(context, "floor", x, y);
                     Tiles2.drawTile(context, field.getTileName(), x, y);
                 }
-
             }
         }
         pickUp();
+        gc.getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
+        gc.getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
+
     }
 
 

@@ -3,15 +3,19 @@ package com.example.tibia.actors;
 import com.example.tibia.Drawable;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class Actor implements Drawable {
 
 // attributes
+
     private String name;
     private Field field;
     protected int viewRange;
     protected int strength;
     protected int health;
+    protected int mana;
     protected boolean alert;
 
 // constructors
@@ -43,6 +47,15 @@ public abstract class Actor implements Drawable {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
     public void setAlert(boolean alert) { this.alert = alert; }
     public boolean isAlert() {
         return alert;
