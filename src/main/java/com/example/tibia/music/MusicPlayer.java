@@ -6,16 +6,15 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
-import java.io.BufferedInputStream;
-import java.io.InputStream;
+import java.net.URL;
 
 public class MusicPlayer {
-    public static String opening = "/opening2.wav";
+    public static String opening = "/opening.wav";
     public static void playSound(String fileName,float volume) {
         try {
             Clip clip = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    Main.class.getResourceAsStream(fileName));
+            URL url = Main.class.getResource(fileName);
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
             clip.open(inputStream);
             setVolume(volume,clip);
             clip.start();

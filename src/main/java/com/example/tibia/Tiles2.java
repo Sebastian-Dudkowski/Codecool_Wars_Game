@@ -13,6 +13,7 @@ import java.util.Map;
 public class Tiles2 {
     public static int TILE_WIDTH = 64;
     private static Image tileset = new Image("tiles2.png", 8192, 2048, true, false);
+
     private static Map<String, Tile> tileMap = new HashMap<>();
     public static class Tile {
         public final int x, y, w, h;
@@ -25,7 +26,7 @@ public class Tiles2 {
     }
 
     static {
-        tileMap.put(FieldType.EMPTY.getTileName(), new Tile(0, 0));
+        tileMap.put(FieldType.EMPTY.getTileName(), new Tile(61, 7));
         tileMap.put(FieldType.WALL.getTileName(), new Tile(0, 22));
         tileMap.put(FieldType.WALL2.getTileName(), new Tile(2, 22));
         tileMap.put(FieldType.FLOOR.getTileName(), new Tile(4, 23));

@@ -18,9 +18,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -40,10 +46,11 @@ public class Main extends Application {
     private int maxHealth;
     private int maxMana;
     private Inventory inventory = new Inventory();
-    private Player player = new Player(HelloController.getUserName(), null, 100,100, 35);
+    private Player player = new Player(HelloController.getUserName(), null, 100, 100, 35);
     private GameMap map = MapLoader.loadMap(player);
     private EQMap eq = EQLoader.loadEQ(player);
     private final int SCREEN_SIZE = 9;
+    private String userName;
     Canvas canvas = new Canvas(
             SCREEN_SIZE * Tiles.TILE_WIDTH,
             SCREEN_SIZE * Tiles.TILE_WIDTH);
@@ -53,12 +60,14 @@ public class Main extends Application {
             SCREEN_SIZE * Tiles.TILE_WIDTH,
             SCREEN_SIZE * Tiles.TILE_WIDTH);
     GameController gc;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     public void printMenu() {
         try {
+//            playSound(opening, (float) 0.4);
             Stage stage = new Stage();
             stage.setResizable(false);
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -75,6 +84,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         printMenu();
+        userName = HelloController.getUserName();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1100, 650);
         gc = fxmlLoader.getController();
@@ -97,7 +107,7 @@ public class Main extends Application {
         scene.setOnKeyPressed(this::onKeyPressed);
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
-        playSound(opening, (float) 0.4);
+//        playSound(opening, (float) 0.4);
 
     }
 
@@ -156,7 +166,7 @@ public class Main extends Application {
                             Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
                         }
                     }
-                }else {
+                } else {
                     Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
                 }
             }
@@ -173,12 +183,39 @@ public class Main extends Application {
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
                 if (field.getActor() == player) {
-                    Tiles2.drawTile(context, "floor", x, y);
+                    if(field.getActor().getHealth()>30){
+                       context.setFill(Color.DARKGREEN);
+                    context.setFont(new Font(15));
+                    }else {
+                        context.setFill(Color.RED);
+                    }
+
+                    Tiles3.drawTile(context, "floor", x, y);
                     Tiles2.drawTile(context, "player2", x, y - 1);
+                    context.fillText(userName, x * 64, y * 64-20);
+
                     Tiles2.drawTile(context, field.getTileName(), x, y);
-                }else {
-                    Tiles2.drawTile(context, "floor", x, y);
-                    Tiles2.drawTile(context, field.getTileName(), x, y);
+                } else if (field.getActor() != null) {
+                    context.setFill(Color.DARKGREEN);
+                    context.setFont(new Font(15));
+                    context.fillText(field.getTileName(), x * 64, y * 64);
+                    Tiles3.drawTile(context, "floor", x, y);
+                    Tiles3.drawTile(context, field.getTileName(), x, y);
+                } else {
+                    if (field.getTileName().equals("empty")) {
+
+                        Tiles2.drawTile(context, field.getTileName(), x, y);
+                        Tiles2.drawTile(context, field.getTileName(), x, y);
+                    } else if (field.getTileName().equals("wall")) {
+                        Tiles3.drawTile(context, field.getTileName(), x, y);
+
+                    } else {
+                        Tiles3.drawTile(context, "floor", x, y);
+                        Tiles3.drawTile(context, field.getTileName(), x, y);
+
+
+                    }
+
                 }
             }
         }
