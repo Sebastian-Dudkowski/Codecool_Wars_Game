@@ -107,7 +107,7 @@ public class Main extends Application {
         scene.setOnKeyPressed(this::onKeyPressed);
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
-//        playSound(opening, (float) 0.4);
+        playSound(opening, (float) 0.4);
 
     }
 
