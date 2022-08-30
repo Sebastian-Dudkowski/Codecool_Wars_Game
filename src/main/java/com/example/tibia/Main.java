@@ -11,6 +11,7 @@ import com.example.tibia.controller.HelloController;
 import com.example.tibia.items.ItemName;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -44,6 +45,7 @@ import static com.example.tibia.music.MusicPlayer.*;
 
 public class Main extends Application {
     private int maxHealth;
+    private int allHealth;
     private int maxMana;
     private Inventory inventory = new Inventory();
     private Player player = new Player(HelloController.getUserName(), null, 100, 100, 35);
@@ -51,6 +53,8 @@ public class Main extends Application {
     private EQMap eq = EQLoader.loadEQ(player);
     private final int SCREEN_SIZE = 9;
     private String userName;
+    private String amountHealth;
+    private String amountMana;
     Canvas canvas = new Canvas(
             SCREEN_SIZE * Tiles.TILE_WIDTH,
             SCREEN_SIZE * Tiles.TILE_WIDTH);
@@ -85,14 +89,22 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         printMenu();
         userName = HelloController.getUserName();
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1100, 650);
         gc = fxmlLoader.getController();
         gc.getPlayerName().setText(HelloController.getUserName());
+        gc.getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
+        gc.getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
         contextEQ = gc.getCanvasEQ().getGraphicsContext2D();
         context = gc.getCanvas().getGraphicsContext2D();
         gc.getBorderPaneEQ().setCenter(gc.getCanvasEQ());
         gc.getBorderpane().setCenter(gc.getCanvas());
+
+
+
+
+
         maxHealth = player.getHealth();
         maxMana = player.getMana();
         displayEQ();
@@ -107,6 +119,7 @@ public class Main extends Application {
         scene.setOnKeyPressed(this::onKeyPressed);
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+
         playSound(opening, (float) 0.4);
 
     }
@@ -170,6 +183,7 @@ public class Main extends Application {
                     Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
                 }
             }
+
         }
     }
 
@@ -183,35 +197,29 @@ public class Main extends Application {
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
                 if (field.getActor() == player) {
-                    if(field.getActor().getHealth()>30){
-                       context.setFill(Color.DARKGREEN);
-                    context.setFont(new Font(15));
-                    }else {
-                        context.setFill(Color.RED);
-                    }
+                    changeColorName(field);
 
-                    Tiles3.drawTile(context, "floor", x, y);
+                    Tiles2.drawTile(context, "floor", x, y);
                     Tiles2.drawTile(context, "player2", x, y - 1);
-                    context.fillText(userName, x * 64, y * 64-20);
-
+                    context.fillText(userName, x * 64, y * 64 - 35);
+                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64 - 20);
                     Tiles2.drawTile(context, field.getTileName(), x, y);
+
                 } else if (field.getActor() != null) {
-                    context.setFill(Color.DARKGREEN);
-                    context.setFont(new Font(15));
-                    context.fillText(field.getTileName(), x * 64, y * 64);
-                    Tiles3.drawTile(context, "floor", x, y);
-                    Tiles3.drawTile(context, field.getTileName(), x, y);
+                    changeColorName(field);
+                    context.fillText(field.getTileName(), x * 64, y * 64 - 15);
+                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
+                    Tiles2.drawTile(context, "floor", x, y);
+                    Tiles2.drawTile(context, field.getTileName(), x, y);
                 } else {
                     if (field.getTileName().equals("empty")) {
-
-                        Tiles2.drawTile(context, field.getTileName(), x, y);
                         Tiles2.drawTile(context, field.getTileName(), x, y);
                     } else if (field.getTileName().equals("wall")) {
-                        Tiles3.drawTile(context, field.getTileName(), x, y);
+                        Tiles2.drawTile(context, field.getTileName(), x, y);
 
                     } else {
-                        Tiles3.drawTile(context, "floor", x, y);
-                        Tiles3.drawTile(context, field.getTileName(), x, y);
+                        Tiles2.drawTile(context, "floor", x, y);
+                        Tiles2.drawTile(context, field.getTileName(), x, y);
 
 
                     }
@@ -222,9 +230,40 @@ public class Main extends Application {
         pickUp();
         gc.getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         gc.getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
+        Platform.runLater(() -> {
+            gc.getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
+            gc.getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
+        });
+
 
     }
 
+    private void changeColorName(Field field) {
+        if (field.getActor().getHealth() > 30) {
+            context.setFill(Color.BLACK);
+            context.setFont(new Font("Segoe UI Black", 15));
+        } else {
+            context.setFill(Color.RED);
+        }
+    }
+
+    private String HPline(int health) {
+
+        String line = "-";
+        if (health * 100 / maxHealth > 75) {
+
+            line = "----";
+        } else if (health * 100 / maxHealth > 50) {
+            System.out.println("3");
+            line = "---";
+        } else if (health * 100 / maxHealth > 25) {
+            System.out.println("2");
+            line = "--";
+        } else {
+            line = "-";
+        }
+        return line;
+    }
 
     /**
      * Make npc try to get close to the player,
@@ -271,6 +310,7 @@ public class Main extends Application {
                     moveNPC(npc);
                 }
                 displayMap();
+
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {

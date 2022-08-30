@@ -11,7 +11,7 @@ public class Skeleton extends Actor{
         super(ActorName.SKELETON.getName(), field);
         this.viewRange = 4;
         this.health = 100;
-        this.strength = 1;
+        this.strength = 5;
     }
 
 // getters & setters

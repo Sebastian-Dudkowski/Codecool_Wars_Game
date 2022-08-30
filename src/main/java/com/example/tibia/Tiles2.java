@@ -26,15 +26,16 @@ public class Tiles2 {
     }
 
     static {
-        tileMap.put(FieldType.EMPTY.getTileName(), new Tile(61, 7));
-        tileMap.put(FieldType.WALL.getTileName(), new Tile(0, 22));
-        tileMap.put(FieldType.WALL2.getTileName(), new Tile(2, 22));
-        tileMap.put(FieldType.FLOOR.getTileName(), new Tile(4, 23));
-        tileMap.put(FieldType.DOOR.getTileName(), new Tile(3, 22));
+        tileMap.put(FieldType.EMPTY.getTileName(), new Tile(55, 22));
+        tileMap.put(FieldType.WALL.getTileName(), new Tile(52, 22));
+        tileMap.put(FieldType.FLOOR.getTileName(), new Tile(85, 23));
+        tileMap.put("floor", new Tile(86, 23));
+        tileMap.put(FieldType.DOOR.getTileName(), new Tile(50, 22));
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
-        tileMap.put(ActorName.PLAYER.getName(), new Tile(0, 29));
-        tileMap.put(ActorName.SKELETON.getName(), new Tile(28, 20));
-        tileMap.put(ActorName.SKELETON.getName() + " alert", new Tile(29, 20));
+        tileMap.put(ActorName.PLAYER.getName(), new Tile(65, 20));
+        tileMap.put("player2", new Tile(65, 19));
+        tileMap.put(ActorName.SKELETON.getName(), new Tile(30, 20));
+        tileMap.put(ActorName.SKELETON.getName() + " alert", new Tile(31, 20));
         tileMap.put(ActorName.DROID.getName(), new Tile(26, 3));
         tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
         tileMap.put("armor", new Tile(3, 23));
@@ -45,7 +46,6 @@ public class Tiles2 {
         tileMap.put(ItemName.HELMET.getName(), new Tile(14, 0));
         tileMap.put(ItemName.MANA_POTION.getName(), new Tile(16, 25));
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));
-        tileMap.put("player2", new Tile(0, 28));
 
     }
 

@@ -28,6 +28,27 @@ public class GameController {
     @FXML
     private Canvas canvas = new Canvas(576, 576);
 
+    @FXML
+    private Label amountOfHealth;
+
+    public Label getAmountOfHealth() {
+        return amountOfHealth;
+    }
+
+    public void setAmountOfHealth(Label amountOfHealth) {
+        this.amountOfHealth = amountOfHealth;
+    }
+
+    public Label getAmountOfMana() {
+        return amountOfMana;
+    }
+
+    public void setAmountOfMana(Label amountOfMana) {
+        this.amountOfMana = amountOfMana;
+    }
+
+    @FXML
+    private Label amountOfMana;
 
 
 

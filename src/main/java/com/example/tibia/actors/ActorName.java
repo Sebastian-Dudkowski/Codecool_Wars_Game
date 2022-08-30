@@ -2,7 +2,7 @@ package com.example.tibia.actors;
 
 public enum ActorName {
     PLAYER("player"),
-    SKELETON("skeleton"),
+    SKELETON("Skeleton"),
     SITH("sith"),
     DROID("droid");
 
