@@ -1,7 +1,10 @@
 package com.example.tibia.actors;
 
 import com.example.tibia.map.Field;
-import javafx.scene.canvas.GraphicsContext;
+
+import java.util.Random;
+
+import static com.example.tibia.music.MusicPlayer.*;
 
 public class Player extends Actor {
 
@@ -31,11 +34,17 @@ public class Player extends Actor {
                 if (!(x==0 && y==0)){
                     Actor target = this.getField().getNeighbor(x, y).getActor();
                     if (target != null){
+                        String sound = (new Random().nextBoolean()) ? lightsaberHit1 : lightsaberHit2;
+                        playSound(sound, (float) 0.3);
                         attack(target);
                     }
                 }
             }
         }
+        String sound = (new Random().nextBoolean())
+                ? lightsaberSwing1 : (new Random().nextBoolean())
+                ? lightsaberSwing2 : lightsaberSwing3;
+        playSound(sound, (float) 0.3);
         Thread attackCooldown = new Thread(() -> {
             this.attacking = true;
             try {
