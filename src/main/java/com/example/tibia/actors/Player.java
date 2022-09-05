@@ -9,8 +9,6 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
-    private boolean facingRight = true;
-    private boolean attacking = false;
 // constructors
 
     public Player(String nickName, Field field, int health,int mana, int attackPower) {
@@ -24,15 +22,10 @@ public class Player extends Actor {
 
 // getters & setters
 
-    public boolean isAttacking(){ return this.attacking; }
-    public boolean isFacingRight() {
-        return facingRight;
-    }
-
 
 // methods
 
-    public void attack(GraphicsContext context) {
+    public void attack() {
         for (int x=-1; x<=1; x++){
             for (int y=-1; y<=1; y++){
                 if (!(x==0 && y==0)){
@@ -43,7 +36,6 @@ public class Player extends Actor {
                 }
             }
         }
-        // displays sword flash
         Thread attackCooldown = new Thread(() -> {
             this.attacking = true;
             try {
@@ -54,24 +46,6 @@ public class Player extends Actor {
             this.attacking = false;
         });
         attackCooldown.start();
-    }
-
-    @Override
-    public void move(int dx, int dy){
-        int currentX = field.getX();
-        super.move(dx ,dy);
-        int newX = field.getX();
-        if (currentX < newX){
-            this.facingRight = true;
-        }
-        if (currentX > newX){
-            this.facingRight = false;
-        }
-    }
-
-    @Override
-    public String getTileName(){
-        return (facingRight) ? name + " right" : name + " left";
     }
 
 }

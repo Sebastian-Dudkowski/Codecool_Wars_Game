@@ -133,7 +133,7 @@ public class Main extends Application {
                 map.getPlayer().move(1, 0);
                 break;
             case SPACE:
-                map.getPlayer().attack(context);
+                map.getPlayer().attack();
                 break;
             default:
                 break;
@@ -270,11 +270,10 @@ public class Main extends Application {
             int nextX = Integer.compare(playerX, npcX);
             int nextY = Integer.compare(playerY, npcY);
             if (playerX == npcX + nextX && playerY == npcY + nextY) {
-                // placeholder for attack function
                 npc.attack(player);
                 return;
             }
-            // try to go around obstacles
+            // try to go around obstacles randomly
             Field originalField = npc.getField();
             npc.move(nextX, nextY);
             moveNpcRandomly(npc, originalField);
