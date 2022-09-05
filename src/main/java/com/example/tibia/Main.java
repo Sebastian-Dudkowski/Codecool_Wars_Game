@@ -8,26 +8,14 @@ import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
-import com.example.tibia.items.ItemName;
+import com.example.tibia.map.FieldType;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -38,7 +26,6 @@ import javafx.scene.paint.Color;
 import com.example.tibia.controller.GameController;
 
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Random;
 
 import static com.example.tibia.music.MusicPlayer.*;
@@ -56,13 +43,13 @@ public class Main extends Application {
     private String amountHealth;
     private String amountMana;
     Canvas canvas = new Canvas(
-            SCREEN_SIZE * Tiles.TILE_WIDTH,
-            SCREEN_SIZE * Tiles.TILE_WIDTH);
+            SCREEN_SIZE * EqTiles.TILE_WIDTH,
+            SCREEN_SIZE * EqTiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     GraphicsContext contextEQ = canvas.getGraphicsContext2D();
     Canvas canvasEQ = new Canvas(
-            SCREEN_SIZE * Tiles.TILE_WIDTH,
-            SCREEN_SIZE * Tiles.TILE_WIDTH);
+            SCREEN_SIZE * EqTiles.TILE_WIDTH,
+            SCREEN_SIZE * EqTiles.TILE_WIDTH);
     GameController gc;
 
     public static void main(String[] args) {
@@ -100,11 +87,6 @@ public class Main extends Application {
         context = gc.getCanvas().getGraphicsContext2D();
         gc.getBorderPaneEQ().setCenter(gc.getCanvasEQ());
         gc.getBorderpane().setCenter(gc.getCanvas());
-
-
-
-
-
         maxHealth = player.getHealth();
         maxMana = player.getMana();
         displayEQ();
@@ -120,7 +102,7 @@ public class Main extends Application {
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
 
-        playSound(opening, (float) 0.4);
+        playSound(opening, (float) 0.2);
 
     }
 
@@ -172,15 +154,15 @@ public class Main extends Application {
                 if (inventory.getItems().size() > 0) {
                     for (int i = 0; i < inventory.getItems().size(); i++) {
                         if (cell.getTileName().equals(inventory.getItems().get(i).getTileName())) {
-                            Tiles.drawTile(contextEQ, "empty", x, y);
-                            Tiles2.drawTile(contextEQ, cell.getTileName(), x, y);
+                            EqTiles.drawTile(contextEQ, "empty", x, y);
+                            GameTiles.drawTile(contextEQ, cell.getTileName(), x, y);
                             break;
                         } else {
-                            Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
+                            EqTiles.drawTile(contextEQ, cell.getTileName(), x, y);
                         }
                     }
                 } else {
-                    Tiles.drawTile(contextEQ, cell.getTileName(), x, y);
+                    EqTiles.drawTile(contextEQ, cell.getTileName(), x, y);
                 }
             }
 
@@ -198,32 +180,25 @@ public class Main extends Application {
                 );
                 if (field.getActor() == player) {
                     changeColorName(field);
-
-                    Tiles2.drawTile(context, "floor", x, y);
-                    Tiles2.drawTile(context, "player2", x, y - 1);
+                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                    GameTiles.drawTile(context, field.getTileName() + " 2", x, y - 1);
                     context.fillText(userName, x * 64, y * 64 - 35);
                     context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64 - 20);
-                    Tiles2.drawTile(context, field.getTileName(), x, y);
+                    GameTiles.drawTile(context, field.getTileName(), x, y);
 
                 } else if (field.getActor() != null) {
                     changeColorName(field);
                     context.fillText(field.getTileName(), x * 64, y * 64 - 15);
                     context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
-                    Tiles2.drawTile(context, "floor", x, y);
-                    Tiles2.drawTile(context, field.getTileName(), x, y);
+                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                    GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
-                    if (field.getTileName().equals("empty")) {
-                        Tiles2.drawTile(context, field.getTileName(), x, y);
-                    } else if (field.getTileName().equals("wall")) {
-                        Tiles2.drawTile(context, field.getTileName(), x, y);
-
+                    if (field.getItem() == null) {
+                        GameTiles.drawTile(context, field.getTileName(), x, y);
                     } else {
-                        Tiles2.drawTile(context, "floor", x, y);
-                        Tiles2.drawTile(context, field.getTileName(), x, y);
-
-
+                        GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                        GameTiles.drawTile(context, field.getTileName(), x, y);
                     }
-
                 }
             }
         }

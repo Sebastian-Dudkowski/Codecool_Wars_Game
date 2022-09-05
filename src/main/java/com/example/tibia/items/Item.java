@@ -6,7 +6,6 @@ import com.example.tibia.map.Field;
 public abstract class Item implements Drawable {
 // attributes
 
-
     private String name;
     private Field field;
 

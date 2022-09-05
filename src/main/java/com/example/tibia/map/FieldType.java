@@ -4,7 +4,8 @@ public enum FieldType {
     EMPTY("empty"),
     FLOOR("floor"),
     WALL("wall"),
-    WALL2("wall2"),
+    WALL_VERTICAL("wall vertical"),
+    WALL_CORNER("wall corner"),
     DOOR("door"),
     BENCH("bench"),
     ITEM("item");

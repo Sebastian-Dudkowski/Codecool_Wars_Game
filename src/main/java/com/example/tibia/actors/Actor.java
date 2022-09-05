@@ -10,8 +10,8 @@ public abstract class Actor implements Drawable {
 
 // attributes
 
-    private String name;
-    private Field field;
+    protected String name;
+    protected Field field;
     protected int viewRange;
     protected int strength;
     protected int health;

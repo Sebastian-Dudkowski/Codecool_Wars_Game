@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Tiles {
+public class EqTiles {
     public static int TILE_WIDTH = 64;
     private static Image tileset = new Image("tiles.png", 543 * 4, 543 * 4, true, false);
     private static Map<String, Tile> tileMap = new HashMap<>();

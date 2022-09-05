@@ -8,7 +8,7 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
-
+    private boolean right = true;
 // constructors
 
     public Player(String nickName, Field field, int health,int mana, int attackPower) {
@@ -38,4 +38,23 @@ public class Player extends Actor {
             }
         }
     }
+
+    @Override
+    public void move(int dx, int dy){
+        int currentX = field.getX();
+        super.move(dx ,dy);
+        int newX = field.getX();
+        if (currentX < newX){
+            this.right = true;
+        }
+        if (currentX > newX){
+            this.right = false;
+        }
+    }
+
+    @Override
+    public String getTileName(){
+        return (right) ? name + " right" : name + " left";
+    }
+
 }

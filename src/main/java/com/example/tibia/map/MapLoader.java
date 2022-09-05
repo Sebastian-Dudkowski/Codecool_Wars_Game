@@ -34,7 +34,10 @@ public class MapLoader {
                             field.setType(FieldType.WALL);
                             break;
                         case '^':
-                            field.setType(FieldType.WALL2);
+                            field.setType(FieldType.WALL_VERTICAL);
+                            break;
+                        case 'C':
+                            field.setType(FieldType.WALL_CORNER);
                             break;
                         case '.':
                             field.setType(FieldType.FLOOR);
