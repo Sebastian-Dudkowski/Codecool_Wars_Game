@@ -41,7 +41,7 @@ public class GameTiles {
         tileMap.put(FieldType.WALL_VERTICAL.getTileName() + "4", new Tile(90, 27));
         tileMap.put(FieldType.WALL_CORNER.getTileName(), new Tile(90, 25));
         // Floors
-        tileMap.put(FieldType.FLOOR.getTileName(), new Tile(93, 25));
+        tileMap.put(FieldType.FLOOR.getTileName(), new Tile(93, 27));
         tileMap.put(FieldType.FLOOR.getTileName() + "1", new Tile(93, 25));
         tileMap.put(FieldType.FLOOR.getTileName() + "2", new Tile(93, 26));
         tileMap.put(FieldType.FLOOR.getTileName() + "3", new Tile(93, 27));
