@@ -311,7 +311,7 @@ public class Main extends Application {
             while (true) {
                 displayMap();
                 try {
-                    Thread.sleep(20); // NPC movement speed
+                    Thread.sleep(33); // refresh rate
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
