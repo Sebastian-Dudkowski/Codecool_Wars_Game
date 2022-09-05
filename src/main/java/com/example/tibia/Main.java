@@ -21,13 +21,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.ColorInput;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeLineJoin;
+import javafx.scene.text.*;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
@@ -37,6 +41,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import com.example.tibia.controller.GameController;
 
+import javax.swing.border.StrokeBorder;
+import java.awt.*;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
@@ -102,9 +108,6 @@ public class Main extends Application {
         gc.getBorderpane().setCenter(gc.getCanvas());
 
 
-
-
-
         maxHealth = player.getHealth();
         maxMana = player.getMana();
         displayEQ();
@@ -117,10 +120,11 @@ public class Main extends Application {
         displayMap();
         startNpcMovement();
         scene.setOnKeyPressed(this::onKeyPressed);
+
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
 
-        playSound(opening, (float) 0.4);
+        playSound(opening, (float) 0.1);
 
     }
 
@@ -201,13 +205,16 @@ public class Main extends Application {
 
                     Tiles2.drawTile(context, "floor", x, y);
                     Tiles2.drawTile(context, "player2", x, y - 1);
-                    context.fillText(userName, x * 64, y * 64 - 35);
+                    Tiles2.drawTile(context, "tlo", x, y-1);
+                    context.fillText(userName, x * 64, y * 64 - 30);
                     context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64 - 20);
+
                     Tiles2.drawTile(context, field.getTileName(), x, y);
 
                 } else if (field.getActor() != null) {
                     changeColorName(field);
-                    context.fillText(field.getTileName(), x * 64, y * 64 - 15);
+                    Tiles2.drawTile(context, "tlo", x, y-1);
+                    context.fillText(field.getTileName(), x * 64, y * 64 - 30);
                     context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
                     Tiles2.drawTile(context, "floor", x, y);
                     Tiles2.drawTile(context, field.getTileName(), x, y);
@@ -240,8 +247,13 @@ public class Main extends Application {
 
     private void changeColorName(Field field) {
         if (field.getActor().getHealth() > 30) {
-            context.setFill(Color.BLACK);
-            context.setFont(new Font("Segoe UI Black", 15));
+            context.setFont(Font.font("Ariel", FontWeight.BOLD, FontPosture.REGULAR, 15));
+            context.setFill(Color.GREEN);
+
+            context.setStroke(Color.BLACK);
+            context.setLineWidth(10.0);
+
+
         } else {
             context.setFill(Color.RED);
         }

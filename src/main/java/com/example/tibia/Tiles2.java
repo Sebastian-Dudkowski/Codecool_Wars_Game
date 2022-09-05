@@ -39,6 +39,7 @@ public class Tiles2 {
         tileMap.put(ActorName.DROID.getName(), new Tile(26, 3));
         tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
         tileMap.put("armor", new Tile(3, 23));
+        tileMap.put("tlo", new Tile(1, 1));
         tileMap.put(ItemName.CARD.getName(), new Tile(22, 4));
         tileMap.put(ItemName.SWORD.getName(), new Tile(8, 10));
         tileMap.put(ItemName.SHOES.getName(), new Tile(8, 22));
