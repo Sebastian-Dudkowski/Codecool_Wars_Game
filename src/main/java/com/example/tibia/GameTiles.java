@@ -24,6 +24,12 @@ public class GameTiles {
             w = TILE_WIDTH;
             h = TILE_WIDTH;
         }
+        Tile(int i, int j, int width, int height) {
+            x = i * (TILE_WIDTH ) ;
+            y = j * (TILE_WIDTH );
+            w = width;
+            h = height;
+        }
     }
 
     static {
@@ -74,12 +80,14 @@ public class GameTiles {
         tileMap.put(ItemName.HELMET.getName(), new Tile(14, 0));
         tileMap.put(ItemName.MANA_POTION.getName(), new Tile(16, 25));
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));
+        // effects
+        tileMap.put("sword flash", new Tile(97, 25, 192, 192));
 
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {
         Tile tile = tileMap.get(name);
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
-                x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+                x * TILE_WIDTH, y * TILE_WIDTH, tile.w, tile.h);
     }
 
 

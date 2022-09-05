@@ -1,6 +1,8 @@
 package com.example.tibia.actors;
 
+import com.example.tibia.GameTiles;
 import com.example.tibia.map.Field;
+import javafx.scene.canvas.GraphicsContext;
 
 public class Player extends Actor {
 
@@ -9,6 +11,7 @@ public class Player extends Actor {
     private Inventory inventory;
     private String nickName;
     private boolean right = true;
+    private boolean attacking = false;
 // constructors
 
     public Player(String nickName, Field field, int health,int mana, int attackPower) {
@@ -22,11 +25,12 @@ public class Player extends Actor {
 
 // getters & setters
 
+    public boolean isAttacking(){ return this.attacking; }
 
 
 // methods
 
-    public void attack() {
+    public void attack(GraphicsContext context) {
         for (int x=-1; x<=1; x++){
             for (int y=-1; y<=1; y++){
                 if (!(x==0 && y==0)){
@@ -37,6 +41,17 @@ public class Player extends Actor {
                 }
             }
         }
+        // displays sword flash
+        Thread attackCooldown = new Thread(() -> {
+            this.attacking = true;
+            try {
+                Thread.sleep(200); // sword flash duration
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            this.attacking = false;
+        });
+        attackCooldown.start();
     }
 
     @Override

@@ -96,7 +96,7 @@ public class Main extends Application {
             displayEQ();
         });
         primaryStage.setScene(scene);
-        displayMap();
+        startMapDisplay();
         startNpcMovement();
         scene.setOnKeyPressed(this::onKeyPressed);
         primaryStage.setTitle("Dungeon Crawl");
@@ -119,26 +119,21 @@ public class Main extends Application {
             case W:
             case UP:
                 map.getPlayer().move(0, -1);
-                displayMap();
                 break;
             case S:
             case DOWN:
                 map.getPlayer().move(0, 1);
-                displayMap();
                 break;
             case A:
             case LEFT:
                 map.getPlayer().move(-1, 0);
-                displayMap();
                 break;
             case D:
             case RIGHT:
                 map.getPlayer().move(1, 0);
-                displayMap();
                 break;
             case SPACE:
-                map.getPlayer().attack();
-                displayMap();
+                map.getPlayer().attack(context);
                 break;
             default:
                 break;
@@ -185,7 +180,6 @@ public class Main extends Application {
                     context.fillText(userName, x * 64, y * 64 - 35);
                     context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64 - 20);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
-
                 } else if (field.getActor() != null) {
                     changeColorName(field);
                     context.fillText(field.getTileName(), x * 64, y * 64 - 15);
@@ -200,9 +194,15 @@ public class Main extends Application {
                         GameTiles.drawTile(context, field.getTileName(), x, y);
                     }
                 }
+                // display sword flashing
+                if (player.isAttacking() && x == 8 && y == 8){
+                        GameTiles.drawTile(context, "sword flash", x - 2, y - 2);
+                    }
             }
         }
-        pickUp();
+
+        pickUp(); // <----- to be moved somewhere else
+
         gc.getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         gc.getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         Platform.runLater(() -> {
@@ -282,7 +282,6 @@ public class Main extends Application {
                 for (Actor npc : map.getNpcs()) {
                     moveNPC(npc);
                 }
-                displayMap();
                 try {
                     Thread.sleep(500); // NPC movement speed
                 } catch (InterruptedException e) {
@@ -291,5 +290,18 @@ public class Main extends Application {
             }
         });
         moveNpcs.start();
+    }
+    private void startMapDisplay() {
+        Thread refreshMap = new Thread(() -> {
+            while (true) {
+                displayMap();
+                try {
+                    Thread.sleep(20); // NPC movement speed
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        refreshMap.start();
     }
 }
