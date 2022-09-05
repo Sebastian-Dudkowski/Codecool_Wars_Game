@@ -194,10 +194,7 @@ public class Main extends Application {
                         GameTiles.drawTile(context, field.getTileName(), x, y);
                     }
                 }
-                // display sword flashing
-                if (player.isAttacking() && x == 8 && y == 8){
-                        GameTiles.drawTile(context, "sword flash", x - 2, y - 2);
-                    }
+                 displayAttackAnimation(x, y);
             }
         }
 
@@ -211,6 +208,24 @@ public class Main extends Application {
         });
 
 
+    }
+
+    /**
+     * checks if player is currently attacking
+     * ensures that sword flash will appear
+     * on tiles that are already loaded
+     * and won't be covered by another tile loading
+     * @param x first loop iterator in displayMap()
+     * @param y second loop iterator in displayMap()
+     */
+    private void displayAttackAnimation(int x, int y){
+        if (player.isAttacking()
+                && x == player.getViewRange() / 2 + 1
+                && y == player.getViewRange() / 2 + 1
+        ){
+            String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
+            GameTiles.drawTile(context, imageName, x - 2, y - 2);
+        }
     }
 
     private void changeColorName(Field field) {

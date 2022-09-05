@@ -1,6 +1,5 @@
 package com.example.tibia.actors;
 
-import com.example.tibia.GameTiles;
 import com.example.tibia.map.Field;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -10,7 +9,7 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
-    private boolean right = true;
+    private boolean facingRight = true;
     private boolean attacking = false;
 // constructors
 
@@ -26,6 +25,9 @@ public class Player extends Actor {
 // getters & setters
 
     public boolean isAttacking(){ return this.attacking; }
+    public boolean isFacingRight() {
+        return facingRight;
+    }
 
 
 // methods
@@ -60,16 +62,16 @@ public class Player extends Actor {
         super.move(dx ,dy);
         int newX = field.getX();
         if (currentX < newX){
-            this.right = true;
+            this.facingRight = true;
         }
         if (currentX > newX){
-            this.right = false;
+            this.facingRight = false;
         }
     }
 
     @Override
     public String getTileName(){
-        return (right) ? name + " right" : name + " left";
+        return (facingRight) ? name + " right" : name + " left";
     }
 
 }

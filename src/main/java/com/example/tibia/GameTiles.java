@@ -81,7 +81,8 @@ public class GameTiles {
         tileMap.put(ItemName.MANA_POTION.getName(), new Tile(16, 25));
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));
         // effects
-        tileMap.put("sword flash", new Tile(97, 25, 192, 192));
+        tileMap.put("sword flash right", new Tile(97, 25, 192, 192));
+        tileMap.put("sword flash left", new Tile(100, 25, 192, 192));
 
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {
