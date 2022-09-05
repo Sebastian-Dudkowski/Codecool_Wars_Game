@@ -229,10 +229,8 @@ public class Main extends Application {
 
             line = "----";
         } else if (health * 100 / maxHealth > 50) {
-            System.out.println("3");
             line = "---";
         } else if (health * 100 / maxHealth > 25) {
-            System.out.println("2");
             line = "--";
         } else {
             line = "-";

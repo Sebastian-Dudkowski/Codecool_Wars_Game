@@ -1,5 +1,7 @@
 package com.example.tibia.map;
 
+import java.util.Random;
+
 public enum FieldType {
     EMPTY("empty"),
     FLOOR("floor"),

@@ -8,6 +8,7 @@ import com.example.tibia.items.Helmet;
 import com.example.tibia.items.Sword;
 
 import java.io.InputStream;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -32,9 +33,11 @@ public class MapLoader {
                             break;
                         case '#':
                             field.setType(FieldType.WALL);
+                            field.setRandom(new Random().nextInt(1, 7));
                             break;
                         case '^':
                             field.setType(FieldType.WALL_VERTICAL);
+                            field.setRandom(new Random().nextInt(1, 5));
                             break;
                         case 'C':
                             field.setType(FieldType.WALL_CORNER);
@@ -53,19 +56,23 @@ public class MapLoader {
                             field.setActor(skeleton);
                             map.addNpc(skeleton);
                             field.setType(FieldType.FLOOR);
+                            field.setRandom(new Random().nextInt(1, 4));
                             break;
                         case '$':
                             field.setItem(new Sword(field));
                             field.setType(FieldType.FLOOR);
+                            field.setRandom(new Random().nextInt(1, 4));
                             break;
                         case 'H':
                             field.setItem(new Helmet(field));
                             field.setType(FieldType.FLOOR);
+                            field.setRandom(new Random().nextInt(1, 4));
                             break;
                         case '@':
                             field.setActor(player);
                             player.setField(field);
                             field.setType(FieldType.FLOOR);
+                            field.setRandom(new Random().nextInt(1, 4));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

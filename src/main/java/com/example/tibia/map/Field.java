@@ -4,6 +4,8 @@ import com.example.tibia.Drawable;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.items.Item;
 
+import java.util.Random;
+
 public class Field implements Drawable {
 
 // attributes
@@ -13,6 +15,7 @@ public class Field implements Drawable {
     private Actor actor;
     private Item item;
     private GameMap gameMap;
+    private int random = 1;
 
 // constructors
 
@@ -51,9 +54,11 @@ public class Field implements Drawable {
     public GameMap getGameMap() {
         return gameMap;
     }
+    public void setRandom(int random) {
+        this.random = random;
+    }
 
-
-// methods
+    // methods
     @Override
     public String getTileName(){
         if (actor != null){
@@ -61,7 +66,15 @@ public class Field implements Drawable {
         } else if ( item != null) {
             return item.getTileName();
         }
-
+        if (type.equals(FieldType.WALL)){
+            return  type.getTileName() + random;
+        }
+        if (type.equals(FieldType.WALL_VERTICAL)){
+            return  type.getTileName() + random;
+        }
+        if (type.equals(FieldType.FLOOR)){
+            return  type.getTileName() + random;
+        }
         return type.getTileName();
     }
 
