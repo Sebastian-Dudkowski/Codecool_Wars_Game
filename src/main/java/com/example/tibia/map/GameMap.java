@@ -6,6 +6,7 @@ import com.example.tibia.items.Item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameMap {
 // attributes
@@ -48,7 +49,9 @@ public class GameMap {
         if (x >= 0 && x < height && y >= 0 && y < width) {
             return fields[x][y];
         }
-        return new Field(this, FieldType.EMPTY, x, y);
+        Field emptyField = new Field(this, FieldType.EMPTY, x, y);
+        emptyField.setRandom(new Random().nextInt(1, 7));
+        return emptyField;
     }
     public List<Actor> getNpcs() {
         return npcs;

@@ -283,9 +283,8 @@ public class Main extends Application {
                     moveNPC(npc);
                 }
                 displayMap();
-
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(500); // NPC movement speed
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

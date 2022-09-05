@@ -27,7 +27,13 @@ public class GameTiles {
     }
 
     static {
-        tileMap.put(FieldType.EMPTY.getTileName(), new Tile(55, 22));
+        tileMap.put(FieldType.EMPTY.getTileName(), new Tile(54, 22));
+        tileMap.put(FieldType.EMPTY.getTileName() + "1", new Tile(54, 22));
+        tileMap.put(FieldType.EMPTY.getTileName() + "2", new Tile(55, 22));
+        tileMap.put(FieldType.EMPTY.getTileName() + "3", new Tile(56, 22));
+        tileMap.put(FieldType.EMPTY.getTileName() + "4", new Tile(57, 22));
+        tileMap.put(FieldType.EMPTY.getTileName() + "5", new Tile(58, 22));
+        tileMap.put(FieldType.EMPTY.getTileName() + "6", new Tile(59, 22));
         // Walls
         tileMap.put(FieldType.WALL.getTileName() + "1", new Tile(91, 25));
         tileMap.put(FieldType.WALL.getTileName() + "2", new Tile(92, 25));
@@ -72,9 +78,6 @@ public class GameTiles {
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {
         Tile tile = tileMap.get(name);
-        if (tile == null){
-            System.out.println(name);
-        }
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
                 x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
     }

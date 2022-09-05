@@ -30,6 +30,7 @@ public class MapLoader {
                     switch (line.charAt(x)) {
                         case ' ':
                             field.setType(FieldType.EMPTY);
+                            field.setRandom(new Random().nextInt(1, 7));
                             break;
                         case '#':
                             field.setType(FieldType.WALL);

@@ -63,16 +63,15 @@ public class Field implements Drawable {
     public String getTileName(){
         if (actor != null){
             return (actor.isAlert()) ? actor.getTileName() + " alert" : actor.getTileName();
-        } else if ( item != null) {
+        }
+        if (item != null) {
             return item.getTileName();
         }
-        if (type.equals(FieldType.WALL)){
-            return  type.getTileName() + random;
-        }
-        if (type.equals(FieldType.WALL_VERTICAL)){
-            return  type.getTileName() + random;
-        }
-        if (type.equals(FieldType.FLOOR)){
+        if (type.equals(FieldType.WALL)
+                || type.equals(FieldType.WALL_VERTICAL)
+                || type.equals(FieldType.FLOOR)
+                || type.equals(FieldType.EMPTY)
+        ) {
             return  type.getTileName() + random;
         }
         return type.getTileName();
