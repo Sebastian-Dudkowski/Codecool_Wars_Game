@@ -44,7 +44,7 @@ public class Main extends Application {
     public static Inventory inventory;
     public static Player player;
     public static GameMap map;
-    public static EQMap eq = EQLoader.loadEQ(player);
+    public static EQMap eq;
     public final int SCREEN_SIZE = 9;
     public static String userName;
     public static String amountHealth;

@@ -1,12 +1,15 @@
 package com.example.tibia.controller;
 
 import com.example.tibia.EQ.Cell;
+import com.example.tibia.EQ.EQLoader;
 import com.example.tibia.EqTiles;
 import com.example.tibia.GameTiles;
 import com.example.tibia.Main;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
+import com.example.tibia.items.Item;
+import com.example.tibia.items.Key;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
 import com.example.tibia.map.MapLoader;
@@ -131,8 +134,9 @@ public class GameController {
         userName = HelloController.getUserName();
         context = canvas.getGraphicsContext2D();
         contextEQ = canvasEQ.getGraphicsContext2D();
-        inventory = new Inventory();
         player = new Player(HelloController.getUserName(), null, 100, 100, 35);
+        eq = EQLoader.loadEQ(player);
+        inventory = player.getInventory();
         getPlayerName().setText(HelloController.getUserName());
         map = MapLoader.loadMap(player);
         getBorderpane().setCenter(getCanvas());
@@ -148,7 +152,7 @@ public class GameController {
         });
         startMapDisplay();
         startNpcMovement();
-        playSound(opening, (float) 0.2);
+//        playSound(opening, (float) 0.2);
     }
 
 
@@ -157,17 +161,7 @@ public class GameController {
     }
 
 
-
-
-    void pickUp() {
-        if (map.getPlayer().getField().getItem() != null) {
-            getPickUpButton().setDisable(false);
-        } else {
-            getPickUpButton().setDisable(true);
-        }
-    }
-
-    private void onKeyPressed(KeyEvent keyEvent) {
+      private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case W:
             case UP:
@@ -188,8 +182,20 @@ public class GameController {
             case SPACE:
                 map.getPlayer().attack();
                 break;
-            default:
+            case K:
+                if (player.getInventory().getItems() != null){
+                    for (Item item : player.getInventory().getItems()){
+                        if (item instanceof Key){
+                            ((Key) item).useKey(map.getPlayer());
+                            break;
+                        }
+                    }
+                }
                 break;
+            case E:
+                player.pickUpItem(player.getField());
+                displayEQ();
+            default:
         }
     }
 
@@ -215,6 +221,7 @@ public class GameController {
             }
 
         }
+
     }
 
     public void displayMap() {
@@ -236,7 +243,7 @@ public class GameController {
                 } else if (field.getActor() != null) {
                     changeColorName(field);
                     context.fillText(field.getTileName(), x * 64, y * 64 - 15);
-                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
+//                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
@@ -250,8 +257,6 @@ public class GameController {
                 displayAttackAnimation(x, y);
             }
         }
-
-        pickUp(); // <----- to be moved somewhere else
 
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
