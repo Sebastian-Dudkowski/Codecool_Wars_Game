@@ -9,6 +9,7 @@ public enum FieldType {
     WALL_VERTICAL("wall vertical"),
     WALL_CORNER("wall corner"),
     DOOR("door"),
+    DOOR_CLOSED("door closed"),
     BENCH("bench"),
     ITEM("item");
 

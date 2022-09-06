@@ -58,7 +58,8 @@ public class GameTiles {
         tileMap.put(FieldType.FLOOR.getTileName() + "2", new Tile(93, 26));
         tileMap.put(FieldType.FLOOR.getTileName() + "3", new Tile(93, 27));
         // Doors
-        tileMap.put(FieldType.DOOR.getTileName(), new Tile(92, 26));
+        tileMap.put(FieldType.DOOR.getTileName(), new Tile(92, 27));
+        tileMap.put(FieldType.DOOR_CLOSED.getTileName(), new Tile(92, 26));
         // Decorations
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
         // Player

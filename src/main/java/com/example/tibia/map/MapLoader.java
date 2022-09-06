@@ -51,6 +51,9 @@ public class MapLoader {
                         case 'D':
                             field.setType(FieldType.DOOR);
                             break;
+                        case 'd':
+                            field.setType(FieldType.DOOR_CLOSED);
+                            break;
                         case 'L':
                             field.setType(FieldType.BENCH);
                             break;
