@@ -58,7 +58,8 @@ public class GameTiles {
         tileMap.put(FieldType.FLOOR.getTileName() + "2", new Tile(93, 26));
         tileMap.put(FieldType.FLOOR.getTileName() + "3", new Tile(93, 27));
         // Doors
-        tileMap.put(FieldType.DOOR.getTileName(), new Tile(92, 26));
+        tileMap.put(FieldType.DOOR.getTileName(), new Tile(92, 27));
+        tileMap.put(FieldType.DOOR_CLOSED.getTileName(), new Tile(92, 26));
         // Decorations
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
         // Player
@@ -82,6 +83,7 @@ public class GameTiles {
         tileMap.put(ItemName.HELMET.getName(), new Tile(14, 0));
         tileMap.put(ItemName.MANA_POTION.getName(), new Tile(16, 25));
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));
+        tileMap.put(ItemName.KEY.getName(), new Tile(94, 27));
         // effects
         tileMap.put("sword flash right", new Tile(97, 25, 192, 192));
         tileMap.put("sword flash left", new Tile(100, 25, 192, 192));
@@ -89,6 +91,9 @@ public class GameTiles {
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {
         Tile tile = tileMap.get(name);
+        if (tile == null){
+            System.out.println(name);
+        }
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
                 x * TILE_WIDTH, y * TILE_WIDTH, tile.w, tile.h);
     }

@@ -12,6 +12,7 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
+
 // constructors
 
     public Player(String nickName, Field field, int health,int mana, int attackPower) {
@@ -21,10 +22,12 @@ public class Player extends Actor {
         this.health = health;
         this.mana = mana;
         this.strength = attackPower;
+        this.inventory = new Inventory();
     }
 
 // getters & setters
 
+    public Inventory getInventory(){ return this.inventory; }
 
 // methods
 
@@ -55,6 +58,14 @@ public class Player extends Actor {
             this.attacking = false;
         });
         attackCooldown.start();
+    }
+
+    public void pickUpItem(Field field){
+        if (field.getItem() != null){
+            this.inventory.addItem(field.getItem());
+            field.setItem(null);
+            // TODO: play pick up item sound
+        }
     }
 
 }

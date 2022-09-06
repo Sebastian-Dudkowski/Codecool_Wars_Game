@@ -8,6 +8,8 @@ import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
+import com.example.tibia.items.Item;
+import com.example.tibia.items.Key;
 import com.example.tibia.map.FieldType;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
