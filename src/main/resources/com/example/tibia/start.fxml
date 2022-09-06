@@ -15,9 +15,6 @@
             <Image url="@../../../images/gra%20kopia.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttonStartGame" layoutX="92.0" layoutY="637.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" prefHeight="101.0" prefWidth="808.0" text="Start New Game" />
-      <Button fx:id="buttonLoadGame" layoutX="96.0" layoutY="775.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="94.0" prefWidth="808.0" text="Load Game" />
-      <Button fx:id="buttonExit" layoutX="100.0" layoutY="902.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="94.0" prefWidth="808.0" text="Exit" />
       <Label layoutX="424.0" layoutY="667.0" prefHeight="42.0" prefWidth="180.0" text="Start New Game" textFill="#fcfcfc">
          <font>
             <Font size="24.0" />
@@ -33,5 +30,8 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="buttonStartGame" layoutX="92.0" layoutY="637.0" mnemonicParsing="false" onAction="#startGame" opacity="0.0" prefHeight="101.0" prefWidth="808.0" text="Start New Game" />
+      <Button fx:id="buttonLoadGame" layoutX="96.0" layoutY="775.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="94.0" prefWidth="808.0" text="Load Game" />
+      <Button fx:id="buttonExit" layoutX="100.0" layoutY="902.0" mnemonicParsing="false" onAction="#exit" opacity="0.0" prefHeight="94.0" prefWidth="808.0" text="Exit" />
    </children>
 </Pane>
