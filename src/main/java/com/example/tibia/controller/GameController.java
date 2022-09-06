@@ -243,7 +243,7 @@ public class GameController {
                 } else if (field.getActor() != null) {
                     changeColorName(field);
                     context.fillText(field.getTileName(), x * 64, y * 64 - 15);
-//                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
+                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
