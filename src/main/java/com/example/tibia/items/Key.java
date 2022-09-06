@@ -16,13 +16,16 @@ public class Key extends Item{
     }
 
     public void useKey(Player player){
-        for (int x=-1; x<=1; x+=2){
-            for (int y=-1; y<=1; y+=2){
-                if (player.getField().getNeighbor(x, y).getType().equals(FieldType.DOOR)){
-                    player.getField().getNeighbor(x, y).setType(FieldType.FLOOR);
-                    // TODO: Play open door sound
-                    player.getInventory().removeItem(this);
-                    return;
+        for (int x=-1; x<=1; x++){
+            for (int y=-1; y<=1; y++){
+                // ensures checking only up, down, left and right directions
+                if (Math.abs(x) + Math.abs(y) == 1){
+                    if (player.getField().getNeighbor(x, y).getType().equals(FieldType.DOOR)){
+                        player.getField().getNeighbor(x, y).setType(FieldType.FLOOR);
+                        // TODO: Play open door sound
+                        player.getInventory().removeItem(this);
+                        return;
+                    }
                 }
             }
         }
