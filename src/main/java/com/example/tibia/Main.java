@@ -78,7 +78,7 @@ public class Main extends Application {
         userName = HelloController.getUserName();
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1100, 650);
+        Scene scene = new Scene(fxmlLoader.load());
         gc = fxmlLoader.getController();
         gc.getPlayerName().setText(HelloController.getUserName());
         gc.getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
