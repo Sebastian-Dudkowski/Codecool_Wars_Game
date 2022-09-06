@@ -17,7 +17,8 @@ public class SoundsPlayer {
     public static final String LIGHTSABER_HIT_2 = "/sounds/lightsaber_hit_2.wav";
     public static final String DEATH = "/sounds/oof.wav";
     public static final String DOOR_OPEN = "/sounds/door_open.wav";
-    public static final String PLAYER_WALK = "/sounds/player_walk.wav";
+    public static final String PLAYER_WALK_1 = "/sounds/player_walk_1.wav";
+    public static final String PLAYER_WALK_2 = "/sounds/player_walk_2.wav";
     public static final String DROID_WALK = "/sounds/droid_walk.wav";
     public static final String PICK_UP = "/sounds/pick_up.wav";
     public static void playSound(String fileName,float volume) {

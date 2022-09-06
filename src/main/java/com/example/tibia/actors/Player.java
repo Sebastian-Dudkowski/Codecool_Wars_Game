@@ -23,7 +23,6 @@ public class Player extends Actor {
         this.mana = mana;
         this.strength = attackPower;
         this.inventory = new Inventory();
-        this.walkingSound = PLAYER_WALK;
     }
 
 // getters & setters
@@ -67,6 +66,13 @@ public class Player extends Actor {
             field.setItem(null);
             playSound(PICK_UP, (float) 0.5);
         }
+    }
+
+    @Override
+    public void move(int dx, int dy){
+        super.move(dx, dy);
+        this.walkingSound = (new Random().nextBoolean()) ? PLAYER_WALK_1 : PLAYER_WALK_2;
+        playSound(walkingSound, (float) 0.2);
     }
 
 }

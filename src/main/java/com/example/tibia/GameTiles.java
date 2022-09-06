@@ -68,7 +68,6 @@ public class GameTiles {
         tileMap.put(ActorName.PLAYER.getName() + " left 2", new Tile(66, 22));
         tileMap.put(ActorName.PLAYER.getName() + " right 2", new Tile(65, 22));
         // NPC
-
         tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
         tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));
         tileMap.put(ActorName.DROID.getName() + " left alert", new Tile(71, 20));
