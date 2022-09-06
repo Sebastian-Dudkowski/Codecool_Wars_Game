@@ -90,6 +90,9 @@ public class GameTiles {
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {
         Tile tile = tileMap.get(name);
+        if (tile == null){
+            System.out.println(name);
+        }
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
                 x * TILE_WIDTH, y * TILE_WIDTH, tile.w, tile.h);
     }

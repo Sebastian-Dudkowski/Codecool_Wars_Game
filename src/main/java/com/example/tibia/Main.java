@@ -8,6 +8,8 @@ import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
 import com.example.tibia.controller.HelloController;
+import com.example.tibia.items.Item;
+import com.example.tibia.items.Key;
 import com.example.tibia.map.FieldType;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
@@ -136,6 +138,12 @@ public class Main extends Application {
                 map.getPlayer().attack();
                 break;
             default:
+            case E:
+                for (Item item : player.getInventory().getItems()){
+                    if (item instanceof Key){
+                        ((Key) item).useKey(map.getPlayer());
+                    }
+                }
                 break;
         }
     }
@@ -183,7 +191,8 @@ public class Main extends Application {
                 } else if (field.getActor() != null) {
                     changeColorName(field);
                     context.fillText(field.getTileName(), x * 64, y * 64 - 15);
-                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
+//                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64); // wywala na tym błąd .getActor() is null
+//                    // widocznie bot zdążył się ruszyć zanim doszło do wywołania tej funkcji
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {

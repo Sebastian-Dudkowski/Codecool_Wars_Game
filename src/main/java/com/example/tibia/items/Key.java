@@ -12,10 +12,10 @@ import static com.example.tibia.music.MusicPlayer.*;
 public class Key extends Item{
 
     public Key(Field field) {
-        super("Key", field);
+        super(ItemName.KEY.getName(), field);
     }
 
-    public void use(Player player){
+    public void useKey(Player player){
         for (int x=-1; x<=1; x+=2){
             for (int y=-1; y<=1; y+=2){
                 if (player.getField().getNeighbor(x, y).getType().equals(FieldType.DOOR)){

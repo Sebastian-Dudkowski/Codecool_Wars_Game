@@ -22,6 +22,7 @@ public class Player extends Actor {
         this.health = health;
         this.mana = mana;
         this.strength = attackPower;
+        this.inventory = new Inventory();
     }
 
 // getters & setters

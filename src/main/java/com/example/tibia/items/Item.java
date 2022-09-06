@@ -35,7 +35,6 @@ public abstract class Item implements Drawable {
     }
 
 // methods
-    public void use() {}
 
     @Override
     public String getTileName() {
