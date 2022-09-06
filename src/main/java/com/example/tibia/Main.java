@@ -133,10 +133,11 @@ public class Main extends Application {
             case K:
                 if (player.getInventory().getItems() != null){
                     for (Item item : player.getInventory().getItems()){
-                    if (item instanceof Key){
-                        ((Key) item).useKey(map.getPlayer());
+                        if (item instanceof Key){
+                            ((Key) item).useKey(map.getPlayer());
+                            break;
+                        }
                     }
-                }
                 }
                 break;
             case E:
