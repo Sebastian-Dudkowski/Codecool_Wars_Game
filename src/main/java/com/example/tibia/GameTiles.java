@@ -72,7 +72,10 @@ public class GameTiles {
         tileMap.put(ActorName.SKELETON.getName() + " right", new Tile(66, 20));
         tileMap.put(ActorName.SKELETON.getName() + " left alert", new Tile(67, 20));
         tileMap.put(ActorName.SKELETON.getName() + " right alert", new Tile(68, 20));
-        tileMap.put(ActorName.DROID.getName(), new Tile(26, 3));
+        tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
+        tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));
+        tileMap.put(ActorName.DROID.getName() + " left alert", new Tile(71, 20));
+        tileMap.put(ActorName.DROID.getName() + " right alert", new Tile(72, 20));
         tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
         // items
         tileMap.put(ItemName.ARMOR.getName(), new Tile(3, 23));

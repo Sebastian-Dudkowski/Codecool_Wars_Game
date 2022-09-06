@@ -1,9 +1,6 @@
 package com.example.tibia.map;
 
-import com.example.tibia.actors.Actor;
-import com.example.tibia.actors.ActorName;
-import com.example.tibia.actors.Player;
-import com.example.tibia.actors.Skeleton;
+import com.example.tibia.actors.*;
 import com.example.tibia.items.Helmet;
 import com.example.tibia.items.Key;
 import com.example.tibia.items.Sword;
@@ -51,16 +48,16 @@ public class MapLoader {
                         case 'D':
                             field.setType(FieldType.DOOR);
                             break;
-                        case 'd':
+                        case 'X':
                             field.setType(FieldType.DOOR_CLOSED);
                             break;
                         case 'L':
                             field.setType(FieldType.BENCH);
                             break;
-                        case 's':
-                            Actor skeleton = new Skeleton(field);
-                            field.setActor(skeleton);
-                            map.addNpc(skeleton);
+                        case 'd':
+                            Actor droid = new Droid(field);
+                            field.setActor(droid);
+                            map.addNpc(droid);
                             field.setType(FieldType.FLOOR);
                             break;
                         case '$':
