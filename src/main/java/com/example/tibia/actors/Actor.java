@@ -3,8 +3,6 @@ package com.example.tibia.actors;
 import com.example.tibia.Drawable;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 
 public abstract class Actor implements Drawable {
 
@@ -17,6 +15,8 @@ public abstract class Actor implements Drawable {
     protected int health;
     protected int mana;
     protected boolean alert;
+    protected boolean facingRight = true;
+    protected boolean attacking = false;
 
 // constructors
 
@@ -47,24 +47,27 @@ public abstract class Actor implements Drawable {
     public void setHealth(int health) {
         this.health = health;
     }
-
     public int getMana() {
         return mana;
     }
-
     public void setMana(int mana) {
         this.mana = mana;
     }
-
     public void setAlert(boolean alert) { this.alert = alert; }
     public boolean isAlert() {
         return alert;
     }
+    public boolean isAttacking(){ return this.attacking; }
+    public boolean isFacingRight() {
+        return facingRight;
+    }
+
 
 
 // methods
 
     public void move(int dx, int dy) {
+        int currentX = field.getX();
         Field nextField = field.getNeighbor(dx, dy);
         if (nextField.getActor() != null || nextField.getType() != FieldType.FLOOR){
             return;
@@ -72,6 +75,13 @@ public abstract class Actor implements Drawable {
         field.setActor(null);
         nextField.setActor(this);
         field = nextField;
+        int newX = field.getX();
+        if (currentX < newX){
+            this.facingRight = true;
+        }
+        if (currentX > newX){
+            this.facingRight = false;
+        }
     }
 
     public void attack(Actor target){
@@ -86,12 +96,11 @@ public abstract class Actor implements Drawable {
         this.field.setActor(null);
     }
 
-    private boolean moveValidation(){
-        return false;
-    }
-
     @Override
     public String getTileName() {
-        return name;
+        if (alert){
+            return (facingRight) ? name + " right alert" : name + " left alert";
+        }
+        return (facingRight) ? name + " right" : name + " left";
     }
 }

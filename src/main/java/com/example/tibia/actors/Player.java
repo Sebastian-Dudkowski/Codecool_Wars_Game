@@ -1,7 +1,10 @@
 package com.example.tibia.actors;
 
 import com.example.tibia.map.Field;
-import javafx.scene.canvas.GraphicsContext;
+
+import java.util.Random;
+
+import static com.example.tibia.music.MusicPlayer.*;
 
 public class Player extends Actor {
 
@@ -9,8 +12,6 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
-    private boolean facingRight = true;
-    private boolean attacking = false;
 // constructors
 
     public Player(String nickName, Field field, int health,int mana, int attackPower) {
@@ -24,26 +25,26 @@ public class Player extends Actor {
 
 // getters & setters
 
-    public boolean isAttacking(){ return this.attacking; }
-    public boolean isFacingRight() {
-        return facingRight;
-    }
-
 
 // methods
 
-    public void attack(GraphicsContext context) {
+    public void attack() {
         for (int x=-1; x<=1; x++){
             for (int y=-1; y<=1; y++){
                 if (!(x==0 && y==0)){
                     Actor target = this.getField().getNeighbor(x, y).getActor();
                     if (target != null){
+                        String sound = (new Random().nextBoolean()) ? lightsaberHit1 : lightsaberHit2;
+                        playSound(sound, (float) 0.3);
                         attack(target);
                     }
                 }
             }
         }
-        // displays sword flash
+        String sound = (new Random().nextBoolean())
+                ? lightsaberSwing1 : (new Random().nextBoolean())
+                ? lightsaberSwing2 : lightsaberSwing3;
+        playSound(sound, (float) 0.3);
         Thread attackCooldown = new Thread(() -> {
             this.attacking = true;
             try {
@@ -54,24 +55,6 @@ public class Player extends Actor {
             this.attacking = false;
         });
         attackCooldown.start();
-    }
-
-    @Override
-    public void move(int dx, int dy){
-        int currentX = field.getX();
-        super.move(dx ,dy);
-        int newX = field.getX();
-        if (currentX < newX){
-            this.facingRight = true;
-        }
-        if (currentX > newX){
-            this.facingRight = false;
-        }
-    }
-
-    @Override
-    public String getTileName(){
-        return (facingRight) ? name + " right" : name + " left";
     }
 
 }
