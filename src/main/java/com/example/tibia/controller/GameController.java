@@ -6,7 +6,6 @@ import com.example.tibia.EqTiles;
 import com.example.tibia.GameTiles;
 import com.example.tibia.Main;
 import com.example.tibia.actors.Actor;
-import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
 import com.example.tibia.items.Item;
 import com.example.tibia.items.Key;
@@ -15,8 +14,6 @@ import com.example.tibia.map.FieldType;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -29,8 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import static com.example.tibia.Main.*;
-import static com.example.tibia.music.MusicPlayer.opening;
-import static com.example.tibia.music.MusicPlayer.playSound;
+import static com.example.tibia.sounds.SoundsPlayer.playSound;
 
 import java.util.Random;
 
@@ -336,6 +332,7 @@ public class GameController {
             Field originalField = npc.getField();
             npc.move(nextX, nextY);
             moveNpcRandomly(npc, originalField);
+            playSound(npc.getWalkingSound(), (float) 0.4);
         } else {
             npc.setAlert(false);
             Field originalField = npc.getField();

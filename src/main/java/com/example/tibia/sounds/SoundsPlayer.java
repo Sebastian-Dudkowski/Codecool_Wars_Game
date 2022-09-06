@@ -1,4 +1,4 @@
-package com.example.tibia.music;
+package com.example.tibia.sounds;
 
 import com.example.tibia.Main;
 
@@ -8,15 +8,18 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
-public class MusicPlayer {
-    public static final String opening = "/sounds/opening.wav";
-    public static final String lightsaberSwing1 = "/sounds/lightsaber_swing_1.wav";
-    public static final String lightsaberSwing2 = "/sounds/lightsaber_swing_2.wav";
-    public static final String lightsaberSwing3 = "/sounds/lightsaber_swing_3.wav";
-    public static final String lightsaberHit1 = "/sounds/lightsaber_hit_1.wav";
-    public static final String lightsaberHit2 = "/sounds/lightsaber_hit_2.wav";
-    public static final String death = "/sounds/oof.wav";
-    public static final String doorOpen = "/sounds/door_open.wav";
+public class SoundsPlayer {
+    public static final String OPENING = "/sounds/opening.wav";
+    public static final String LIGHTSABER_SWING_1 = "/sounds/lightsaber_swing_1.wav";
+    public static final String LIGHTSABER_SWING_2 = "/sounds/lightsaber_swing_2.wav";
+    public static final String LIGHTSABER_SWING_3 = "/sounds/lightsaber_swing_3.wav";
+    public static final String LIGHTSABER_HIT_1 = "/sounds/lightsaber_hit_1.wav";
+    public static final String LIGHTSABER_HIT_2 = "/sounds/lightsaber_hit_2.wav";
+    public static final String DEATH = "/sounds/oof.wav";
+    public static final String DOOR_OPEN = "/sounds/door_open.wav";
+    public static final String PLAYER_WALK = "/sounds/player_walk.wav";
+    public static final String DROID_WALK = "/sounds/droid_walk.wav";
+    public static final String PICK_UP = "/sounds/pick_up.wav";
     public static void playSound(String fileName,float volume) {
         try {
             Clip clip = AudioSystem.getClip();

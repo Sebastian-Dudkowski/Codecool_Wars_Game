@@ -4,7 +4,7 @@ import com.example.tibia.map.Field;
 
 import java.util.Random;
 
-import static com.example.tibia.music.MusicPlayer.*;
+import static com.example.tibia.sounds.SoundsPlayer.*;
 
 public class Player extends Actor {
 
@@ -23,6 +23,7 @@ public class Player extends Actor {
         this.mana = mana;
         this.strength = attackPower;
         this.inventory = new Inventory();
+        this.walkingSound = PLAYER_WALK;
     }
 
 // getters & setters
@@ -37,7 +38,7 @@ public class Player extends Actor {
                 if (!(x==0 && y==0)){
                     Actor target = this.getField().getNeighbor(x, y).getActor();
                     if (target != null){
-                        String sound = (new Random().nextBoolean()) ? lightsaberHit1 : lightsaberHit2;
+                        String sound = (new Random().nextBoolean()) ? LIGHTSABER_HIT_1 : LIGHTSABER_HIT_2;
                         playSound(sound, (float) 0.3);
                         attack(target);
                     }
@@ -45,8 +46,8 @@ public class Player extends Actor {
             }
         }
         String sound = (new Random().nextBoolean())
-                ? lightsaberSwing1 : (new Random().nextBoolean())
-                ? lightsaberSwing2 : lightsaberSwing3;
+                ? LIGHTSABER_SWING_1 : (new Random().nextBoolean())
+                ? LIGHTSABER_SWING_2 : LIGHTSABER_SWING_3;
         playSound(sound, (float) 0.3);
         Thread attackCooldown = new Thread(() -> {
             this.attacking = true;
@@ -64,7 +65,7 @@ public class Player extends Actor {
         if (field.getItem() != null){
             this.inventory.addItem(field.getItem());
             field.setItem(null);
-            // TODO: play pick up item sound
+            playSound(PICK_UP, (float) 0.5);
         }
     }
 

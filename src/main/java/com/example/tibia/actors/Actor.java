@@ -4,8 +4,8 @@ import com.example.tibia.Drawable;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
 
-import static com.example.tibia.music.MusicPlayer.death;
-import static com.example.tibia.music.MusicPlayer.playSound;
+import static com.example.tibia.sounds.SoundsPlayer.DEATH;
+import static com.example.tibia.sounds.SoundsPlayer.playSound;
 
 public abstract class Actor implements Drawable {
 
@@ -20,6 +20,7 @@ public abstract class Actor implements Drawable {
     protected boolean alert;
     protected boolean facingRight = true;
     protected boolean attacking = false;
+    protected String walkingSound;
 
 // constructors
 
@@ -42,8 +43,7 @@ public abstract class Actor implements Drawable {
     public int getY() {
         return field.getY();
     }
-    public int getViewRange() { return viewRange; }
-    public void setViewRange(int range) { this.viewRange = range; }
+    public int getViewRange() { return viewRange; }public void setViewRange(int range) { this.viewRange = range; }
     public int getHealth() {
         return health;
     }
@@ -64,6 +64,7 @@ public abstract class Actor implements Drawable {
     public boolean isFacingRight() {
         return facingRight;
     }
+    public String getWalkingSound() { return walkingSound; }
 
 
 
@@ -97,7 +98,7 @@ public abstract class Actor implements Drawable {
     public void kill(){
         this.field.getGameMap().removeNpc(this);
         this.field.setActor(null);
-        playSound(death, 1f);
+        playSound(DEATH, 1f);
     }
 
     @Override

@@ -1,36 +1,18 @@
 package com.example.tibia;
 
 
-import com.example.tibia.EQ.Cell;
-import com.example.tibia.EQ.EQLoader;
 import com.example.tibia.EQ.EQMap;
-import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Inventory;
 import com.example.tibia.actors.Player;
-import com.example.tibia.controller.HelloController;
-import com.example.tibia.items.Item;
-import com.example.tibia.items.Key;
-import com.example.tibia.map.FieldType;
-import com.example.tibia.map.MapLoader;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import com.example.tibia.map.Field;
 import com.example.tibia.map.GameMap;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import com.example.tibia.controller.GameController;
-import javafx.scene.Scene;
-import java.io.IOException;
-import java.util.Random;
 
-import static com.example.tibia.music.MusicPlayer.*;
+import java.io.IOException;
 
 public class Main extends Application {
     public static Scene scene;

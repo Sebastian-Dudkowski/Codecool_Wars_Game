@@ -1,13 +1,10 @@
 package com.example.tibia.items;
 
-import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
 
-import java.util.Random;
-
-import static com.example.tibia.music.MusicPlayer.*;
+import static com.example.tibia.sounds.SoundsPlayer.*;
 
 public class Key extends Item{
 
@@ -22,7 +19,7 @@ public class Key extends Item{
                 if (Math.abs(x) + Math.abs(y) == 1){
                     if (player.getField().getNeighbor(x, y).getType().equals(FieldType.DOOR)){
                         player.getField().getNeighbor(x, y).setType(FieldType.FLOOR);
-                        playSound(doorOpen, (float) 0.6);
+                        playSound(DOOR_OPEN, (float) 0.6);
                         player.getInventory().removeItem(this);
                         return;
                     }
