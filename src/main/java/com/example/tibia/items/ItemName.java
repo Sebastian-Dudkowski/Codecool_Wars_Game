@@ -8,7 +8,8 @@ public enum ItemName {
     SHIELD("shield"),
     MANA_POTION("manaPotion"),
     HEALTH_POTION("healthPotion"),
-    CARD("card");
+    CARD("card"),
+    KEY("key");
 
     private final String name;
 

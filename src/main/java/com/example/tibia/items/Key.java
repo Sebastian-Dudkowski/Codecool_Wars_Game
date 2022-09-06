@@ -11,8 +11,8 @@ import static com.example.tibia.music.MusicPlayer.*;
 
 public class Key extends Item{
 
-    public Key(String name, Field field) {
-        super(name, field);
+    public Key(Field field) {
+        super("Key", field);
     }
 
     public void use(Player player){

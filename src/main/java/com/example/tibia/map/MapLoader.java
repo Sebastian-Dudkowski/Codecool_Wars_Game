@@ -5,6 +5,7 @@ import com.example.tibia.actors.ActorName;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Skeleton;
 import com.example.tibia.items.Helmet;
+import com.example.tibia.items.Key;
 import com.example.tibia.items.Sword;
 
 import java.io.InputStream;
@@ -70,6 +71,10 @@ public class MapLoader {
                         case '@':
                             field.setActor(player);
                             player.setField(field);
+                            field.setType(FieldType.FLOOR);
+                            break;
+                        case 'K':
+                            field.setItem(new Key(field));
                             field.setType(FieldType.FLOOR);
                             break;
                         default:
