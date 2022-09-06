@@ -62,7 +62,16 @@ public class Main extends Application {
     }
 
 
-    private static void setView(FXMLLoader view, String title) {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setResizable(false);
+        primaryStage.alwaysOnTopProperty();
+        stage = primaryStage;
+        setMenuView();
+
+
+    }
+        private static void setView(FXMLLoader view, String title) {
         try {
             scene = new Scene(view.load());
             stage.setScene(scene);
@@ -93,13 +102,4 @@ public class Main extends Application {
         ((GameController) gameViewLoader.getController()).setupKeys();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        primaryStage.setResizable(false);
-        primaryStage.alwaysOnTopProperty();
-        stage = primaryStage;
-        setMenuView();
-
-
-    }
 }
