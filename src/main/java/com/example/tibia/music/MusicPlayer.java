@@ -9,12 +9,14 @@ import javax.sound.sampled.FloatControl;
 import java.net.URL;
 
 public class MusicPlayer {
-    public static String opening = "/sounds/opening.wav";
-    public static String lightsaberSwing1 = "/sounds/lightsaber_swing_1.wav";
-    public static String lightsaberSwing2 = "/sounds/lightsaber_swing_2.wav";
-    public static String lightsaberSwing3 = "/sounds/lightsaber_swing_3.wav";
-    public static String lightsaberHit1 = "/sounds/lightsaber_hit_1.wav";
-    public static String lightsaberHit2 = "/sounds/lightsaber_hit_2.wav";
+    public static final String opening = "/sounds/opening.wav";
+    public static final String lightsaberSwing1 = "/sounds/lightsaber_swing_1.wav";
+    public static final String lightsaberSwing2 = "/sounds/lightsaber_swing_2.wav";
+    public static final String lightsaberSwing3 = "/sounds/lightsaber_swing_3.wav";
+    public static final String lightsaberHit1 = "/sounds/lightsaber_hit_1.wav";
+    public static final String lightsaberHit2 = "/sounds/lightsaber_hit_2.wav";
+    public static final String death = "/sounds/oof.wav";
+    public static final String doorOpen = "/sounds/door_open.wav";
     public static void playSound(String fileName,float volume) {
         try {
             Clip clip = AudioSystem.getClip();

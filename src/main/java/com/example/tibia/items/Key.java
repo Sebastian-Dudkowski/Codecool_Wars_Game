@@ -22,7 +22,7 @@ public class Key extends Item{
                 if (Math.abs(x) + Math.abs(y) == 1){
                     if (player.getField().getNeighbor(x, y).getType().equals(FieldType.DOOR)){
                         player.getField().getNeighbor(x, y).setType(FieldType.FLOOR);
-                        // TODO: Play open door sound
+                        playSound(doorOpen, (float) 0.6);
                         player.getInventory().removeItem(this);
                         return;
                     }
