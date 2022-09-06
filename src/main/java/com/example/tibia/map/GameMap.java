@@ -49,9 +49,7 @@ public class GameMap {
         if (x >= 0 && x < height && y >= 0 && y < width) {
             return fields[x][y];
         }
-        Field emptyField = new Field(this, FieldType.EMPTY, x, y);
-        emptyField.setRandom(new Random().nextInt(1, 7));
-        return emptyField;
+        return generateRandomEmptyField(x, y);
     }
     public List<Actor> getNpcs() {
         return npcs;
@@ -65,4 +63,10 @@ public class GameMap {
     }
 
     public void removeNpc(Actor npc) { npcs.remove(npc); }
+
+    public Field generateRandomEmptyField(int x, int y){
+        Field emptyField = new Field(this, FieldType.EMPTY, x, y);
+        emptyField.setRandom(new Random().nextInt(1, 7));
+        return emptyField;
+    }
 }

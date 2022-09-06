@@ -243,7 +243,9 @@ public class GameController {
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
-                    if (field.getItem() == null) {
+                    if (field.getType().equals(FieldType.EMPTY)){
+                        GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
+                    } else if (field.getItem() == null) {
                         GameTiles.drawTile(context, field.getTileName(), x, y);
                     } else {
                         GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
