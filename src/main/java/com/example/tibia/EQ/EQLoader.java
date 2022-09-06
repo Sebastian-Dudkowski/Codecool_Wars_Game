@@ -1,14 +1,6 @@
 package com.example.tibia.EQ;
 
-import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
-import com.example.tibia.actors.Skeleton;
-import com.example.tibia.items.ItemName;
-import com.example.tibia.items.Sword;
-import com.example.tibia.map.Field;
-import com.example.tibia.map.FieldType;
-import com.example.tibia.map.GameMap;
-import com.example.tibia.map.MapLoader;
 
 import java.io.InputStream;
 import java.util.Scanner;
