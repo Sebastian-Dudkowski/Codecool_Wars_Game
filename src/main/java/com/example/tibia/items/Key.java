@@ -2,9 +2,9 @@ package com.example.tibia.items;
 
 import com.example.tibia.map.Field;
 
-public class MagicBean extends Item{
+public class Key extends Item{
 
-    public MagicBean(String name, Field field) {
+    public Key(String name, Field field) {
         super(name, field);
     }
 }
