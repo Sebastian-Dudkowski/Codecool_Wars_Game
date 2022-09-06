@@ -1,6 +1,7 @@
 package com.example.tibia.controller;
 
 import com.example.tibia.HelloApplication;
+import com.example.tibia.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static com.example.tibia.Main.setGameView;
 
 public class HelloController {
 
@@ -27,24 +30,18 @@ public class HelloController {
 
     @FXML
     void startNewGame(ActionEvent event) throws IOException {
-        getNewGame();
+        userName = textFieldName.getText();
+        Main.setGameView();
     }
 
     @FXML
     void startNewGameKeyboard(KeyEvent event) throws IOException {
         if (event.getCode() == KeyCode.ENTER) {
-            getNewGame();
+            userName = textFieldName.getText();
+            Main.setGameView();
         }
     }
     public static String userName;
-
-
-    public void getNewGame () throws IOException {
-        userName = textFieldName.getText();
-
-        Stage stageToClose = (Stage) textFieldName.getScene().getWindow();
-        stageToClose.close();
-    }
 
 
 
