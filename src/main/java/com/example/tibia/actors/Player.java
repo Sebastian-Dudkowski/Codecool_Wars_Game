@@ -12,6 +12,7 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
+
 // constructors
 
     public Player(String nickName, Field field, int health,int mana, int attackPower) {
@@ -25,6 +26,7 @@ public class Player extends Actor {
 
 // getters & setters
 
+    public Inventory getInventory(){ return this.inventory; }
 
 // methods
 

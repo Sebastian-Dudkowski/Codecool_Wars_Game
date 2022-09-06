@@ -17,8 +17,7 @@ public abstract class Item implements Drawable {
         this.field = field;
     }
 
-
-    // getters & setters
+// getters & setters
     public Field getField() {
         return this.field;
     }
@@ -34,11 +33,9 @@ public abstract class Item implements Drawable {
     public void setName(String name) {
         this.name = name;
     }
+
 // methods
-
-    public void use() {
-
-    }
+    public void use() {}
 
     @Override
     public String getTileName() {

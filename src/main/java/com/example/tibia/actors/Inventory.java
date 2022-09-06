@@ -9,14 +9,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Inventory{
-    public List<Item> getItems() {
-        return items;
-    }
 
-    // attributes
+// attributes
     private List<Item> items;
-    private List<String> itemNames;
-    private Field field;
+
 // constructors
 
     public Inventory() {
@@ -25,20 +21,22 @@ public class Inventory{
 
 // getters & setters
 
-    // methods
+    public List<Item> getItems() {
+        return items;
+    }
+
+// methods
     public void addItem(Item item) {
         items.add(item);
-//        field.setItem(null);
+        item.getField().setItem(null);
     }
 
     public void removeItem(Item item) {
         items.remove(item);
     }
-
     @Override
     public String toString() {
         return items.toString();
     }
-
 
 }
