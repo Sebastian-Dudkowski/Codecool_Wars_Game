@@ -49,15 +49,7 @@ public class Main extends Application {
     public static String userName;
     public static String amountHealth;
     public static String amountMana;
-    //    Canvas canvas = new Canvas(
-//            SCREEN_SIZE * EqTiles.TILE_WIDTH,
-//            SCREEN_SIZE * EqTiles.TILE_WIDTH);
-//    GraphicsContext context = canvas.getGraphicsContext2D();
-//    GraphicsContext contextEQ = canvas.getGraphicsContext2D();
-    Canvas canvasEQ = new Canvas(
-            SCREEN_SIZE * EqTiles.TILE_WIDTH,
-            SCREEN_SIZE * EqTiles.TILE_WIDTH);
-    GameController gc;
+
 
     public static void main(String[] args) {
         launch(args);
