@@ -60,4 +60,12 @@ public class Player extends Actor {
         attackCooldown.start();
     }
 
+    public void pickUpItem(Field field){
+        if (field.getItem() != null){
+            this.inventory.addItem(field.getItem());
+            field.setItem(null);
+            // TODO: play pick up item sound
+        }
+    }
+
 }

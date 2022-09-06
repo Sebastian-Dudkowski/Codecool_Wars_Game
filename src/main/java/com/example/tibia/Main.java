@@ -108,13 +108,6 @@ public class Main extends Application {
 
     }
 
-    void pickUp() {
-        if (map.getPlayer().getField().getItem() != null) {
-            gc.getPickUpButton().setDisable(false);
-        } else {
-            gc.getPickUpButton().setDisable(true);
-        }
-    }
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -137,14 +130,18 @@ public class Main extends Application {
             case SPACE:
                 map.getPlayer().attack();
                 break;
-            default:
-            case E:
-                for (Item item : player.getInventory().getItems()){
+            case K:
+                if (player.getInventory().getItems() != null){
+                    for (Item item : player.getInventory().getItems()){
                     if (item instanceof Key){
                         ((Key) item).useKey(map.getPlayer());
                     }
                 }
+                }
                 break;
+            case E:
+                player.pickUpItem(player.getField());
+            default:
         }
     }
 
@@ -206,9 +203,6 @@ public class Main extends Application {
                  displayAttackAnimation(x, y);
             }
         }
-
-        pickUp(); // <----- to be moved somewhere else
-
         gc.getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         gc.getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         Platform.runLater(() -> {
