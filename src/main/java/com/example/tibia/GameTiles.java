@@ -126,8 +126,8 @@ public class GameTiles {
         // effects
         tileMap.put("sword flash right", new Tile(97, 25, 192, 192, -2, -2));
         tileMap.put("sword flash left", new Tile(100, 25, 192, 192, -2, -2));
-        tileMap.put("Vader sword flash right", new Tile(102, 25, 192, 192, -2, -2));
-        tileMap.put("Vader sword flash left", new Tile(105, 25, 192, 192, -2, -2));
+        tileMap.put("Vader sword flash right", new Tile(103, 25, 192, 192, -2, -2));
+        tileMap.put("Vader sword flash left", new Tile(106, 25, 192, 192, -2, -2));
 
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {

@@ -7,6 +7,7 @@ import com.example.tibia.GameTiles;
 import com.example.tibia.Main;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
+import com.example.tibia.actors.Vader;
 import com.example.tibia.items.Item;
 import com.example.tibia.items.Key;
 import com.example.tibia.map.Field;
@@ -384,6 +385,10 @@ public class GameController {
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
                 if (field.getActor() != null) {
+                    if(field.getActor() instanceof Vader) {
+                        ((Vader)field.getActor()).setCanvasX(x);
+                        ((Vader)field.getActor()).setCanvasY(y);
+                    }
                     displayActor(field, x, y);
                     continue;
                 }
@@ -396,8 +401,8 @@ public class GameController {
                 } else {
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 }
-
                 displayAttackAnimation(x, y);
+
                 checkForNextLevel(); // to mogłoby być gdzie indziej
             }
         }
@@ -474,6 +479,12 @@ public class GameController {
         ) {
             String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
             GameTiles.drawTile(context, imageName, x, y);
+        }
+        for (Actor npc : map.getNpcs()){
+            if(npc instanceof Vader & npc.isAttacking()){
+                String imageName = (npc.isFacingRight()) ? "Vader sword flash right" : "Vader sword flash left";
+                GameTiles.drawTile(context, imageName, ((Vader) npc).getCanvasX() + 1,((Vader) npc).getCanvasY() + 1);
+            }
         }
     }
 

@@ -10,8 +10,8 @@ public class Trooper extends Actor{
     public Trooper(Field field){
         super(ActorName.TROOPER.getName(), field);
         this.viewRange = 4;
-        this.health = 100;
-        this.strength = 5;
+        this.health = 150;
+        this.strength = 50;
         this.walkingSound = ""; // TODO: add sound
     }
 }

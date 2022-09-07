@@ -8,13 +8,33 @@ import static com.example.tibia.sounds.SoundsPlayer.*;
 
 public class Vader extends Actor{
 
+
+    private int canvasX;
+    private int canvasY;
+
     public Vader(Field field) {
         super(ActorName.VADER.getName(), field);
-        this.viewRange = 5;
-        this.health = 666;
-        this.strength = 10;
+        this.viewRange = 7;
+        this.health = 666666;
+        this.strength = 11;
         this.exp = 1000;
         this.walkingSound = ""; // TODO: add Vader sound
+    }
+
+    public int getCanvasX() {
+        return canvasX;
+    }
+
+    public void setCanvasX(int canvasX) {
+        this.canvasX = canvasX;
+    }
+
+    public int getCanvasY() {
+        return canvasY;
+    }
+
+    public void setCanvasY(int canvasY) {
+        this.canvasY = canvasY;
     }
 
     @Override
