@@ -33,7 +33,8 @@ public class MapLoader {
                 if (x < line.length()) {
                     Field field = map.getField(x, y);
                     switch (line.charAt(x)) {
-                        case ' ':
+                        case '.':
+                        case 'x':
                             field.setType(FieldType.EMPTY);
                             field.setRandom(new Random().nextInt(1, 7));
                             break;
@@ -48,7 +49,7 @@ public class MapLoader {
                         case 'C':
                             field.setType(FieldType.WALL_CORNER);
                             break;
-                        case '.':
+                        case ' ':
                             field.setType(FieldType.FLOOR);
                             field.setRandom(new Random().nextInt(1, 4));
                             break;
@@ -98,6 +99,16 @@ public class MapLoader {
                             break;
                         case 'P':
                             field.setType(FieldType.NEXT);
+                            break;
+                        case 'E':
+                            field.setType(FieldType.ENGINE);
+                            field.setRandom(new Random().nextInt(1, 3));
+                            break;
+                        case 'b':
+                            field.setType(FieldType.BOX_SMALL);
+                            break;
+                        case 'B':
+                            field.setType(FieldType.BOX_BIG);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

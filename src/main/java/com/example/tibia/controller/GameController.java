@@ -231,25 +231,25 @@ public class GameController {
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
                 if (field.getActor() != null) {
-                    Actor actor = field.getActor();
-                    changeColorName(field);
-                    context.fillText(actor.getName(), x * 64, y * 64 - 15);
-                    context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
-                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                    GameTiles.drawTile(context, field.getTileName(), x, y);
-                } else if (field.getType().equals(FieldType.EMPTY)){
-                    GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
-                } else if (field.getItem() != null) {
+                    displayActor(field, x, y);
+                    continue;
+                }
+                if (displayDecorations(field, x, y)){
+                    continue;
+                }
+                else if (field.getItem() != null) {
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 }
+
                 displayAttackAnimation(x, y);
-                checkForNextLevel();
+                checkForNextLevel(); // to mogłoby być gdzie indziej
             }
         }
 
+        // to mogłoby być w osobnej funkcji
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         Platform.runLater(() -> {
@@ -257,12 +257,45 @@ public class GameController {
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
         });
     }
+
+    private void displayActor(Field field, int x, int y){
+        Actor actor = field.getActor();
+                    changeColorName(field);
+                    context.fillText(actor.getName(), x * 64, y * 64 - 15);
+                    context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
+                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                    GameTiles.drawTile(context, field.getTileName(), x, y);
+    }
+    private boolean displayDecorations(Field field, int x, int y){
+        switch (field.getType()){
+            case EMPTY:
+                GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
+                return true;
+            case ENGINE:
+                Field engine = new Field(map, FieldType.ENGINE, x, y, new Random().nextInt(1, 3));
+                GameTiles.drawTile(context, engine.getTileName(), x ,y);
+                GameTiles.drawTile(context, FieldType.EMPTY.getTileName(), x ,y);
+                return true;
+            case BOX_SMALL:
+                GameTiles.drawTile(context, field.getTileName(), x, y);
+                return true;
+            case BOX_BIG:
+                GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                GameTiles.drawTile(context, field.getTileName(), x ,y);
+                return true;
+            case FLOOR:
+                return false;
+            default:
+                System.out.println("No such decoration:" + field.getType());
+                return false;
+        }
+    }
+
+
     private static void checkForNextLevel() {
         if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
             level++;
-
             map = MapLoader.loadMap(player, level);
-
         }
     }
 
