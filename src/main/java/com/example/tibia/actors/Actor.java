@@ -17,11 +17,8 @@ public abstract class Actor implements Drawable {
     protected int viewRange;
     protected int strength;
     protected int armor;
-
-
     protected int exp;
     protected int playerLvl;
-
     protected int health;
     protected int mana;
     protected boolean alert;
@@ -75,35 +72,27 @@ public abstract class Actor implements Drawable {
         return facingRight;
     }
     public String getWalkingSound() { return walkingSound; }
-
     public void setExp(int exp) {
         this.exp = exp;
     }
-
     public int getExp() {
         return exp;
     }
-
     public int getPlayerLvl() {
         return playerLvl;
     }
-
     public void setPlayerLvl(int playerLvl) {
         this.playerLvl = playerLvl;
     }
-
     public int getStrength() {
         return strength;
     }
-
     public void setStrength(int strength) {
         this.strength = strength;
     }
-
     public int getArmor() {
         return armor;
     }
-
     public void setArmor(int armor) {
         this.armor = armor;
     }
@@ -138,7 +127,9 @@ public abstract class Actor implements Drawable {
     public void kill(){
         this.field.getGameMap().removeNpc(this);
         this.field.setActor(null);
+        player.setExp(player.getExp() + this.exp);
         playSound(DEATH, 1f);
+        System.out.println(player.getExp());
     }
 
     @Override

@@ -37,8 +37,6 @@ public class Player extends Actor {
     public void setFacingRight(Boolean right) { this.facingRight = right; }
 
 
-
-
 // methods
 
     public void attack() {

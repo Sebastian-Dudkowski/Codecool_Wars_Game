@@ -24,10 +24,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
 import static com.example.tibia.Main.*;
-import static com.example.tibia.sounds.SoundsPlayer.playSound;
+import static com.example.tibia.sounds.SoundsPlayer.*;
 
 import java.util.Random;
 
@@ -202,6 +200,8 @@ public class GameController {
 
     @FXML
     public void initialize() {
+        //
+
         playSound(UFO, (float) 0.8);
         actionButton();
         userName = HelloController.getUserName();
@@ -290,10 +290,12 @@ public class GameController {
             case A:
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                map.getPlayer().setFacingRight(false);
                 break;
             case D:
             case RIGHT:
                 map.getPlayer().move(1, 0);
+                map.getPlayer().setFacingRight(true);
                 break;
             case SPACE:
                 map.getPlayer().attack();
@@ -403,6 +405,11 @@ public class GameController {
         // to mogłoby być w osobnej funkcji
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
+        getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
+
+
+        getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
+        getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         Platform.runLater(() -> {
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
@@ -411,12 +418,13 @@ public class GameController {
 
     private void displayActor(Field field, int x, int y){
         Actor actor = field.getActor();
-                    changeColorName(field);
-                    context.fillText(actor.getName(), x * 64, y * 64 - 15);
-                    context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
-                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                    GameTiles.drawTile(context, field.getTileName(), x, y);
+        changeColorName(field);
+        context.fillText(actor.getName(), x * 64, y * 64 - 15);
+        context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
+        GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+        GameTiles.drawTile(context, field.getTileName(), x, y);
     }
+
     private boolean displayDecorations(Field field, int x, int y){
         switch (field.getType()){
             case EMPTY:
