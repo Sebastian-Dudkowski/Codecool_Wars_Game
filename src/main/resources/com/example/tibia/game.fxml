@@ -87,7 +87,11 @@
                      <font>
                         <Font size="18.0" />
                      </font></Label>
-                  <Label fx:id="characterStats" opacity="0.0" text="Label" />
+                  <Label fx:id="characterStats" opacity="0.0" text="Label" textFill="#dd2121">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </Pane>
          </right>
