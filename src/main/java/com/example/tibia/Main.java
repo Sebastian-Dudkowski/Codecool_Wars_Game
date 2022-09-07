@@ -59,6 +59,17 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
     }
+    private static void setViewS(FXMLLoader view, String title) {
+        try {
+            scene = new Scene(view.load());
+            Stage stage1 = new Stage();
+            stage1.setScene(scene);
+            stage1.setTitle(title);
+            stage1.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void setMenuView() {
         menuViewLoader = new FXMLLoader(Main.class.getResource("start.fxml"));
@@ -67,7 +78,7 @@ public class Main extends Application {
 
     public static void setNameSelectView() {
         nameSelectViewLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-        setView(nameSelectViewLoader, "Select Name");
+        setViewS(nameSelectViewLoader, "Select Name");
     }
 
     public static void closeView() {
