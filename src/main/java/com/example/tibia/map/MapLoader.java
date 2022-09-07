@@ -3,7 +3,7 @@ package com.example.tibia.map;
 import com.example.tibia.actors.*;
 import com.example.tibia.items.Helmet;
 import com.example.tibia.items.Key;
-import com.example.tibia.items.Sword;
+import com.example.tibia.items.Lightsaber;
 
 import java.io.InputStream;
 import java.util.Random;
@@ -67,8 +67,20 @@ public class MapLoader {
                             map.addNpc(droid);
                             field.setType(FieldType.FLOOR);
                             break;
+                        case 'g':
+                            Actor guard = new Guard(field);
+                            field.setActor(guard);
+                            map.addNpc(guard);
+                            field.setType(FieldType.FLOOR);
+                            break;
+                        case 't':
+                            Actor trooper = new Trooper(field);
+                            field.setActor(trooper);
+                            map.addNpc(trooper);
+                            field.setType(FieldType.FLOOR);
+                            break;
                         case '$':
-                            field.setItem(new Sword(field));
+                            field.setItem(new Lightsaber(field));
                             field.setType(FieldType.FLOOR);
                             break;
                         case 'H':

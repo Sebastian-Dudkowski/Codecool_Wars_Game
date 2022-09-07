@@ -55,6 +55,7 @@ public class GameTiles {
     }
 
     static {
+        // Background
         tileMap.put(FieldType.EMPTY.getTileName(), new Tile(54, 22));
         tileMap.put(FieldType.EMPTY.getTileName() + "1", new Tile(54, 22));
         tileMap.put(FieldType.EMPTY.getTileName() + "2", new Tile(55, 22));
@@ -89,12 +90,21 @@ public class GameTiles {
         // Player
         tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 192, 0, -1));
         tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 192, 0, -1));
-        // NPC
+        // NPCs
         tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
         tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));
         tileMap.put(ActorName.DROID.getName() + " left alert", new Tile(71, 20));
         tileMap.put(ActorName.DROID.getName() + " right alert", new Tile(72, 20));
-        tileMap.put(ActorName.SITH.getName(), new Tile(24, 3));
+
+        tileMap.put(ActorName.GUARD.getName() + " left", new Tile(81, 20));
+        tileMap.put(ActorName.GUARD.getName() + " right", new Tile(82, 20));
+        tileMap.put(ActorName.GUARD.getName() + " left alert", new Tile(84, 20));
+        tileMap.put(ActorName.GUARD.getName() + " right alert", new Tile(83, 20));
+
+        tileMap.put(ActorName.TROOPER.getName() + " left", new Tile(77, 20));
+        tileMap.put(ActorName.TROOPER.getName() + " right", new Tile(78, 20));
+        tileMap.put(ActorName.TROOPER.getName() + " left alert", new Tile(79, 20));
+        tileMap.put(ActorName.TROOPER.getName() + " right alert", new Tile(80, 20));
         // items
         tileMap.put(ItemName.ARMOR.getName(), new Tile(3, 23));
         tileMap.put(ItemName.CARD.getName(), new Tile(22, 4));

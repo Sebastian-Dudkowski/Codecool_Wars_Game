@@ -73,8 +73,8 @@ public class Player extends Actor {
     @Override
     public void move(int dx, int dy){
         super.move(dx, dy);
-        this.walkingSound = PLAYER_WALK_1;
-        playSound(walkingSound, (float) 0.6);
+        this.walkingSound = (new Random().nextBoolean()) ? PLAYER_WALK_1 : PLAYER_WALK_2;
+        playSound(walkingSound, (float) 0.1);
     }
 
 }
