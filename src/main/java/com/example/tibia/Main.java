@@ -56,6 +56,8 @@ public class Main extends Application {
                 stage1.close();
             }
             scene = new Scene(view.load());
+            stage.setX(200.0);
+            stage.setY(50.0);
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();
