@@ -18,18 +18,40 @@ public class GameTiles {
     private static Map<String, Tile> tileMap = new HashMap<>();
     public static class Tile {
         public final int x, y, w, h;
+        public final int dx ,dy; // image offset relative to tile's position
         Tile(int i, int j) {
             x = i * (TILE_WIDTH ) ;
             y = j * (TILE_WIDTH );
             w = TILE_WIDTH;
             h = TILE_WIDTH;
+            dx = 0;
+            dy = 0;
         }
+
+        /**
+         * Constructor for images with size different from default
+         */
         Tile(int i, int j, int width, int height) {
             x = i * (TILE_WIDTH ) ;
             y = j * (TILE_WIDTH );
             w = width;
             h = height;
+            dx = 0;
+            dy = 0;
         }
+
+        /**
+         * constructor for images offset relative to tile's position
+         */
+        Tile(int i, int j, int width, int height, int dx, int dy) {
+            x = i * (TILE_WIDTH ) ;
+            y = j * (TILE_WIDTH );
+            w = width;
+            h = height;
+            this.dx = dx;
+            this.dy = dy;
+        }
+
     }
 
     static {
@@ -65,8 +87,8 @@ public class GameTiles {
         // Decorations
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
         // Player
-        tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 192));
-        tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 192));
+        tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 192, 0, -1));
+        tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 192, 0, -1));
         // NPC
         tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
         tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));
@@ -84,20 +106,18 @@ public class GameTiles {
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));
         tileMap.put(ItemName.KEY.getName(), new Tile(94, 27));
         // effects
-        tileMap.put("sword flash right", new Tile(97, 25, 192, 192));
-        tileMap.put("sword flash left", new Tile(100, 25, 192, 192));
+        tileMap.put("sword flash right", new Tile(97, 25, 192, 192, -2, -2));
+        tileMap.put("sword flash left", new Tile(100, 25, 192, 192, -2, -2));
 
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {
         Tile tile = tileMap.get(name);
         if (tile == null){
-            System.out.println(name);
+            throw new IllegalArgumentException("Tile does not exist: " + name);
         }
         context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
-                x * TILE_WIDTH, y * TILE_WIDTH, tile.w, tile.h);
+                (x + tile.dx) * TILE_WIDTH, (y + tile.dy) * TILE_WIDTH, tile.w, tile.h);
     }
-
-
 
 }
 

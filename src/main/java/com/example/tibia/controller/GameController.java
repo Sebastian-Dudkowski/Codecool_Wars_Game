@@ -236,7 +236,7 @@ public class GameController {
                     context.fillText(actor.getName(), x * 64, y * 64 - 15);
                     context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                    GameTiles.drawTile(context, field.getTileName(), x, (actor.equals(player)) ? y - 1 : y);
+                    GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else if (field.getType().equals(FieldType.EMPTY)){
                     GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
                 } else if (field.getItem() != null) {
@@ -281,7 +281,7 @@ public class GameController {
                 && y == player.getViewRange() / 2 + 1
         ) {
             String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
-            GameTiles.drawTile(context, imageName, x - 2, y - 2);
+            GameTiles.drawTile(context, imageName, x, y);
         }
     }
 
