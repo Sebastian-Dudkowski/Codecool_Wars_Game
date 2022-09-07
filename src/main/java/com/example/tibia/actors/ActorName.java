@@ -6,7 +6,8 @@ public enum ActorName {
     SITH("Sith"),
     DROID("Droid"),
     GUARD("Guard"),
-    TROOPER("Trooper");
+    TROOPER("Trooper"),
+    VADER("Vader");
 
     private final String name;
 

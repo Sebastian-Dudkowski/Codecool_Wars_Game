@@ -15,6 +15,9 @@ public class SoundsPlayer {
     public static final String LIGHTSABER_SWING_3 = "/sounds/lightsaber_swing_3.wav";
     public static final String LIGHTSABER_HIT_1 = "/sounds/lightsaber_hit_1.wav";
     public static final String LIGHTSABER_HIT_2 = "/sounds/lightsaber_hit_2.wav";
+    public static final String LIGHTSABER_CLASH_1 = "/sounds/lightsaber_clash_2.wav";
+    public static final String LIGHTSABER_CLASH_2 = "/sounds/lightsaber_clash_2.wav";
+    public static final String LIGHTSABER_CLASH_3 = "/sounds/lightsaber_hitclash_2.wav";
     public static final String DEATH = "/sounds/oof.wav";
     public static final String DOOR_OPEN = "/sounds/door_open.wav";
     public static final String PLAYER_WALK_1 = "/sounds/player_walk_1.wav";

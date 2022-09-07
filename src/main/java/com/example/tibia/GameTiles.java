@@ -108,6 +108,11 @@ public class GameTiles {
         tileMap.put(ActorName.TROOPER.getName() + " right", new Tile(78, 20));
         tileMap.put(ActorName.TROOPER.getName() + " left alert", new Tile(79, 20));
         tileMap.put(ActorName.TROOPER.getName() + " right alert", new Tile(80, 20));
+
+        tileMap.put(ActorName.VADER.getName() + " left", new Tile(70, 23));
+        tileMap.put(ActorName.VADER.getName() + " right", new Tile(69, 23));
+        tileMap.put(ActorName.VADER.getName() + " left alert", new Tile(72, 23));
+        tileMap.put(ActorName.VADER.getName() + " right alert", new Tile(71, 23));
         // items
         tileMap.put(ItemName.ARMOR.getName(), new Tile(3, 23));
         tileMap.put(ItemName.CARD.getName(), new Tile(22, 4));
@@ -121,6 +126,8 @@ public class GameTiles {
         // effects
         tileMap.put("sword flash right", new Tile(97, 25, 192, 192, -2, -2));
         tileMap.put("sword flash left", new Tile(100, 25, 192, 192, -2, -2));
+        tileMap.put("Vader sword flash right", new Tile(102, 25, 192, 192, -2, -2));
+        tileMap.put("Vader sword flash left", new Tile(105, 25, 192, 192, -2, -2));
 
     }
     public static void drawTile(GraphicsContext context, String name, int x, int y) {

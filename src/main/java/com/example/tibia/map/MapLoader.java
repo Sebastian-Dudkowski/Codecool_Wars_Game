@@ -84,6 +84,11 @@ public class MapLoader {
                             map.addNpc(trooper);
                             field.setType(FieldType.FLOOR);
                             break;
+                        case 'V':
+                            Actor vader = new Vader(field);
+                            map.addNpc(vader);
+                            field.setType(FieldType.FLOOR);
+                            break;
                         case '$':
                             field.setItem(new Lightsaber(field));
                             field.setType(FieldType.FLOOR);
