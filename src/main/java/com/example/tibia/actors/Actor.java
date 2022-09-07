@@ -70,7 +70,6 @@ public abstract class Actor implements Drawable {
     public String getWalkingSound() { return walkingSound; }
 
 
-
 // methods
 
     public void move(int dx, int dy) {

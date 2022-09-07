@@ -171,10 +171,12 @@ public class GameController {
             case A:
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                map.getPlayer().setFacingRight(false);
                 break;
             case D:
             case RIGHT:
                 map.getPlayer().move(1, 0);
+                map.getPlayer().setFacingRight(true);
                 break;
             case SPACE:
                 map.getPlayer().attack();

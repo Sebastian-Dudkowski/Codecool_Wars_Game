@@ -30,6 +30,7 @@ public class Player extends Actor {
     public Inventory getInventory(){ return this.inventory; }
     @Override
     public String getName(){ return this.nickName; }
+    public void setFacingRight(Boolean right) { this.facingRight = right; }
 
 // methods
 
