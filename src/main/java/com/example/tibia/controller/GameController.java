@@ -175,6 +175,17 @@ public class GameController {
     }
 
     @FXML
+    private Label characterStats;
+
+    public Label getCharacterStats() {
+        return characterStats;
+    }
+
+    public void setCharacterStats(Label characterStats) {
+        this.characterStats = characterStats;
+    }
+
+    @FXML
     private BorderPane borderpane;
 
     public Canvas getCanvas() {
@@ -213,6 +224,7 @@ public class GameController {
         getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
         getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
         actuallyLvl();
+        characterStatsText();
         displayEQ();
         getPickUpButton().addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> {
             inventory.addItem(map.getPlayer().getField().getItem());
@@ -248,7 +260,15 @@ public class GameController {
                 "SPACE - Attack\n" +
                 "K - Open Door\n" +
                 "E - Pick up Item\n" +
+                "B - Show Skills\n" +
                 "N - show Button Action\n");
+    }
+
+    private void characterStatsText() {
+        getCharacterStats().setText("SKILL" + userName + "\n" +
+                "Armor : " + player.getArmor() + "\n" +
+                "Strength : " + player.getStrength()+ "\n"  +
+                "Power : 0"+ "\n" );
     }
 
 
@@ -295,6 +315,10 @@ public class GameController {
             case N:
                 showAction();
                 break;
+            case B:
+                characterStatsText();
+                showSkills();
+                break;
             default:
         }
     }
@@ -302,9 +326,22 @@ public class GameController {
     private void showAction() {
         if (!actionButton.isVisible()) {
             actionButton.setVisible(true);
+            actionLabel.setOpacity(1.0);
         } else {
             actionButton.setVisible(false);
-            hbox.setPrefWidth(1160.0);
+            actionLabel.setOpacity(0.0);
+
+        }
+    }
+
+    private void showSkills() {
+        if (!actionButton.isVisible()) {
+            actionButton.setVisible(true);
+            characterStats.setOpacity(1.0);
+
+        } else {
+            actionButton.setVisible(false);
+            characterStats.setOpacity(0.0);
 
         }
     }
@@ -369,6 +406,7 @@ public class GameController {
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
+
         Platform.runLater(() -> {
             getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);

@@ -83,10 +83,11 @@
          <right>
             <Pane fx:id="actionButton" prefHeight="200.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="actionLabel" text="Label" textFill="#0cb5e4">
+                  <Label fx:id="actionLabel" opacity="0.0" text="Label" textFill="#0cb5e4">
                      <font>
                         <Font size="18.0" />
                      </font></Label>
+                  <Label fx:id="characterStats" opacity="0.0" text="Label" />
                </children>
             </Pane>
          </right>
