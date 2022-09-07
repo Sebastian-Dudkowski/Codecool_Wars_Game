@@ -20,7 +20,7 @@ public class SoundsPlayer {
     public static final String PLAYER_WALK_1 = "/sounds/footstep_player.wav";
     public static final String DROID_WALK = "/sounds/footstep_droid.wav";
     public static final String PICK_UP = "/sounds/pick_up.wav";
-    public static void playSound(String fileName,float volume) {
+    public static Clip playSound(String fileName,float volume) {
         try {
             Clip clip = AudioSystem.getClip();
             URL url = Main.class.getResource(fileName);
@@ -28,9 +28,11 @@ public class SoundsPlayer {
             clip.open(inputStream);
             setVolume(volume,clip);
             clip.start();
+            return clip;
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+        return null;
     }
     public static void setVolume(float volume, Clip clip) {
         if (volume < 0f || volume > 1f)

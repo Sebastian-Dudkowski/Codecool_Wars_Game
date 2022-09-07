@@ -24,8 +24,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import static com.example.tibia.Main.*;
+import static com.example.tibia.sounds.SoundsPlayer.OPENING;
 import static com.example.tibia.sounds.SoundsPlayer.playSound;
 
 import java.util.Random;
@@ -219,7 +221,7 @@ public class GameController {
         });
         startMapDisplay();
         startNpcMovement();
-//        playSound(opening, (float) 0.2);
+//        playSound(OPENING, (float) 0.2);
     }
 
     private void actuallyLvl() {
@@ -485,6 +487,7 @@ public class GameController {
     }
 
     private void startMapDisplay() {
+//        Stage stageToClose = (Stage)canvas.getScene().getWindow();
         Thread refreshMap = new Thread(() -> {
             while (true) {
                 displayMap();

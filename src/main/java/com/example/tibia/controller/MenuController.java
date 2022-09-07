@@ -31,6 +31,7 @@ public class MenuController {
 
     @FXML
     void startGame(ActionEvent event) throws IOException {
+
         Main.setNameSelectView();
 
     }

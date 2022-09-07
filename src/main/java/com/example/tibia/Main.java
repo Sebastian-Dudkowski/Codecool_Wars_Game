@@ -12,7 +12,11 @@ import com.example.tibia.map.GameMap;
 import javafx.scene.canvas.Canvas;
 import com.example.tibia.controller.GameController;
 
+import javax.sound.sampled.Clip;
 import java.io.IOException;
+
+import static com.example.tibia.sounds.SoundsPlayer.OPENING;
+import static com.example.tibia.sounds.SoundsPlayer.playSound;
 
 public class Main extends Application {
     public static Scene scene;
@@ -34,6 +38,7 @@ public class Main extends Application {
     public static String userName;
     public static String amountHealth;
     public static String amountMana;
+    public static Clip clip;
 
 
     public static void main(String[] args) {
@@ -46,6 +51,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.alwaysOnTopProperty();
         stage = primaryStage;
+        clip = playSound(OPENING, (float) 0.2);
         setMenuView();
 
 
@@ -93,6 +99,7 @@ public class Main extends Application {
     }
 
     public static void setGameView() {
+        clip.stop();
         gameViewLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         setView(gameViewLoader, "Dungeon Crawl");
         ((GameController) gameViewLoader.getController()).setupKeys();
