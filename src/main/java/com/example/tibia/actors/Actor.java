@@ -137,7 +137,6 @@ public abstract class Actor implements Drawable {
 
     public void kill(){
         this.field.getGameMap().removeNpc(this);
-        player.setExp(player.getExp() + this.field.getActor().getExp());
         this.field.setActor(null);
         playSound(DEATH, 1f);
     }

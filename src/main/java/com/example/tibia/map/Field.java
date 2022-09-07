@@ -15,7 +15,7 @@ public class Field implements Drawable {
     private Actor actor;
     private Item item;
     private GameMap gameMap;
-    private int random = 1;
+    private int random = 0;
 
 // constructors
 
@@ -24,6 +24,17 @@ public class Field implements Drawable {
         this.type = type;
         this.X = x;
         this.Y = y;
+    }
+
+    /**
+     * Constructor for fields with randomized tiles
+     */
+    public Field(GameMap gameMap,FieldType type, int x, int y, int random) {
+        this.gameMap = gameMap;
+        this.type = type;
+        this.X = x;
+        this.Y = y;
+        this.random = random;
     }
 
 // getters & setters
@@ -67,11 +78,7 @@ public class Field implements Drawable {
         if (item != null) {
             return item.getTileName();
         }
-        if (type.equals(FieldType.WALL)
-                || type.equals(FieldType.WALL_VERTICAL)
-                || type.equals(FieldType.FLOOR)
-                || type.equals(FieldType.EMPTY)
-        ) {
+        if ( random != 0) {
             return  type.getTileName() + random;
         }
         return type.getTileName();

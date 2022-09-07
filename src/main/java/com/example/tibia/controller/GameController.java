@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import static com.example.tibia.Main.*;
-import static com.example.tibia.sounds.SoundsPlayer.*;
+import static com.example.tibia.sounds.SoundsPlayer.playSound;
 
 import java.util.Random;
 
@@ -382,39 +382,64 @@ public class GameController {
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
                 if (field.getActor() != null) {
-                    Actor actor = field.getActor();
-                    changeColorName(field);
-                    context.fillText(actor.getName(), x * 64, y * 64 - 15);
-                    context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
-                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                    GameTiles.drawTile(context, field.getTileName(), x, (actor.equals(player)) ? y - 1 : y);
-                } else if (field.getType().equals(FieldType.EMPTY)) {
-                    GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
-                } else if (field.getItem() != null) {
+                    displayActor(field, x, y);
+                    continue;
+                }
+                if (displayDecorations(field, x, y)){
+                    continue;
+                }
+                else if (field.getItem() != null) {
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 }
-                displayAttackAnimation(x, y);
-                checkForNextLevel();
-                actuallyLvl();
 
+                displayAttackAnimation(x, y);
+                checkForNextLevel(); // to mogłoby być gdzie indziej
             }
         }
 
+        // to mogłoby być w osobnej funkcji
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
-        getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
-
         Platform.runLater(() -> {
-            getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
-            getExpToNextLvl().setText("Exp: " + player.getExp() + "/" + expNextLvl);
-
         });
     }
+
+    private void displayActor(Field field, int x, int y){
+        Actor actor = field.getActor();
+                    changeColorName(field);
+                    context.fillText(actor.getName(), x * 64, y * 64 - 15);
+                    context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
+                    GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                    GameTiles.drawTile(context, field.getTileName(), x, y);
+    }
+    private boolean displayDecorations(Field field, int x, int y){
+        switch (field.getType()){
+            case EMPTY:
+                GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
+                return true;
+            case ENGINE:
+                Field engine = new Field(map, FieldType.ENGINE, x, y, new Random().nextInt(1, 3));
+                GameTiles.drawTile(context, engine.getTileName(), x ,y);
+                GameTiles.drawTile(context, FieldType.EMPTY.getTileName(), x ,y);
+                return true;
+            case BOX_SMALL:
+                GameTiles.drawTile(context, field.getTileName(), x, y);
+                return true;
+            case BOX_BIG:
+                GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
+                GameTiles.drawTile(context, field.getTileName(), x ,y);
+                return true;
+            default:
+//                System.out.println("No such decoration:" + field.getType());
+                return false;
+        }
+    }
+
 
     private static void checkForNextLevel() {
         if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
@@ -440,7 +465,7 @@ public class GameController {
                 && y == player.getViewRange() / 2 + 1
         ) {
             String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
-            GameTiles.drawTile(context, imageName, x - 2, y - 2);
+            GameTiles.drawTile(context, imageName, x, y);
         }
     }
 
@@ -524,10 +549,8 @@ public class GameController {
     }
 
     private void startMapDisplay() {
-
         Thread refreshMap = new Thread(() -> {
             while (true) {
-
                 displayMap();
                 try {
                     Thread.sleep(33); // refresh rate

@@ -3,7 +3,7 @@ package com.example.tibia.map;
 import com.example.tibia.actors.*;
 import com.example.tibia.items.Helmet;
 import com.example.tibia.items.Key;
-import com.example.tibia.items.Sword;
+import com.example.tibia.items.Lightsaber;
 
 import java.io.InputStream;
 import java.util.Random;
@@ -33,7 +33,8 @@ public class MapLoader {
                 if (x < line.length()) {
                     Field field = map.getField(x, y);
                     switch (line.charAt(x)) {
-                        case ' ':
+                        case '.':
+                        case 'x':
                             field.setType(FieldType.EMPTY);
                             field.setRandom(new Random().nextInt(1, 7));
                             break;
@@ -48,8 +49,12 @@ public class MapLoader {
                         case 'C':
                             field.setType(FieldType.WALL_CORNER);
                             break;
-                        case '.':
+                        case ' ':
                             field.setType(FieldType.FLOOR);
+                            field.setRandom(new Random().nextInt(1, 4));
+                            break;
+                        case 'u':
+                            field.setType(FieldType.FLOOR_UNWALKABLE);
                             field.setRandom(new Random().nextInt(1, 4));
                             break;
                         case 'D':
@@ -67,8 +72,20 @@ public class MapLoader {
                             map.addNpc(droid);
                             field.setType(FieldType.FLOOR);
                             break;
+                        case 'g':
+                            Actor guard = new Guard(field);
+                            field.setActor(guard);
+                            map.addNpc(guard);
+                            field.setType(FieldType.FLOOR);
+                            break;
+                        case 't':
+                            Actor trooper = new Trooper(field);
+                            field.setActor(trooper);
+                            map.addNpc(trooper);
+                            field.setType(FieldType.FLOOR);
+                            break;
                         case '$':
-                            field.setItem(new Sword(field));
+                            field.setItem(new Lightsaber(field));
                             field.setType(FieldType.FLOOR);
                             break;
                         case 'H':
@@ -86,6 +103,16 @@ public class MapLoader {
                             break;
                         case 'P':
                             field.setType(FieldType.NEXT);
+                            break;
+                        case 'E':
+                            field.setType(FieldType.ENGINE);
+                            field.setRandom(new Random().nextInt(1, 3));
+                            break;
+                        case 'b':
+                            field.setType(FieldType.BOX_SMALL);
+                            break;
+                        case 'B':
+                            field.setType(FieldType.BOX_BIG);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

@@ -1,10 +1,12 @@
 package com.example.tibia.actors;
 
 public enum ActorName {
-    PLAYER("player"),
+    PLAYER("Player"),
     SKELETON("Skeleton"),
-    SITH("sith"),
-    DROID("droid");
+    SITH("Sith"),
+    DROID("Droid"),
+    GUARD("Guard"),
+    TROOPER("Trooper");
 
     private final String name;
 
