@@ -19,6 +19,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -35,6 +36,14 @@ public class GameController {
 
     @FXML
     private HBox hbox;
+
+    public HBox getHbox() {
+        return hbox;
+    }
+
+    public void setHbox(HBox hbox) {
+        this.hbox = hbox;
+    }
 
     @FXML
     private Label playerName;
@@ -109,6 +118,27 @@ public class GameController {
     public Button getPickUpButton() {
         return pickUpButton;
     }
+    @FXML
+    private Pane actionButton;
+
+    @FXML
+    private Label actionLabel;
+
+    public Pane getActionButton() {
+        return actionButton;
+    }
+
+    public void setActionButton(Pane actionButton) {
+        this.actionButton = actionButton;
+    }
+
+    public Label getActionLabel() {
+        return actionLabel;
+    }
+
+    public void setActionLabel(Label actionLabel) {
+        this.actionLabel = actionLabel;
+    }
 
     @FXML
     private BorderPane borderpane;
@@ -127,6 +157,8 @@ public class GameController {
 
     @FXML
     public void initialize() {
+
+        actionButton();
         userName = HelloController.getUserName();
         level = 1;
         context = canvas.getGraphicsContext2D();
@@ -150,6 +182,18 @@ public class GameController {
         startMapDisplay();
         startNpcMovement();
 //        playSound(opening, (float) 0.2);
+    }
+
+    private void actionButton() {
+        getActionLabel().setText("Button Action\n" +
+                "↑, W - UP\n" +
+                "↓, S - DOWN\n" +
+                "←, A - LEFT\n" +
+                "→, D - RIGHT\n" +
+                "SPACE - Attack\n" +
+                "K - Open Door\n" +
+                "E - Pick up Item\n" +
+                "N - show Button Action\n");
     }
 
 
@@ -192,9 +236,22 @@ public class GameController {
             case E:
                 player.pickUpItem(player.getField());
                 displayEQ();
+            case N:
+                showAction();
             default:
         }
     }
+
+    private void showAction() {
+        if(!actionButton.isVisible()){
+            actionButton.setVisible(true);
+        }else {
+            actionButton.setVisible(false);
+            hbox.setPrefWidth(1160.0);
+
+        }
+    }
+
 
     public void displayEQ() {
         contextEQ.setFill(Color.BLACK);
@@ -247,6 +304,7 @@ public class GameController {
                 }
                 displayAttackAnimation(x, y);
                 checkForNextLevel();
+
             }
         }
 
