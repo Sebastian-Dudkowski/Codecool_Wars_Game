@@ -27,8 +27,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import static com.example.tibia.Main.*;
-import static com.example.tibia.sounds.SoundsPlayer.OPENING;
-import static com.example.tibia.sounds.SoundsPlayer.playSound;
+import static com.example.tibia.sounds.SoundsPlayer.*;
 
 import java.util.Random;
 
@@ -192,7 +191,7 @@ public class GameController {
 
     @FXML
     public void initialize() {
-
+        playSound(UFO, (float) 0.2);
         actionButton();
         userName = HelloController.getUserName();
         level = 1;
@@ -227,10 +226,10 @@ public class GameController {
     private void actuallyLvl() {
         if (player.getExp() >= expNextLvl) {
             player.setPlayerLvl(player.getPlayerLvl() + 1);
-            player.setHealth(player.getHealth()+(player.getPlayerLvl()*20));
-            maxHealth = maxHealth+(player.getPlayerLvl()*20);
-            player.setMana(player.getMana()+(player.getPlayerLvl()*5));
-            maxMana = maxMana +(player.getPlayerLvl()*5);
+            player.setHealth(player.getHealth() + (player.getPlayerLvl() * 20));
+            maxHealth = maxHealth + (player.getPlayerLvl() * 20);
+            player.setMana(player.getMana() + (player.getPlayerLvl() * 5));
+            maxMana = maxMana + (player.getPlayerLvl() * 5);
         }
         howManyExpToNextLvl();
     }
