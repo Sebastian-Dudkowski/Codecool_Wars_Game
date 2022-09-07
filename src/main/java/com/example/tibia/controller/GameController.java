@@ -487,9 +487,10 @@ public class GameController {
     }
 
     private void startMapDisplay() {
-//        Stage stageToClose = (Stage)canvas.getScene().getWindow();
+
         Thread refreshMap = new Thread(() -> {
             while (true) {
+
                 displayMap();
                 try {
                     Thread.sleep(33); // refresh rate
