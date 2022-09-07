@@ -15,6 +15,10 @@ public abstract class Actor implements Drawable {
     protected Field field;
     protected int viewRange;
     protected int strength;
+
+    protected int exp;
+    protected int playerLvl;
+
     protected int health;
     protected int mana;
     protected boolean alert;
@@ -66,8 +70,21 @@ public abstract class Actor implements Drawable {
     }
     public String getWalkingSound() { return walkingSound; }
 
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
 
+    public int getExp() {
+        return exp;
+    }
 
+    public int getPlayerLvl() {
+        return playerLvl;
+    }
+
+    public void setPlayerLvl(int playerLvl) {
+        this.playerLvl = playerLvl;
+    }
 // methods
 
     public void move(int dx, int dy) {
