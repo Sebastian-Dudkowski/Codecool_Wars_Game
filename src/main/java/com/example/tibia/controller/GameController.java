@@ -230,28 +230,20 @@ public class GameController {
                         map.getPlayer().getX() + x - (player.getViewRange() / 2),
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
-                if (field.getActor() == player) {
+                if (field.getActor() != null) {
+                    Actor actor = field.getActor();
                     changeColorName(field);
+                    context.fillText(actor.getName(), x * 64, y * 64 - 15);
+                    context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                    GameTiles.drawTile(context, field.getTileName() + " 2", x, y - 1);
-                    context.fillText(userName, x * 64, y * 64 - 35);
-                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64 - 20);
-                    GameTiles.drawTile(context, field.getTileName(), x, y);
-                } else if (field.getActor() != null) {
-                    changeColorName(field);
-                    context.fillText(field.getTileName(), x * 64, y * 64 - 15);
-//                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
+                    GameTiles.drawTile(context, field.getTileName(), x, (actor.equals(player)) ? y - 1 : y);
+                } else if (field.getType().equals(FieldType.EMPTY)){
+                    GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
+                } else if (field.getItem() != null) {
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
-                    if (field.getType().equals(FieldType.EMPTY)) {
-                        GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
-                    } else if (field.getItem() == null) {
-                        GameTiles.drawTile(context, field.getTileName(), x, y);
-                    } else {
-                        GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                        GameTiles.drawTile(context, field.getTileName(), x, y);
-                    }
+                    GameTiles.drawTile(context, field.getTileName(), x, y);
                 }
                 displayAttackAnimation(x, y);
                 checkForNextLevel();

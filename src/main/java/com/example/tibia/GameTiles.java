@@ -65,10 +65,8 @@ public class GameTiles {
         // Decorations
         tileMap.put(FieldType.BENCH.getTileName(), new Tile(8, 5));
         // Player
-        tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 23));
-        tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 23));
-        tileMap.put(ActorName.PLAYER.getName() + " left 2", new Tile(66, 22));
-        tileMap.put(ActorName.PLAYER.getName() + " right 2", new Tile(65, 22));
+        tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 192));
+        tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 192));
         // NPC
         tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
         tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));

@@ -33,6 +33,9 @@ public abstract class Actor implements Drawable {
 
 // getters & setters
 
+    public String getName() {
+        return name;
+    }
     public Field getField() { return this.field; }
     public void setField(Field field) {
         this.field = field;
@@ -43,7 +46,7 @@ public abstract class Actor implements Drawable {
     public int getY() {
         return field.getY();
     }
-    public int getViewRange() { return viewRange; }public void setViewRange(int range) { this.viewRange = range; }
+    public int getViewRange() { return viewRange; }
     public int getHealth() {
         return health;
     }
