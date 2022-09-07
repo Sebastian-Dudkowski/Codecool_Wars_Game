@@ -17,6 +17,7 @@ import java.io.IOException;
 public class Main extends Application {
     public static Scene scene;
     public static Stage stage;
+    public static Stage stage1;
     private static FXMLLoader menuViewLoader;
     private static FXMLLoader nameSelectViewLoader;
     private static FXMLLoader gameViewLoader;
@@ -51,6 +52,9 @@ public class Main extends Application {
     }
         private static void setView(FXMLLoader view, String title) {
         try {
+            if(stage1!=null){
+                stage1.close();
+            }
             scene = new Scene(view.load());
             stage.setScene(scene);
             stage.setTitle(title);
@@ -62,10 +66,11 @@ public class Main extends Application {
     private static void setViewS(FXMLLoader view, String title) {
         try {
             scene = new Scene(view.load());
-            Stage stage1 = new Stage();
+            stage1 = new Stage();
             stage1.setScene(scene);
             stage1.setTitle(title);
             stage1.show();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
