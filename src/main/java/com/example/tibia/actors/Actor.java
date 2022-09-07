@@ -16,6 +16,8 @@ public abstract class Actor implements Drawable {
     protected Field field;
     protected int viewRange;
     protected int strength;
+    protected int armor;
+
 
     protected int exp;
     protected int playerLvl;
@@ -89,7 +91,24 @@ public abstract class Actor implements Drawable {
     public void setPlayerLvl(int playerLvl) {
         this.playerLvl = playerLvl;
     }
-// methods
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    // methods
 
     public void move(int dx, int dy) {
         int currentX = field.getX();

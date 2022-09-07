@@ -4,6 +4,7 @@ import com.example.tibia.map.Field;
 
 import java.util.Random;
 
+import static com.example.tibia.Main.player;
 import static com.example.tibia.sounds.SoundsPlayer.*;
 
 public class Player extends Actor {
@@ -24,6 +25,7 @@ public class Player extends Actor {
         this.strength = attackPower;
         this.playerLvl = 1;
         this.exp = 0;
+        this.armor = 2;
         this.inventory = new Inventory();
     }
 
@@ -32,6 +34,9 @@ public class Player extends Actor {
     public Inventory getInventory(){ return this.inventory; }
     @Override
     public String getName(){ return this.nickName; }
+
+
+
 
 // methods
 
@@ -66,6 +71,8 @@ public class Player extends Actor {
 
     public void pickUpItem(Field field){
         if (field.getItem() != null){
+            player.setStrength(getStrength()+ this.field.getItem().getStrength());
+            player.setArmor(getArmor()+ this.field.getItem().getArmor());
             this.inventory.addItem(field.getItem());
             field.setItem(null);
             playSound(PICK_UP, (float) 0.5);

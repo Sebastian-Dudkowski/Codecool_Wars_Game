@@ -6,6 +6,8 @@ public class Helmet extends Item{
 // attributes
     public Helmet(Field field){
         super(ItemName.HELMET.getName(), field);
+        this.strength = 0;
+        this.armor = 10;
     }
 // constructors
 

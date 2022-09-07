@@ -8,6 +8,9 @@ public abstract class Item implements Drawable {
 
     private String name;
     private Field field;
+    protected int strength;
+    protected int armor;
+
 
 // constructors
 
@@ -34,7 +37,23 @@ public abstract class Item implements Drawable {
         this.name = name;
     }
 
-// methods
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    // methods
 
     @Override
     public String getTileName() {

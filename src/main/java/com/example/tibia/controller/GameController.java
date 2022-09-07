@@ -290,8 +290,10 @@ public class GameController {
             case E:
                 player.pickUpItem(player.getField());
                 displayEQ();
+                break;
             case N:
                 showAction();
+                break;
             default:
         }
     }
