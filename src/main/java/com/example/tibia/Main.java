@@ -85,7 +85,7 @@ public class Main extends Application {
 
     public static void setNameSelectView() {
         nameSelectViewLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
-        setViewS(nameSelectViewLoader, "Select Name");
+        setView(nameSelectViewLoader, "Select Name");
     }
 
     public static void closeView() {
