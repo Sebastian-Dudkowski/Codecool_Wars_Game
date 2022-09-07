@@ -10,9 +10,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static GameMap loadMap(Player player) {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
-        Scanner scanner = new Scanner(is);
+    public static GameMap loadMap(Player player, int level) {
+        Scanner scanner;
+        if (level == 1) {
+            InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+            scanner = new Scanner(is);
+        } else {
+            InputStream is = MapLoader.class.getResourceAsStream("/map2.txt");
+            scanner = new Scanner(is);
+        }
+
         int width = scanner.nextInt();
         int height = scanner.nextInt();
 
@@ -77,6 +84,9 @@ public class MapLoader {
                             field.setItem(new Key(field));
                             field.setType(FieldType.FLOOR);
                             break;
+                        case 'P':
+                            field.setType(FieldType.NEXT);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
@@ -85,5 +95,6 @@ public class MapLoader {
         }
         return map;
     }
+
 
 }

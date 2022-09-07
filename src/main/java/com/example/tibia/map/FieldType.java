@@ -11,7 +11,8 @@ public enum FieldType {
     DOOR("door"),
     DOOR_CLOSED("door closed"),
     BENCH("bench"),
-    ITEM("item");
+    ITEM("item"),
+    NEXT("next");
 
     private final String tileName;
 

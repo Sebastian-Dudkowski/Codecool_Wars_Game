@@ -73,7 +73,7 @@ public abstract class Actor implements Drawable {
     public void move(int dx, int dy) {
         int currentX = field.getX();
         Field nextField = field.getNeighbor(dx, dy);
-        if (nextField.getActor() != null || nextField.getType() != FieldType.FLOOR){
+        if (nextField.getActor() != null || nextField.getType() != FieldType.FLOOR && nextField.getType() != FieldType.NEXT){
             return;
         }
         field.setActor(null);

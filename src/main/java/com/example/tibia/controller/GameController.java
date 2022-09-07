@@ -128,13 +128,14 @@ public class GameController {
     @FXML
     public void initialize() {
         userName = HelloController.getUserName();
+        level = 1;
         context = canvas.getGraphicsContext2D();
         contextEQ = canvasEQ.getGraphicsContext2D();
         player = new Player(HelloController.getUserName(), null, 100, 100, 35);
         eq = EQLoader.loadEQ(player);
         inventory = player.getInventory();
         getPlayerName().setText(HelloController.getUserName());
-        map = MapLoader.loadMap(player);
+        map = MapLoader.loadMap(player, level);
         getBorderpane().setCenter(getCanvas());
         getBorderPaneEQ().setCenter(getCanvasEQ());
         maxHealth = player.getHealth();
@@ -157,7 +158,7 @@ public class GameController {
     }
 
 
-      private void onKeyPressed(KeyEvent keyEvent) {
+    private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case W:
             case UP:
@@ -179,9 +180,9 @@ public class GameController {
                 map.getPlayer().attack();
                 break;
             case K:
-                if (player.getInventory().getItems() != null){
-                    for (Item item : player.getInventory().getItems()){
-                        if (item instanceof Key){
+                if (player.getInventory().getItems() != null) {
+                    for (Item item : player.getInventory().getItems()) {
+                        if (item instanceof Key) {
                             ((Key) item).useKey(map.getPlayer());
                             break;
                         }
@@ -239,11 +240,11 @@ public class GameController {
                 } else if (field.getActor() != null) {
                     changeColorName(field);
                     context.fillText(field.getTileName(), x * 64, y * 64 - 15);
-                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
+//                    context.fillText(HPline(field.getActor().getHealth()), x * 64 + 20, y * 64);
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
-                    if (field.getType().equals(FieldType.EMPTY)){
+                    if (field.getType().equals(FieldType.EMPTY)) {
                         GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
                     } else if (field.getItem() == null) {
                         GameTiles.drawTile(context, field.getTileName(), x, y);
@@ -253,6 +254,7 @@ public class GameController {
                     }
                 }
                 displayAttackAnimation(x, y);
+                checkForNextLevel();
             }
         }
 
@@ -262,8 +264,14 @@ public class GameController {
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
         });
+    }
+    private static void checkForNextLevel() {
+        if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
+            level++;
 
+            map = MapLoader.loadMap(player, level);
 
+        }
     }
 
     /**
