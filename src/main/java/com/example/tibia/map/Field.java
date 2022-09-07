@@ -78,7 +78,11 @@ public class Field implements Drawable {
     }
 
     public Field getNeighbor(int dx, int dy) {
-        return gameMap.getField(X + dx, Y + dy);
+        try {
+            return gameMap.getField(X + dx, Y + dy);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
 }
