@@ -191,7 +191,7 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        playSound(UFO, (float) 0.2);
+        playSound(UFO, (float) 0.8);
         actionButton();
         userName = HelloController.getUserName();
         level = 1;
