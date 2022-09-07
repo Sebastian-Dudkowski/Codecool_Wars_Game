@@ -225,6 +225,10 @@ public class GameController {
     private void actuallyLvl() {
         if (player.getExp() >= expNextLvl) {
             player.setPlayerLvl(player.getPlayerLvl() + 1);
+            player.setHealth(player.getHealth()+(player.getPlayerLvl()*20));
+            maxHealth = maxHealth+(player.getPlayerLvl()*20);
+            player.setMana(player.getMana()+(player.getPlayerLvl()*5));
+            maxMana = maxMana +(player.getPlayerLvl()*5);
         }
         howManyExpToNextLvl();
     }
