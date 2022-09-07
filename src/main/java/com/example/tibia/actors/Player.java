@@ -28,6 +28,8 @@ public class Player extends Actor {
 // getters & setters
 
     public Inventory getInventory(){ return this.inventory; }
+    @Override
+    public String getName(){ return this.nickName; }
 
 // methods
 
