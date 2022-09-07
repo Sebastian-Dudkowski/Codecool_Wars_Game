@@ -118,6 +118,7 @@ public class GameController {
     public Button getPickUpButton() {
         return pickUpButton;
     }
+
     @FXML
     private Pane actionButton;
 
@@ -138,6 +139,39 @@ public class GameController {
 
     public void setActionLabel(Label actionLabel) {
         this.actionLabel = actionLabel;
+    }
+
+    @FXML
+    private Label lvlPlayer;
+
+    @FXML
+    private Label expToNextLvl;
+
+    @FXML
+    private ProgressBar progressExpToNextLvl;
+
+    public Label getLvlPlayer() {
+        return lvlPlayer;
+    }
+
+    public void setLvlPlayer(Label lvlPlayer) {
+        this.lvlPlayer = lvlPlayer;
+    }
+
+    public Label getExpToNextLvl() {
+        return expToNextLvl;
+    }
+
+    public void setExpToNextLvl(Label expToNextLvl) {
+        this.expToNextLvl = expToNextLvl;
+    }
+
+    public ProgressBar getProgressExpToNextLvl() {
+        return progressExpToNextLvl;
+    }
+
+    public void setProgressExpToNextLvl(ProgressBar progressExpToNextLvl) {
+        this.progressExpToNextLvl = progressExpToNextLvl;
     }
 
     @FXML
@@ -172,6 +206,9 @@ public class GameController {
         getBorderPaneEQ().setCenter(getCanvasEQ());
         maxHealth = player.getHealth();
         maxMana = player.getMana();
+        expNextLvl = howManyExpToNextLvl();
+        getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
+        getExpToNextLvl().setText("Exp: " + player.getExp()+"/"+ expNextLvl);
         getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
         getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
         displayEQ();
@@ -182,6 +219,10 @@ public class GameController {
         startMapDisplay();
         startNpcMovement();
 //        playSound(opening, (float) 0.2);
+    }
+
+    private int howManyExpToNextLvl() {
+        return 100;
     }
 
     private void actionButton() {
@@ -243,9 +284,9 @@ public class GameController {
     }
 
     private void showAction() {
-        if(!actionButton.isVisible()){
+        if (!actionButton.isVisible()) {
             actionButton.setVisible(true);
-        }else {
+        } else {
             actionButton.setVisible(false);
             hbox.setPrefWidth(1160.0);
 
@@ -310,9 +351,11 @@ public class GameController {
 
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
+        getProgressExpToNextLvl().setProgress(((double) player.getExp()/100)*100/expNextLvl);
         Platform.runLater(() -> {
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
+            getExpToNextLvl().setText("Exp: " + player.getExp()+"/"+ expNextLvl);
         });
     }
     private static void checkForNextLevel() {

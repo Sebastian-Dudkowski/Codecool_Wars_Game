@@ -15,13 +15,15 @@ public class Player extends Actor {
 
 // constructors
 
-    public Player(String nickName, Field field, int health,int mana, int attackPower) {
+    public Player(String nickName, Field field, int health, int mana, int attackPower) {
         super(ActorName.PLAYER.getName(), field);
         this.nickName = nickName;
         this.viewRange = 15;
         this.health = health;
         this.mana = mana;
         this.strength = attackPower;
+        this.playerLvl = 1;
+        this.exp = 0;
         this.inventory = new Inventory();
     }
 
