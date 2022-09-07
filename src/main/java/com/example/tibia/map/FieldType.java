@@ -5,6 +5,7 @@ import java.util.Random;
 public enum FieldType {
     EMPTY("empty"),
     FLOOR("floor"),
+    FLOOR_UNWALKABLE("floor"),
     WALL("wall"),
     WALL_VERTICAL("wall vertical"),
     WALL_CORNER("wall corner"),

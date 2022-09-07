@@ -283,10 +283,8 @@ public class GameController {
                 GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                 GameTiles.drawTile(context, field.getTileName(), x ,y);
                 return true;
-            case FLOOR:
-                return false;
             default:
-                System.out.println("No such decoration:" + field.getType());
+//                System.out.println("No such decoration:" + field.getType());
                 return false;
         }
     }

@@ -88,11 +88,11 @@ public class GameTiles {
         // Decorations
         tileMap.put(FieldType.ENGINE.getTileName() + "1", new Tile(122, 4, 192, 254, -2, -3));
         tileMap.put(FieldType.ENGINE.getTileName() + "2", new Tile(125, 4, 192, 254, -2, -3));
-        tileMap.put(FieldType.BOX_BIG.getTileName(), new Tile(125, 26));
-        tileMap.put(FieldType.BOX_SMALL.getTileName(), new Tile(27, 89));
+        tileMap.put(FieldType.BOX_BIG.getTileName(), new Tile(94, 25, 192, 128, -2, -1));
+        tileMap.put(FieldType.BOX_SMALL.getTileName(), new Tile(89, 27));
         // Player
-        tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 192, 0, -1));
-        tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 192, 0, -1));
+        tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 128, 0, -1));
+        tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 128, 0, -1));
         // NPCs
         tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
         tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));

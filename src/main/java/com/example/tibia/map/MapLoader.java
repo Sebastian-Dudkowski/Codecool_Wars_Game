@@ -53,6 +53,10 @@ public class MapLoader {
                             field.setType(FieldType.FLOOR);
                             field.setRandom(new Random().nextInt(1, 4));
                             break;
+                        case 'u':
+                            field.setType(FieldType.FLOOR_UNWALKABLE);
+                            field.setRandom(new Random().nextInt(1, 4));
+                            break;
                         case 'D':
                             field.setType(FieldType.DOOR);
                             break;
