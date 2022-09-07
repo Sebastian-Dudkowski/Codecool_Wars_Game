@@ -4,6 +4,7 @@ import com.example.tibia.Drawable;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
 
+import static com.example.tibia.Main.player;
 import static com.example.tibia.sounds.SoundsPlayer.DEATH;
 import static com.example.tibia.sounds.SoundsPlayer.playSound;
 
@@ -117,6 +118,7 @@ public abstract class Actor implements Drawable {
 
     public void kill(){
         this.field.getGameMap().removeNpc(this);
+        player.setExp(player.getExp() + this.field.getActor().getExp());
         this.field.setActor(null);
         playSound(DEATH, 1f);
     }

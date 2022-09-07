@@ -19,7 +19,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -206,11 +205,13 @@ public class GameController {
         getBorderPaneEQ().setCenter(getCanvasEQ());
         maxHealth = player.getHealth();
         maxMana = player.getMana();
-        expNextLvl = howManyExpToNextLvl();
+        expNextLvl = 100;
+        howManyExpToNextLvl();
         getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
-        getExpToNextLvl().setText("Exp: " + player.getExp()+"/"+ expNextLvl);
+        getExpToNextLvl().setText("Exp: " + player.getExp() + "/" + expNextLvl);
         getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
         getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
+        actuallyLvl();
         displayEQ();
         getPickUpButton().addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> {
             inventory.addItem(map.getPlayer().getField().getItem());
@@ -221,8 +222,16 @@ public class GameController {
 //        playSound(opening, (float) 0.2);
     }
 
-    private int howManyExpToNextLvl() {
-        return 100;
+    private void actuallyLvl() {
+        if (player.getExp() >= expNextLvl) {
+            player.setPlayerLvl(player.getPlayerLvl() + 1);
+        }
+        howManyExpToNextLvl();
+    }
+
+    private void howManyExpToNextLvl() {
+        expNextLvl = player.getPlayerLvl() * 100;
+
     }
 
     private void actionButton() {
@@ -335,7 +344,7 @@ public class GameController {
                     context.fillText(HPline(actor.getHealth()), x * 64 + 20, y * 64);
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, (actor.equals(player)) ? y - 1 : y);
-                } else if (field.getType().equals(FieldType.EMPTY)){
+                } else if (field.getType().equals(FieldType.EMPTY)) {
                     GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
                 } else if (field.getItem() != null) {
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
@@ -345,19 +354,23 @@ public class GameController {
                 }
                 displayAttackAnimation(x, y);
                 checkForNextLevel();
+                actuallyLvl();
 
             }
         }
 
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
-        getProgressExpToNextLvl().setProgress(((double) player.getExp()/100)*100/expNextLvl);
+        getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
         Platform.runLater(() -> {
+            getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
-            getExpToNextLvl().setText("Exp: " + player.getExp()+"/"+ expNextLvl);
+            getExpToNextLvl().setText("Exp: " + player.getExp() + "/" + expNextLvl);
+
         });
     }
+
     private static void checkForNextLevel() {
         if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
             level++;
