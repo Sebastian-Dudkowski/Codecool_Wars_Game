@@ -319,6 +319,8 @@ public class GameController {
                 characterStatsText();
                 showSkills();
                 break;
+            case Z:
+                Main.closeView();
             default:
         }
     }
