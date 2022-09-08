@@ -33,6 +33,7 @@ public class SoundsPlayer {
     public static final String PICK_UP = "/sounds/pick_up.wav";
     public static final String UFO = "/sounds/ufo.wav";
     public static final String HEALING = "/sounds/heal.wav";
+    public static final String R2D2 = "/sounds/R2D2.wav";
 
     public static Clip playSound(String fileName,float volume) {
         try {

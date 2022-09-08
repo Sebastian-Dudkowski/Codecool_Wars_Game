@@ -21,11 +21,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+
+import javax.sound.sampled.Clip;
+
 import java.util.Random;
 
 import static com.example.tibia.Main.*;
@@ -118,10 +122,71 @@ public class GameController {
     private static String userName;
 
     @FXML
+    private Pane paneText;
+
+    @FXML
+    private ImageView luke1;
+
+    @FXML
+    private ImageView luke2;
+
+    @FXML
+    private ImageView luke3;
+
+    @FXML
+    private ImageView r2d2;
+
+
+    public void setPickUpButton(Button pickUpButton) {
+        this.pickUpButton = pickUpButton;
+    }
+
+    public Pane getPaneText() {
+        return paneText;
+    }
+
+    public void setPaneText(Pane paneText) {
+        this.paneText = paneText;
+    }
+
+    public ImageView getLuke1() {
+        return luke1;
+    }
+
+    public void setLuke1(ImageView luke1) {
+        this.luke1 = luke1;
+    }
+
+    public ImageView getLuke2() {
+        return luke2;
+    }
+
+    public void setLuke2(ImageView luke2) {
+        this.luke2 = luke2;
+    }
+
+    public ImageView getLuke3() {
+        return luke3;
+    }
+
+    public void setLuke3(ImageView luke3) {
+        this.luke3 = luke3;
+    }
+
+    public ImageView getR2d2() {
+        return r2d2;
+    }
+
+    public void setR2d2(ImageView r2d2) {
+        this.r2d2 = r2d2;
+    }
+    Clip clipOpening;
+
+    @FXML
     public void initialize() {
         //
 
-        playSound(UFO, (float) 0.8);
+        clipOpening =  playSound(UFO, (float) 0.8);
         actionButton();
         userName = HelloController.getUserName();
         level = 1;
@@ -170,6 +235,61 @@ public class GameController {
         expNextLvl = player.getPlayerLvl() * 100*(player.getPlayerLvl() * 1.25);
 
     }
+
+
+    private void dialog(){
+        if(!paneText.isVisible()){
+            paneText.setVisible(true);
+            paneText.setPrefHeight(200.0);
+            Thread dialogR2D2 = new Thread(() -> {
+                clipOpening.stop();
+            luke1.setVisible(true);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            luke1.setVisible(false);
+            r2d2.setVisible(true);
+            playSound(R2D2,(float)0.3);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            r2d2.setVisible(false);
+            luke2.setVisible(true);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            luke2.setVisible(false);
+            r2d2.setVisible(true);
+            playSound(R2D2,(float)0.3);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            r2d2.setVisible(false);
+            luke3.setVisible(true);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            luke3.setVisible(false);
+            paneText.setVisible(false);
+            paneText.setPrefHeight(0.0);
+            clipOpening.start();
+
+        });
+        dialogR2D2.start();
+        }
+
+    }
+
 
     private void actionButton() {
         getActionLabel().setText("Button Action\n" +
@@ -247,6 +367,10 @@ public class GameController {
                 break;
             case Z:
                 System.exit(0);
+                break;
+            case O:
+                dialog();
+                break;
             default:
         }
     }
