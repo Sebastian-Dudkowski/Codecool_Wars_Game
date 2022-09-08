@@ -315,6 +315,9 @@ public class GameController {
                 player.pickUpItem(player.getField());
                 displayEQ();
                 break;
+            case H:
+                player.heal();
+                break;
             case N:
                 showAction();
                 break;
@@ -401,7 +404,7 @@ public class GameController {
                 } else {
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 }
-                displayAttackAnimation(x, y);
+                displayAnimations(x, y);
 
                 checkForNextLevel(); // to mogłoby być gdzie indziej
             }
@@ -472,14 +475,19 @@ public class GameController {
      * @param x first loop iterator in displayMap()
      * @param y second loop iterator in displayMap()
      */
-    private void displayAttackAnimation(int x, int y) {
-        if (player.isAttacking()
-                && x == player.getViewRange() / 2 + 1
-                && y == player.getViewRange() / 2 + 1
-        ) {
-            String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
-            GameTiles.drawTile(context, imageName, x, y);
+    private void displayAnimations(int x, int y) {
+        if (x == player.getViewRange() / 2 + 1 && y == player.getViewRange() / 2 + 1) {
+            if (player.isAttacking()){
+                String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
+                GameTiles.drawTile(context, imageName, x, y);
+            }
+            if (player.isHealing()){
+                String imageName = (new Random().nextBoolean()) ? "Player heal 1" : "Player heal 2";
+                GameTiles.drawTile(context, imageName, x, y);
+            }
         }
+
+
         for (Actor npc : map.getNpcs()){
             if(npc instanceof Vader & npc.isAttacking()){
                 String imageName = (npc.isFacingRight()) ? "Vader sword flash right" : "Vader sword flash left";

@@ -13,6 +13,7 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
+    private boolean healing;
 
 // constructors
 
@@ -35,6 +36,10 @@ public class Player extends Actor {
     @Override
     public String getName(){ return this.nickName; }
     public void setFacingRight(Boolean right) { this.facingRight = right; }
+    public boolean isHealing() {
+        return healing;
+    }
+
 
 
 // methods
@@ -83,6 +88,23 @@ public class Player extends Actor {
         super.move(dx, dy);
         this.walkingSound = (new Random().nextBoolean()) ? PLAYER_WALK_1 : PLAYER_WALK_2;
         playSound(walkingSound, (float) 0.1);
+    }
+
+    public void heal(){
+        playSound(HEALING, (float) 0.3);
+        Thread heal = new Thread(() -> {
+            this.healing = true;
+            for (int i=0; i< 20; i++){
+                this.health++;
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            this.healing = false;
+        });
+        heal.start();
     }
 
 }

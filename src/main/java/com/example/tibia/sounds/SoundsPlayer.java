@@ -25,6 +25,7 @@ public class SoundsPlayer {
     public static final String DROID_WALK = "/sounds/footstep_droid.wav";
     public static final String PICK_UP = "/sounds/pick_up.wav";
     public static final String UFO = "/sounds/ufo.wav";
+    public static final String HEALING = "/sounds/heal.wav";
     public static Clip playSound(String fileName,float volume) {
         try {
             Clip clip = AudioSystem.getClip();
