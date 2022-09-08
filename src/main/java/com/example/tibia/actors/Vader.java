@@ -15,10 +15,10 @@ public class Vader extends Actor{
     public Vader(Field field) {
         super(ActorName.VADER.getName(), field);
         this.viewRange = 7;
-        this.health = 6666;
+        this.health = 666;
         this.strength = 11;
         this.exp = 1000;
-        this.walkingSound = ""; // TODO: add Vader sound
+        this.walkingSound = PLAYER_WALK_1; // TODO: add Vader sound
     }
 
     public int getCanvasX() {
