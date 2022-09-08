@@ -2,7 +2,7 @@ package com.example.tibia.actors;
 
 import com.example.tibia.map.Field;
 
-import static com.example.tibia.sounds.SoundsPlayer.DROID_WALK;
+import static com.example.tibia.sounds.SoundsPlayer.GUARD_WALK;
 
 public class Guard extends Actor{
 // attributes
@@ -14,7 +14,7 @@ public class Guard extends Actor{
         this.viewRange = 8;
         this.health = 200;
         this.strength = 15;
-        this.walkingSound = ""; // TODO: add sound
+        this.walkingSound = GUARD_WALK;
     }
 
 // getters & setters

@@ -23,9 +23,12 @@ public class SoundsPlayer {
     public static final String PLAYER_WALK_1 = "/sounds/player_walk_1.wav";
     public static final String PLAYER_WALK_2 = "/sounds/player_walk_2.wav";
     public static final String DROID_WALK = "/sounds/footstep_droid.wav";
+    public static final String TROOPER_WALK = "/sounds/trooper_walk.wav";
+    public static final String GUARD_WALK = "/sounds/trooper_walk.wav"; // to be changed
     public static final String PICK_UP = "/sounds/pick_up.wav";
     public static final String UFO = "/sounds/ufo.wav";
     public static final String HEALING = "/sounds/heal.wav";
+
     public static Clip playSound(String fileName,float volume) {
         try {
             Clip clip = AudioSystem.getClip();
