@@ -10,16 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static com.example.tibia.Main.setGameView;
 
 public class HelloController {
-
-    @FXML
-    private Button startButton;
 
     @FXML
     public TextField textFieldName;

@@ -2,7 +2,6 @@ package com.example.tibia.actors;
 
 import com.example.tibia.items.Lightsaber;
 import com.example.tibia.map.Field;
-
 import java.util.Random;
 
 import static com.example.tibia.Main.player;
@@ -47,11 +46,9 @@ public class Player extends Actor {
     public int getMaxHealth(){ return this.maxHealth; }
     public void setMaxHealth(int health){ this.maxHealth = health; }
     public boolean hasLightsaber(){ return this.hasLightsaber; }
-
     public int getMaxMana() {
         return maxMana;
     }
-
     public void setMaxMana(int maxMana) {
         this.maxMana = maxMana;
     }

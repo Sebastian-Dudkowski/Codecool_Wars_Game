@@ -26,172 +26,89 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import java.util.Random;
+
 import static com.example.tibia.Main.*;
 import static com.example.tibia.sounds.SoundsPlayer.*;
 
-import java.util.Random;
 
 
 public class GameController {
 
     @FXML
-    private HBox hbox;
-
-    public HBox getHbox() {
-        return hbox;
-    }
-
-    public void setHbox(HBox hbox) {
-        this.hbox = hbox;
-    }
-
-    @FXML
     private Label playerName;
-
-    public Label getPlayerName() {
-        return playerName;
-    }
-
-    public void setPlayerName(Label playerName) {
-        this.playerName = playerName;
-    }
-
     @FXML
     private Button pickUpButton;
     @FXML
     private Canvas canvas;
-
     @FXML
     private Label amountOfHealth;
-
+    @FXML
+    private Label amountOfMana;
+    @FXML
+    private BorderPane borderPaneEQ;
+    @FXML
+    private ProgressBar progressHealth;
+    @FXML
+    private ProgressBar progressMana;
+    @FXML
+    private Canvas canvasEQ;
+    @FXML
+    private Pane actionButton;
+    @FXML
+    private Label actionLabel;
+    @FXML
+    private Label lvlPlayer;
+    @FXML
+    private Label expToNextLvl;
+    @FXML
+    private ProgressBar progressExpToNextLvl;
+    @FXML
+    private Label characterStats;
+    @FXML
+    private BorderPane borderpane;
+    public Label getPlayerName() {
+        return playerName;
+    }
     public Label getAmountOfHealth() {
         return amountOfHealth;
     }
-
-    public void setAmountOfHealth(Label amountOfHealth) {
-        this.amountOfHealth = amountOfHealth;
-    }
-
     public Label getAmountOfMana() {
         return amountOfMana;
     }
-
-    public void setAmountOfMana(Label amountOfMana) {
-        this.amountOfMana = amountOfMana;
-    }
-
-    @FXML
-    private Label amountOfMana;
-
-
-    @FXML
-    private VBox playerMenu;
-
-    @FXML
-    private BorderPane borderPaneEQ;
-
     public BorderPane getBorderPaneEQ() {
         return borderPaneEQ;
     }
-
-    @FXML
-    private ProgressBar progressHealth;
-
     public ProgressBar getProgressHealth() {
         return progressHealth;
     }
-
-    @FXML
-    private ProgressBar progressMana;
-
     public ProgressBar getProgressMana() {
         return progressMana;
     }
-
-    @FXML
-    private Canvas canvasEQ;
-
     public Canvas getCanvasEQ() {
         return canvasEQ;
     }
-
     public Button getPickUpButton() {
         return pickUpButton;
     }
-
-    @FXML
-    private Pane actionButton;
-
-    @FXML
-    private Label actionLabel;
-
-    public Pane getActionButton() {
-        return actionButton;
-    }
-
-    public void setActionButton(Pane actionButton) {
-        this.actionButton = actionButton;
-    }
-
     public Label getActionLabel() {
         return actionLabel;
     }
-
-    public void setActionLabel(Label actionLabel) {
-        this.actionLabel = actionLabel;
-    }
-
-    @FXML
-    private Label lvlPlayer;
-
-    @FXML
-    private Label expToNextLvl;
-
-    @FXML
-    private ProgressBar progressExpToNextLvl;
-
     public Label getLvlPlayer() {
         return lvlPlayer;
     }
-
-    public void setLvlPlayer(Label lvlPlayer) {
-        this.lvlPlayer = lvlPlayer;
-    }
-
     public Label getExpToNextLvl() {
         return expToNextLvl;
     }
-
-    public void setExpToNextLvl(Label expToNextLvl) {
-        this.expToNextLvl = expToNextLvl;
-    }
-
     public ProgressBar getProgressExpToNextLvl() {
         return progressExpToNextLvl;
     }
-
-    public void setProgressExpToNextLvl(ProgressBar progressExpToNextLvl) {
-        this.progressExpToNextLvl = progressExpToNextLvl;
-    }
-
-    @FXML
-    private Label characterStats;
-
     public Label getCharacterStats() {
         return characterStats;
     }
-
-    public void setCharacterStats(Label characterStats) {
-        this.characterStats = characterStats;
-    }
-
-    @FXML
-    private BorderPane borderpane;
-
     public Canvas getCanvas() {
         return canvas;
     }
-
     public BorderPane getBorderpane() {
         return borderpane;
     }
@@ -234,7 +151,6 @@ public class GameController {
         });
         startMapDisplay();
         startNpcMovement();
-//        playSound(OPENING, (float) 0.2);
     }
 
     private void actuallyLvl() {
@@ -467,7 +383,6 @@ public class GameController {
                 GameTiles.drawTile(context, field.getTileName(), x ,y);
                 return true;
             default:
-//                System.out.println("No such decoration:" + field.getType());
                 return false;
         }
     }
@@ -476,9 +391,7 @@ public class GameController {
     private static void checkForNextLevel() {
         if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
             level++;
-
             map = MapLoader.loadMap(player, level);
-
         }
     }
 

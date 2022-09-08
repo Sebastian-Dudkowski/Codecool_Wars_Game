@@ -9,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.example.tibia.map.GameMap;
-import javafx.scene.canvas.Canvas;
 import com.example.tibia.controller.GameController;
-
 import javax.sound.sampled.Clip;
 import java.io.IOException;
 
@@ -26,20 +24,16 @@ public class Main extends Application {
     private static FXMLLoader nameSelectViewLoader;
     private static FXMLLoader gameViewLoader;
     public static double expNextLvl;
-
     public static Inventory inventory;
     public static Player player;
     public static GameMap map;
     public static int level;
     public static EQMap eq;
-    public final int SCREEN_SIZE = 9;
     public static Clip clip;
-
 
     public static void main(String[] args) {
         launch(args);
     }
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -48,10 +42,8 @@ public class Main extends Application {
         stage = primaryStage;
         clip = playSound(OPENING, (float) 0.2);
         setMenuView();
-
-
     }
-        private static void setView(FXMLLoader view, String title) {
+    private static void setView(FXMLLoader view, String title) {
         try {
             if(stage1!=null){
                 stage1.close();
@@ -62,18 +54,6 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private static void setViewS(FXMLLoader view, String title) {
-        try {
-            scene = new Scene(view.load());
-            stage1 = new Stage();
-            stage1.setScene(scene);
-            stage1.setTitle(title);
-            stage1.show();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

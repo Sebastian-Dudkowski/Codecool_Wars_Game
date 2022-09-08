@@ -4,23 +4,21 @@ import com.example.tibia.Drawable;
 import com.example.tibia.actors.Actor;
 import com.example.tibia.items.Item;
 
-import java.util.Random;
-
 public class Field implements Drawable {
 
 // attributes
-    private int X;
-    private int Y;
+    private final int X;
+    private final int Y;
     private FieldType type;
     private Actor actor;
     private Item item;
-    private GameMap gameMap;
+    private final GameMap GAME_MAP;
     private int random = 0;
 
 // constructors
 
-    public Field(GameMap gameMap,FieldType type, int x, int y) {
-        this.gameMap = gameMap;
+    public Field(GameMap GAME_MAP, FieldType type, int x, int y) {
+        this.GAME_MAP = GAME_MAP;
         this.type = type;
         this.X = x;
         this.Y = y;
@@ -29,8 +27,8 @@ public class Field implements Drawable {
     /**
      * Constructor for fields with randomized tiles
      */
-    public Field(GameMap gameMap,FieldType type, int x, int y, int random) {
-        this.gameMap = gameMap;
+    public Field(GameMap GAME_MAP, FieldType type, int x, int y, int random) {
+        this.GAME_MAP = GAME_MAP;
         this.type = type;
         this.X = x;
         this.Y = y;
@@ -62,8 +60,8 @@ public class Field implements Drawable {
     public int getY() {
         return Y;
     }
-    public GameMap getGameMap() {
-        return gameMap;
+    public GameMap getGAME_MAP() {
+        return GAME_MAP;
     }
     public void setRandom(int random) {
         this.random = random;
@@ -85,7 +83,7 @@ public class Field implements Drawable {
     }
 
     public Field getNeighbor(int dx, int dy) {
-        return gameMap.getField(X + dx, Y + dy);
+        return GAME_MAP.getField(X + dx, Y + dy);
     }
 
 }
