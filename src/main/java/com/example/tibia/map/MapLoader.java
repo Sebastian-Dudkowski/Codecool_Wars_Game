@@ -119,6 +119,9 @@ public class MapLoader {
                         case 'B':
                             field.setType(FieldType.BOX_BIG);
                             break;
+                        case 'R':
+                            field.setType(FieldType.R2D2);
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
