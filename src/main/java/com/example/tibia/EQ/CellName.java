@@ -6,7 +6,8 @@ public enum CellName {
     ARMOR("armor"),
     HELMET("helmet"),
     SHOES("shoes"),
-    SHIELD("shield"),
+
+    BLASTER("blaster"),
     MANA_POTION("manaPotion"),
     HEALTH_POTION("healthPotion"),
     CARD("card");

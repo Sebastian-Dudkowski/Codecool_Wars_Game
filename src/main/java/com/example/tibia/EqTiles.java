@@ -39,7 +39,7 @@ public class EqTiles {
         tileMap.put(ItemName.CARD.getName(), new Tile(22, 4));
         tileMap.put(ItemName.SWORD.getName(), new Tile(3, 24));
         tileMap.put(ItemName.SHOES.getName(), new Tile(8, 22));
-        tileMap.put(ItemName.SHIELD.getName(), new Tile(7, 26));
+        tileMap.put(ItemName.BLASTER.getName(), new Tile(7, 26));
         tileMap.put(ItemName.HELMET.getName(), new Tile(2, 22));
         tileMap.put(ItemName.MANA_POTION.getName(), new Tile(16, 25));
         tileMap.put(ItemName.HEALTH_POTION.getName(), new Tile(17, 25));

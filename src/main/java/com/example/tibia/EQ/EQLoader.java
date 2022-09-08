@@ -38,7 +38,7 @@ public class EQLoader {
                             cell.setType(CellName.ARMOR);
                             break;
                         case 'T':
-                            cell.setType(CellName.SHIELD);
+                            cell.setType(CellName.BLASTER);
                             break;
                         case 'M':
                             cell.setType(CellName.MANA_POTION);

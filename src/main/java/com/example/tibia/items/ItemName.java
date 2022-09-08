@@ -9,7 +9,9 @@ public enum ItemName {
     MANA_POTION("manaPotion"),
     HEALTH_POTION("healthPotion"),
     CARD("card"),
-    KEY("key");
+    KEY("key"),
+    SWORD1("sword1"),
+    BLASTER("blaster");
 
     private final String name;
 

@@ -9,6 +9,7 @@ import com.example.tibia.actors.Actor;
 import com.example.tibia.actors.Player;
 import com.example.tibia.actors.Vader;
 import com.example.tibia.items.Item;
+import com.example.tibia.items.ItemName;
 import com.example.tibia.items.Key;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
@@ -366,10 +367,16 @@ public class GameController {
                     for (int i = 0; i < inventory.getItems().size(); i++) {
                         if (cell.getTileName().equals(inventory.getItems().get(i).getTileName())) {
                             EqTiles.drawTile(contextEQ, "empty", x, y);
+
+                            if(cell.getTileName().equals((ItemName.SWORD.getName()))){
+                                GameTiles.drawTile(contextEQ, ItemName.SWORD1.getName(), x, y);
+                                break;
+                            }
                             GameTiles.drawTile(contextEQ, cell.getTileName(), x, y);
                             break;
                         } else {
                             EqTiles.drawTile(contextEQ, cell.getTileName(), x, y);
+
                         }
                     }
                 } else {

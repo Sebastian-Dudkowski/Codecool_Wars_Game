@@ -117,6 +117,7 @@ public class GameTiles {
         tileMap.put(ItemName.ARMOR.getName(), new Tile(3, 23));
         tileMap.put(ItemName.CARD.getName(), new Tile(22, 4));
         tileMap.put(ItemName.SWORD.getName(), new Tile(8, 10));
+        tileMap.put(ItemName.SWORD1.getName(), new Tile(9, 10));
         tileMap.put(ItemName.SHOES.getName(), new Tile(8, 22));
         tileMap.put(ItemName.SHIELD.getName(), new Tile(7, 26));
         tileMap.put(ItemName.HELMET.getName(), new Tile(14, 0));
