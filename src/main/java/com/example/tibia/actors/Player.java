@@ -15,7 +15,7 @@ public class Player extends Actor {
     private Inventory inventory;
     private String nickName;
     private boolean healing;
-    private boolean hasLightsaber;
+    private boolean hasLightsaber = false;
     private int maxHealth = 100;
 
 
@@ -57,7 +57,12 @@ public class Player extends Actor {
                 if (!(x==0 && y==0)){
                     Actor target = this.getField().getNeighbor(x, y).getActor();
                     if (target != null){
-                        String sound = (new Random().nextBoolean()) ? LIGHTSABER_HIT_1 : LIGHTSABER_HIT_2;
+                        String sound;
+                        if (hasLightsaber){
+                            sound = (new Random().nextBoolean()) ? LIGHTSABER_HIT_1 : LIGHTSABER_HIT_2;
+                        } else {
+                            sound = (new Random().nextBoolean()) ? PUNCH_1 : PUNCH_2;
+                        }
                         playSound(sound, (float) 0.3);
                         attack(target);
                     }
