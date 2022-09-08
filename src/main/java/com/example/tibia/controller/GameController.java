@@ -494,8 +494,13 @@ public class GameController {
     private void displayAnimations(int x, int y) {
         if (x == player.getViewRange() / 2 + 1 && y == player.getViewRange() / 2 + 1) {
             if (player.isAttacking()){
-                String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
-                GameTiles.drawTile(context, imageName, x, y);
+                if (player.hasLightsaber()){
+                    String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
+                    GameTiles.drawTile(context, imageName, x, y);
+                } else {
+                    String imageName = (player.isFacingRight()) ? "punch right" : "punch left";
+                    GameTiles.drawTile(context, imageName, x, y);
+                }
             }
             if (player.isHealing()){
                 String imageName = (new Random().nextBoolean()) ? "Player heal 1" : "Player heal 2";

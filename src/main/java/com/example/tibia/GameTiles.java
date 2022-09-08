@@ -93,6 +93,8 @@ public class GameTiles {
         // Player
         tileMap.put(ActorName.PLAYER.getName() + " left", new Tile(66, 22, 64, 128, 0, -1));
         tileMap.put(ActorName.PLAYER.getName() + " right", new Tile(65, 22, 64, 128, 0, -1));
+        tileMap.put(ActorName.PLAYER.getName() + " left lightsaber", new Tile(68, 22, 64, 128, 0, -1));
+        tileMap.put(ActorName.PLAYER.getName() + " right lightsaber", new Tile(67, 22, 64, 128, 0, -1));
         // NPCs
         tileMap.put(ActorName.DROID.getName() + " left", new Tile(70, 20));
         tileMap.put(ActorName.DROID.getName() + " right", new Tile(69, 20));
@@ -127,6 +129,8 @@ public class GameTiles {
         // effects
         tileMap.put("sword flash right", new Tile(97, 25, 192, 192, -2, -2));
         tileMap.put("sword flash left", new Tile(100, 25, 192, 192, -2, -2));
+        tileMap.put("punch right", new Tile(115, 25, 192, 192, -2, -2));
+        tileMap.put("punch left", new Tile(118, 25, 192, 192, -2, -2));
         tileMap.put("Vader sword flash right", new Tile(103, 25, 192, 192, -2, -2));
         tileMap.put("Vader sword flash left", new Tile(106, 25, 192, 192, -2, -2));
         tileMap.put("Player heal 1", new Tile(109, 25, 192, 192, -2, -2));
