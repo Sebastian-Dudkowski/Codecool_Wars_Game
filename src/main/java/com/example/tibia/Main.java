@@ -25,6 +25,7 @@ public class Main extends Application {
     private static FXMLLoader menuViewLoader;
     private static FXMLLoader nameSelectViewLoader;
     private static FXMLLoader gameViewLoader;
+    private static FXMLLoader loadGameViewLoader;
     public static int expNextLvl;
     public static int allHealth;
     public static int maxMana;
@@ -55,9 +56,10 @@ public class Main extends Application {
 
 
     }
-        private static void setView(FXMLLoader view, String title) {
+
+    private static void setView(FXMLLoader view, String title) {
         try {
-            if(stage1!=null){
+            if (stage1 != null) {
                 stage1.close();
             }
             scene = new Scene(view.load());
@@ -70,6 +72,7 @@ public class Main extends Application {
             throw new RuntimeException(e);
         }
     }
+
     private static void setViewS(FXMLLoader view, String title) {
         try {
             scene = new Scene(view.load());
@@ -102,6 +105,11 @@ public class Main extends Application {
         gameViewLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         setView(gameViewLoader, "Dungeon Crawl");
         ((GameController) gameViewLoader.getController()).setupKeys();
+    }
+
+    public static void setLoadGameView() {
+        loadGameViewLoader = new FXMLLoader(Main.class.getResource("loadGame-view.fxml"));
+        setView(loadGameViewLoader, "Load Game");
     }
 
 }

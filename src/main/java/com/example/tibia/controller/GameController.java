@@ -33,6 +33,8 @@ import java.util.Random;
 
 public class GameController {
 
+    public static boolean isMapLoaded = false;
+
     @FXML
     private HBox hbox;
 
