@@ -262,6 +262,7 @@ public class GameController {
                 "K - Open Door\n" +
                 "E - Pick up Item\n" +
                 "B - Show Skills\n" +
+                "Z - close Game\n" +
                 "N - show Button Action\n");
     }
 
@@ -325,6 +326,8 @@ public class GameController {
                 characterStatsText();
                 showSkills();
                 break;
+            case Z:
+                System.exit(0);
             default:
         }
     }
@@ -405,13 +408,14 @@ public class GameController {
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 }
                 displayAnimations(x, y);
-
                 checkForNextLevel();
                 actuallyLvl();// to mogłoby być gdzie indziej
             }
         }
+        refreshingThePlayerStatusDisplay();
+    }
 
-        // to mogłoby być w osobnej funkcji
+    private void refreshingThePlayerStatusDisplay() {
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / player.getMaxHealth());
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
