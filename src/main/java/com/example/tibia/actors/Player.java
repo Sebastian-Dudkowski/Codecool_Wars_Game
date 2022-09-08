@@ -117,12 +117,12 @@ public class Player extends Actor {
         playSound(HEALING, (float) 0.3);
         Thread heal = new Thread(() -> {
             this.healing = true;
-            for (int i=0; i< 20; i++){
+            for (int i=0; i< 40; i++){
                 if (health < maxHealth){
                     this.health++;
                 }
                 try {
-                    Thread.sleep(200);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

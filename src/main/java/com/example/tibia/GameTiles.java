@@ -111,8 +111,8 @@ public class GameTiles {
 
         tileMap.put(ActorName.TROOPER.getName() + " left", new Tile(77, 20));
         tileMap.put(ActorName.TROOPER.getName() + " right", new Tile(78, 20));
-        tileMap.put(ActorName.TROOPER.getName() + " left alert", new Tile(79, 20));
-        tileMap.put(ActorName.TROOPER.getName() + " right alert", new Tile(80, 20));
+        tileMap.put(ActorName.TROOPER.getName() + " left alert", new Tile(80, 20));
+        tileMap.put(ActorName.TROOPER.getName() + " right alert", new Tile(79, 20));
 
         tileMap.put(ActorName.VADER.getName() + " left", new Tile(70, 23));
         tileMap.put(ActorName.VADER.getName() + " right", new Tile(69, 23));

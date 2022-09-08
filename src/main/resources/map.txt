@@ -1,54 +1,49 @@
-75 53
+75 48
 C####################################^
-^P    $    ^                        K^
+^P    $    ^   b b b      b b b     K^
+^          ^   b b b      b b b   uuB^
 ^          ^                         ^
-^          ^                         ^
-^          ^                         ^
-^          ^                         ^
+^          ^   b b b      b b b      ^
+^          ^   b b b      b b b      ^
 C#####D#####                         ^
 ^                                    ^
-^            tttt                    ^
-^                                    ^
-^                                    ^
-^                                    ^
-^                                    ^
-^                                    ^
-^                                    ^
-^uuu     uuu                         ^
-^uuB     uuB           b            b^
+^            tttt              uuBuuB^
+^                              uuBuuB^
+^                              uuBuuB^
+^uuB     uuB                   uuBuuB^
 C###############D####################^
-^uuu  K              uuu           bb^
-^uuB                 uuB           bb^
+^     K                            bb^
+^                                  bb^
+^uuB    uuB           uuB    uuB     ^
 ^                                    ^
 ^                                    ^
+^uuB    uuB   ddddd   uuB    uuB     ^
+^             ddddd                  ^
+^             ddddd                  ^
+^uuB    uuB           uuB    uuB     ^
 ^                                    ^
-^  b          dddd                   ^
-^             dddd                   ^
-^             dddd                   ^
 ^                                    ^
-^                                    ^
-^uuu                                 ^
-^uuB                                 ^
+^uuB    uuB           uuB    uuB     ^
 C###############D####################^
 ^                                    ^
 C######X######^   #############^     ^
-^             ^                ^     ^
+^             ^    bbbbbbbbbbbb^     ^
 ^             ^        dd      ^     ^
-^      $      ^        dd      ^     ^
+^      $      ^                ^     ^
 ^             ^                ^     ^
-^             ^                ^     ^
+^             ^      uuB    uuB^     ^
 C##############################^     #####################################^
-^                                                                         ^
+^                                 R                                       ^
 C######D######^   C#####D######^     C######D#######^   C####### #########^
-^b            ^   ^           b^     ^b          uuu^   ^b             uuu^
+^b            ^   ^           b^     ^b             ^   ^b                ^
 ^             ^   ^            ^     ^           uub^   ^              uuB^
-^     d       ^   ^     d      ^     ^      d       ^   ^                 ^
+^     d       ^   ^     d      ^     ^      d       ^   ^b                ^
 ^     d       ^   ^     d      ^     ^      d       ^   ^        d        ^
-^             ^   ^            ^     ^              ^   ^                 ^
-^H        uuu ^   ^            ^  R  ^b             ^   ^b                ^
-^K        uuB ^   ^K           ^  @  ^K             ^   ^               K ^
+^             ^   ^            ^     ^              ^   ^b                ^
+^H            ^   ^            ^     ^b             ^   ^                 ^
+^K        uuB ^   ^K           ^  @  ^K             ^   ^b              K ^
 ###########################################################################
 .xxx.......xxx.......xxx.......xxx.......xxx.......xxx.......xxx.......xxx.
 .xxx.......xxx.......xxx.......xxx.......xxx.......xxx.......xxx.......xxx.
 .xxx.......xxx.......xxx.......xxx.......xxx.......xxx.......xxx.......xxx.
-.xxE.......xxE.......xxE.......xxE.......xxE.......xxE.......xxE.......xxE.
+.xxE....E..xxE....E..xxE....E..xxE....E..xxE....E..xxE....E..xxE....E..xxE.

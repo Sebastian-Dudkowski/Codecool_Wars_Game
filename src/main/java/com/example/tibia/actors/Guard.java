@@ -12,7 +12,7 @@ public class Guard extends Actor{
     public Guard(Field field){
         super(ActorName.GUARD.getName(), field);
         this.viewRange = 8;
-        this.health = 200;
+        this.health = 400;
         this.strength = 15;
         this.walkingSound = GUARD_WALK;
     }
