@@ -406,7 +406,8 @@ public class GameController {
                 }
                 displayAnimations(x, y);
 
-                checkForNextLevel(); // to mogłoby być gdzie indziej
+                checkForNextLevel();
+                actuallyLvl();// to mogłoby być gdzie indziej
             }
         }
 
@@ -419,8 +420,10 @@ public class GameController {
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / maxHealth);
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
         Platform.runLater(() -> {
+            getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
             getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
+            getExpToNextLvl().setText("Exp: " + player.getExp() + "/" + expNextLvl);
         });
     }
 
