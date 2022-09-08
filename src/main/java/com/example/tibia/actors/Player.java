@@ -1,5 +1,6 @@
 package com.example.tibia.actors;
 
+import com.example.tibia.items.Lightsaber;
 import com.example.tibia.map.Field;
 
 import java.util.Random;
@@ -14,7 +15,9 @@ public class Player extends Actor {
     private Inventory inventory;
     private String nickName;
     private boolean healing;
+    private boolean hasLightsaber = false;
     private int maxHealth = 100;
+
 
 // constructors
 
@@ -42,6 +45,7 @@ public class Player extends Actor {
     }
     public int getMaxHealth(){ return this.maxHealth; }
     public void setMaxHealth(int health){ this.maxHealth = health; }
+    public boolean hasLightsaber(){ return this.hasLightsaber; }
 
 
 
@@ -53,16 +57,28 @@ public class Player extends Actor {
                 if (!(x==0 && y==0)){
                     Actor target = this.getField().getNeighbor(x, y).getActor();
                     if (target != null){
-                        String sound = (new Random().nextBoolean()) ? LIGHTSABER_HIT_1 : LIGHTSABER_HIT_2;
+                        String sound;
+                        if (hasLightsaber){
+                            sound = (new Random().nextBoolean()) ? LIGHTSABER_HIT_1 : LIGHTSABER_HIT_2;
+                        } else {
+                            sound = (new Random().nextBoolean()) ? PUNCH_1 : PUNCH_2;
+                        }
                         playSound(sound, (float) 0.3);
                         attack(target);
                     }
                 }
             }
         }
-        String sound = (new Random().nextBoolean())
+        String sound;
+        if (hasLightsaber){
+            sound = (new Random().nextBoolean())
                 ? LIGHTSABER_SWING_1 : (new Random().nextBoolean())
                 ? LIGHTSABER_SWING_2 : LIGHTSABER_SWING_3;
+        } else {
+            sound = (new Random().nextBoolean())
+                ? FIST_1 : (new Random().nextBoolean())
+                ? FIST_2 : FIST_3;
+        }
         playSound(sound, (float) 0.3);
         Thread attackCooldown = new Thread(() -> {
             this.attacking = true;
@@ -78,6 +94,7 @@ public class Player extends Actor {
 
     public void pickUpItem(Field field){
         if (field.getItem() != null){
+            if (field.getItem() instanceof Lightsaber){ hasLightsaber = true; }
             player.setStrength(getStrength()+ this.field.getItem().getStrength());
             player.setArmor(getArmor()+ this.field.getItem().getArmor());
             this.inventory.addItem(field.getItem());
@@ -110,6 +127,13 @@ public class Player extends Actor {
             this.healing = false;
         });
         heal.start();
+    }
+    @Override
+    public String getTileName() {
+        if (hasLightsaber){
+            return (facingRight) ? name + " right lightsaber" : name + " left lightsaber";
+        }
+        return (facingRight) ? name + " right" : name + " left";
     }
 
 }
