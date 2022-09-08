@@ -16,7 +16,8 @@ public enum FieldType {
     NEXT("next"),
     ENGINE("engine"),
     BOX_SMALL("box"),
-    BOX_BIG("box big");
+    BOX_BIG("box big"),
+    R2D2("R2D2");
 
     private final String tileName;
 
