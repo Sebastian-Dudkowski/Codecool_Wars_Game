@@ -17,6 +17,7 @@ public class Player extends Actor {
     private boolean healing;
     private boolean hasLightsaber = false;
     private int maxHealth = 100;
+    private int maxMana = 100;
 
 
 // constructors
@@ -47,8 +48,13 @@ public class Player extends Actor {
     public void setMaxHealth(int health){ this.maxHealth = health; }
     public boolean hasLightsaber(){ return this.hasLightsaber; }
 
+    public int getMaxMana() {
+        return maxMana;
+    }
 
-
+    public void setMaxMana(int maxMana) {
+        this.maxMana = maxMana;
+    }
 // methods
 
     public void attack() {

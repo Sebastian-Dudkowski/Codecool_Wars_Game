@@ -25,18 +25,14 @@ public class Main extends Application {
     private static FXMLLoader menuViewLoader;
     private static FXMLLoader nameSelectViewLoader;
     private static FXMLLoader gameViewLoader;
-    public static int expNextLvl;
-    public static int allHealth;
-    public static int maxMana;
+    public static double expNextLvl;
+
     public static Inventory inventory;
     public static Player player;
     public static GameMap map;
     public static int level;
     public static EQMap eq;
     public final int SCREEN_SIZE = 9;
-    public static String userName;
-    public static String amountHealth;
-    public static String amountMana;
     public static Clip clip;
 
 

@@ -218,7 +218,7 @@ public class GameController {
         getBorderpane().setCenter(getCanvas());
         getBorderPaneEQ().setCenter(getCanvasEQ());
         int maxHealth = player.getMaxHealth();
-        maxMana = player.getMana();
+        int maxMana = player.getMana();
         expNextLvl = 100;
         howManyExpToNextLvl();
         getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
@@ -243,13 +243,15 @@ public class GameController {
             player.setHealth(player.getHealth() + (player.getPlayerLvl() * 20));
             player.setMaxHealth(player.getMaxHealth() + (player.getPlayerLvl() * 20));
             player.setMana(player.getMana() + (player.getPlayerLvl() * 5));
-            maxMana = maxMana + (player.getPlayerLvl() * 5);
+            player.setMaxMana(player.getMaxMana()+ (player.getPlayerLvl() * 5));
+            player.setStrength(player.getStrength()+(player.getPlayerLvl()*3));
+            player.setArmor(player.getArmor()+player.getPlayerLvl()*3);
         }
         howManyExpToNextLvl();
     }
 
     private void howManyExpToNextLvl() {
-        expNextLvl = player.getPlayerLvl() * 100;
+        expNextLvl = player.getPlayerLvl() * 100*(player.getPlayerLvl() * 1.25);
 
     }
 
@@ -424,16 +426,16 @@ public class GameController {
 
     private void refreshingThePlayerStatusDisplay() {
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / player.getMaxHealth());
-        getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
+        getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / player.getMaxMana());
         getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
 
 
         getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / player.getMaxHealth());
-        getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / maxMana);
+        getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / player.getMaxMana());
         Platform.runLater(() -> {
             getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + player.getMaxHealth());
-            getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
+            getAmountOfMana().setText("Mana : " + player.getMana() + "/" + player.getMaxMana());
             getExpToNextLvl().setText("Exp: " + player.getExp() + "/" + expNextLvl);
         });
     }
