@@ -14,6 +14,7 @@ public class Player extends Actor {
     private Inventory inventory;
     private String nickName;
     private boolean healing;
+    private int maxHealth = 100;
 
 // constructors
 
@@ -39,6 +40,8 @@ public class Player extends Actor {
     public boolean isHealing() {
         return healing;
     }
+    public int getMaxHealth(){ return this.maxHealth; }
+    public void setMaxHealth(int health){ this.maxHealth = health; }
 
 
 
@@ -95,7 +98,9 @@ public class Player extends Actor {
         Thread heal = new Thread(() -> {
             this.healing = true;
             for (int i=0; i< 20; i++){
-                this.health++;
+                if (health < maxHealth){
+                    this.health++;
+                }
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {

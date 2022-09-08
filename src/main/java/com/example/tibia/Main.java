@@ -25,7 +25,6 @@ public class Main extends Application {
     private static FXMLLoader menuViewLoader;
     private static FXMLLoader nameSelectViewLoader;
     private static FXMLLoader gameViewLoader;
-    public static int maxHealth;
     public static int expNextLvl;
     public static int allHealth;
     public static int maxMana;
