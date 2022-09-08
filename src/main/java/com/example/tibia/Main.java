@@ -43,11 +43,9 @@ public class Main extends Application {
         clip = playSound(OPENING, (float) 0.2);
         setMenuView();
     }
+
     private static void setView(FXMLLoader view, String title) {
         try {
-            if(stage1!=null){
-                stage1.close();
-            }
             scene = new Scene(view.load());
             stage.setX(200.0);
             stage.setY(50.0);
@@ -78,6 +76,23 @@ public class Main extends Application {
         gameViewLoader = new FXMLLoader(Main.class.getResource("game.fxml"));
         setView(gameViewLoader, "Dungeon Crawl");
         ((GameController) gameViewLoader.getController()).setupKeys();
+    }
+
+    public static void setGameOverView(){
+        clip.stop();
+        stage.close();
+        stage = new Stage();
+        gameViewLoader = new FXMLLoader(Main.class.getResource("game-over.fxml"));
+        try {
+            scene = new Scene(gameViewLoader.load());
+            stage.setX(200.0);
+            stage.setY(50.0);
+            stage.setScene(scene);
+            stage.setTitle("Game Over");
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

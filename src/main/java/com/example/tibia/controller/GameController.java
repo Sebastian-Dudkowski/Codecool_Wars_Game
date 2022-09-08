@@ -16,6 +16,7 @@ import com.example.tibia.map.FieldType;
 import com.example.tibia.map.MapLoader;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -202,6 +203,7 @@ public class GameController {
         switch (keyEvent.getCode()) {
             case W:
             case UP:
+                if (player.isDead()){ player.die();}
                 map.getPlayer().move(0, -1);
                 break;
             case S:
@@ -492,7 +494,7 @@ public class GameController {
 
     private void startNpcMovement() {
         Thread moveNpcs = new Thread(() -> {
-            while (true) {
+            while (!player.isDead()) {
                 for (Actor npc : map.getNpcs()) {
                     moveNPC(npc);
                 }
@@ -502,13 +504,15 @@ public class GameController {
                     throw new RuntimeException(e);
                 }
             }
+            player.die();
         });
         moveNpcs.start();
+
     }
 
     private void startMapDisplay() {
         Thread refreshMap = new Thread(() -> {
-            while (true) {
+            while (!player.isDead()) {
                 displayMap();
                 try {
                     Thread.sleep(33); // refresh rate

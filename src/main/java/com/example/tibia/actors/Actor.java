@@ -1,6 +1,7 @@
 package com.example.tibia.actors;
 
 import com.example.tibia.Drawable;
+import com.example.tibia.Main;
 import com.example.tibia.map.Field;
 import com.example.tibia.map.FieldType;
 
@@ -125,6 +126,10 @@ public abstract class Actor implements Drawable {
     }
 
     public void kill(){
+        if (this instanceof Player){
+            player.setDead(true);
+            return;
+        }
         this.field.getGAME_MAP().removeNpc(this);
         this.field.setActor(null);
         player.setExp(player.getExp() + this.exp);

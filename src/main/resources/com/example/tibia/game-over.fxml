@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tibia.controller.GameOverController">
+   <children>
+      <ImageView fitHeight="425.0" fitWidth="621.0" layoutX="-11.0" layoutY="-20.0">
+         <image>
+            <Image url="@../../../images/game%20over.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="226.0" layoutY="282.0" text="Continue" textFill="#c8dd08">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <Button fx:id="continueButton" layoutX="93.0" layoutY="269.0" mnemonicParsing="false" onAction="#continueGame" opacity="0.0" prefHeight="79.0" prefWidth="413.0" text="CONTINUE" />
+   </children>
+</Pane>

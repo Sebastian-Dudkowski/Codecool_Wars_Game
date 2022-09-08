@@ -1,5 +1,6 @@
 package com.example.tibia.actors;
 
+import com.example.tibia.Main;
 import com.example.tibia.items.Lightsaber;
 import com.example.tibia.map.Field;
 import java.util.Random;
@@ -13,6 +14,7 @@ public class Player extends Actor {
 
     private Inventory inventory;
     private String nickName;
+    private boolean dead = false;
     private boolean healing;
     private boolean hasLightsaber = false;
     private int maxHealth = 100;
@@ -51,6 +53,12 @@ public class Player extends Actor {
     }
     public void setMaxMana(int maxMana) {
         this.maxMana = maxMana;
+    }
+    public boolean isDead() {
+        return dead;
+    }
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 // methods
 
@@ -137,6 +145,10 @@ public class Player extends Actor {
             return (facingRight) ? name + " right lightsaber" : name + " left lightsaber";
         }
         return (facingRight) ? name + " right" : name + " left";
+    }
+
+    public void die(){
+        Main.setGameOverView();
     }
 
 }
