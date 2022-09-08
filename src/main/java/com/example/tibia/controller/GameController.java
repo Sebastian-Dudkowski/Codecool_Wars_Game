@@ -345,9 +345,6 @@ public class GameController {
         getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / player.getMaxMana());
         getProgressExpToNextLvl().setProgress(((double) player.getExp() / 100) * 100 / expNextLvl);
 
-
-        getProgressHealth().setProgress(((double) player.getHealth() / 100) * 100 / player.getMaxHealth());
-        getProgressMana().setProgress(((double) player.getMana() / 100) * 100 / player.getMaxMana());
         Platform.runLater(() -> {
             getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
             getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + player.getMaxHealth());
