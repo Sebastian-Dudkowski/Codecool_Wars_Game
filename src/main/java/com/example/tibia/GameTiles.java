@@ -107,8 +107,6 @@ public class GameTiles {
         tileMap.put(ActorName.GUARD.getName() + " right alert", new Tile(83, 20));
         //R2D2
         tileMap.put(FieldType.R2D2.getTileName(), new Tile(86, 20));
-
-
         tileMap.put(ActorName.TROOPER.getName() + " left", new Tile(77, 20));
         tileMap.put(ActorName.TROOPER.getName() + " right", new Tile(78, 20));
         tileMap.put(ActorName.TROOPER.getName() + " left alert", new Tile(80, 20));

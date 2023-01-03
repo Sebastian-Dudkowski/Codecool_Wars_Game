@@ -24,21 +24,23 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import javax.sound.sampled.Clip;
-
 import java.util.Random;
 
 import static com.example.tibia.Main.*;
 import static com.example.tibia.sounds.SoundsPlayer.*;
 
-
-
 public class GameController {
 
+    public static GraphicsContext context;
+    public static GraphicsContext contextEQ;
+    private static String userName;
+    Clip clipOpening;
     @FXML
     private Label playerName;
     @FXML
@@ -71,122 +73,93 @@ public class GameController {
     private Label characterStats;
     @FXML
     private BorderPane borderpane;
-    public Label getPlayerName() {
-        return playerName;
-    }
-    public Label getAmountOfHealth() {
-        return amountOfHealth;
-    }
-    public Label getAmountOfMana() {
-        return amountOfMana;
-    }
-    public BorderPane getBorderPaneEQ() {
-        return borderPaneEQ;
-    }
-    public ProgressBar getProgressHealth() {
-        return progressHealth;
-    }
-    public ProgressBar getProgressMana() {
-        return progressMana;
-    }
-    public Canvas getCanvasEQ() {
-        return canvasEQ;
-    }
-    public Button getPickUpButton() {
-        return pickUpButton;
-    }
-    public Label getActionLabel() {
-        return actionLabel;
-    }
-    public Label getLvlPlayer() {
-        return lvlPlayer;
-    }
-    public Label getExpToNextLvl() {
-        return expToNextLvl;
-    }
-    public ProgressBar getProgressExpToNextLvl() {
-        return progressExpToNextLvl;
-    }
-    public Label getCharacterStats() {
-        return characterStats;
-    }
-    public Canvas getCanvas() {
-        return canvas;
-    }
-    public BorderPane getBorderpane() {
-        return borderpane;
-    }
-
-    public static GraphicsContext context;
-    public static GraphicsContext contextEQ;
-    private static String userName;
-
     @FXML
     private Pane paneText;
-
     @FXML
     private ImageView luke1;
-
     @FXML
     private ImageView luke2;
-
     @FXML
     private ImageView luke3;
-
     @FXML
     private ImageView r2d2;
 
+    private static void checkForNextLevel() {
+        if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
+            level++;
+            map = MapLoader.loadMap(player, level);
+        }
+    }
+
+    public Label getPlayerName() {
+        return playerName;
+    }
+
+    public Label getAmountOfHealth() {
+        return amountOfHealth;
+    }
+
+    public Label getAmountOfMana() {
+        return amountOfMana;
+    }
+
+    public BorderPane getBorderPaneEQ() {
+        return borderPaneEQ;
+    }
+
+    public ProgressBar getProgressHealth() {
+        return progressHealth;
+    }
+
+    public ProgressBar getProgressMana() {
+        return progressMana;
+    }
+
+    public Canvas getCanvasEQ() {
+        return canvasEQ;
+    }
+
+    public Button getPickUpButton() {
+        return pickUpButton;
+    }
 
     public void setPickUpButton(Button pickUpButton) {
         this.pickUpButton = pickUpButton;
     }
 
-    public Pane getPaneText() {
-        return paneText;
+    public Label getActionLabel() {
+        return actionLabel;
     }
 
-    public void setPaneText(Pane paneText) {
-        this.paneText = paneText;
+    public Label getLvlPlayer() {
+        return lvlPlayer;
     }
 
-    public ImageView getLuke1() {
-        return luke1;
+    public Label getExpToNextLvl() {
+        return expToNextLvl;
     }
 
-    public void setLuke1(ImageView luke1) {
-        this.luke1 = luke1;
+    public ProgressBar getProgressExpToNextLvl() {
+        return progressExpToNextLvl;
     }
 
-    public ImageView getLuke2() {
-        return luke2;
+    public Label getCharacterStats() {
+        return characterStats;
     }
 
-    public void setLuke2(ImageView luke2) {
-        this.luke2 = luke2;
+    public Canvas getCanvas() {
+        return canvas;
     }
 
-    public ImageView getLuke3() {
-        return luke3;
+    public BorderPane getBorderpane() {
+        return borderpane;
     }
-
-    public void setLuke3(ImageView luke3) {
-        this.luke3 = luke3;
-    }
-
-    public ImageView getR2d2() {
-        return r2d2;
-    }
-
-    public void setR2d2(ImageView r2d2) {
-        this.r2d2 = r2d2;
-    }
-    Clip clipOpening;
 
     @FXML
     public void initialize() {
         //
 
-        clipOpening =  playSound(UFO, (float) 0.8);
+        clipOpening = playSound(UFO, (float) 0.8);
         actionButton();
         userName = HelloController.getUserName();
         level = 1;
@@ -202,12 +175,12 @@ public class GameController {
         int maxHealth = player.getMaxHealth();
         int maxMana = player.getMana();
         expNextLvl = 100;
-        howManyExpToNextLvl();
+        setNextLevelExp();
         getLvlPlayer().setText("Lvl " + player.getPlayerLvl());
         getExpToNextLvl().setText("Exp: " + player.getExp() + "/" + expNextLvl);
         getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
         getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
-        actuallyLvl();
+        actualLevel();
         characterStatsText();
         displayEQ();
         getPickUpButton().addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> {
@@ -218,78 +191,65 @@ public class GameController {
         startNpcMovement();
     }
 
-    private void actuallyLvl() {
+    private void actualLevel() {
         if (player.getExp() >= expNextLvl) {
             player.setPlayerLvl(player.getPlayerLvl() + 1);
             player.setHealth(player.getHealth() + (player.getPlayerLvl() * 20));
             player.setMaxHealth(player.getMaxHealth() + (player.getPlayerLvl() * 20));
             player.setMana(player.getMana() + (player.getPlayerLvl() * 5));
-            player.setMaxMana(player.getMaxMana()+ (player.getPlayerLvl() * 5));
-            player.setStrength(player.getStrength()+(player.getPlayerLvl()*3));
-            player.setArmor(player.getArmor()+player.getPlayerLvl()*3);
+            player.setMaxMana(player.getMaxMana() + (player.getPlayerLvl() * 5));
+            player.setStrength(player.getStrength() + (player.getPlayerLvl() * 3));
+            player.setArmor(player.getArmor() + player.getPlayerLvl() * 3);
         }
-        howManyExpToNextLvl();
+        setNextLevelExp();
     }
 
-    private void howManyExpToNextLvl() {
-        expNextLvl = player.getPlayerLvl() * 100*(player.getPlayerLvl() * 1.25);
-
+    private void setNextLevelExp() {
+        expNextLvl = player.getPlayerLvl() * 100 * (player.getPlayerLvl() * 1.25);
     }
 
-
-    private void dialog(){
-        if(!paneText.isVisible()){
+    private void dialog() {
+        if (!paneText.isVisible()) {
             paneText.setVisible(true);
             paneText.setPrefHeight(200.0);
             Thread dialogR2D2 = new Thread(() -> {
                 clipOpening.stop();
-            luke1.setVisible(true);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            luke1.setVisible(false);
-            r2d2.setVisible(true);
-            playSound(R2D2,(float)0.3);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            r2d2.setVisible(false);
-            luke2.setVisible(true);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            luke2.setVisible(false);
-            r2d2.setVisible(true);
-            playSound(R2D2,(float)0.3);
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            r2d2.setVisible(false);
-            luke3.setVisible(true);
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            luke3.setVisible(false);
-            paneText.setVisible(false);
-            paneText.setPrefHeight(0.0);
-            clipOpening.start();
+                idk(luke1);
+                idk(luke2);
+                luke3.setVisible(true);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                luke3.setVisible(false);
+                paneText.setVisible(false);
+                paneText.setPrefHeight(0.0);
+                clipOpening.start();
 
-        });
-        dialogR2D2.start();
+            });
+            dialogR2D2.start();
         }
 
     }
 
+    private void idk(ImageView luke1) {
+        luke1.setVisible(true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        luke1.setVisible(false);
+        r2d2.setVisible(true);
+        playSound(R2D2, (float) 0.3);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        r2d2.setVisible(false);
+    }
 
     private void actionButton() {
         getActionLabel().setText("Button Action\n" +
@@ -308,15 +268,13 @@ public class GameController {
     private void characterStatsText() {
         getCharacterStats().setText("SKILL" + userName + "\n" +
                 "Armor : " + player.getArmor() + "\n" +
-                "Strength : " + player.getStrength()+ "\n"  +
-                "Power : 0"+ "\n" );
+                "Strength : " + player.getStrength() + "\n" +
+                "Power : 0" + "\n");
     }
-
 
     public void setupKeys() {
         Main.scene.setOnKeyPressed(this::onKeyPressed);
     }
-
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -359,11 +317,11 @@ public class GameController {
                 player.heal();
                 break;
             case N:
-                showAction();
+                toggleAction();
                 break;
             case B:
                 characterStatsText();
-                showSkills();
+                toggleSkills();
                 break;
             case Z:
                 System.exit(0);
@@ -375,7 +333,7 @@ public class GameController {
         }
     }
 
-    private void showAction() {
+    private void toggleAction() {
         if (!actionButton.isVisible()) {
             actionButton.setVisible(true);
             actionLabel.setOpacity(1.0);
@@ -386,7 +344,7 @@ public class GameController {
         }
     }
 
-    private void showSkills() {
+    private void toggleSkills() {
         if (!actionButton.isVisible()) {
             actionButton.setVisible(true);
             characterStats.setOpacity(1.0);
@@ -398,7 +356,6 @@ public class GameController {
         }
     }
 
-
     public void displayEQ() {
         contextEQ.setFill(Color.BLACK);
         contextEQ.fillRect(0, 0, canvasEQ.getWidth(), canvasEQ.getHeight());
@@ -409,8 +366,7 @@ public class GameController {
                     for (int i = 0; i < inventory.getItems().size(); i++) {
                         if (cell.getTileName().equals(inventory.getItems().get(i).getTileName())) {
                             EqTiles.drawTile(contextEQ, "empty", x, y);
-
-                            if(cell.getTileName().equals((ItemName.SWORD.getName()))){
+                            if (cell.getTileName().equals((ItemName.SWORD.getName()))) {
                                 GameTiles.drawTile(contextEQ, ItemName.SWORD1.getName(), x, y);
                                 break;
                             }
@@ -418,16 +374,13 @@ public class GameController {
                             break;
                         } else {
                             EqTiles.drawTile(contextEQ, cell.getTileName(), x, y);
-
                         }
                     }
                 } else {
                     EqTiles.drawTile(contextEQ, cell.getTileName(), x, y);
                 }
             }
-
         }
-
     }
 
     public void displayMap() {
@@ -440,17 +393,16 @@ public class GameController {
                         map.getPlayer().getY() + y - (player.getViewRange() / 2)
                 );
                 if (field.getActor() != null) {
-                    if(field.getActor() instanceof Vader) {
-                        ((Vader)field.getActor()).setCanvasX(x);
-                        ((Vader)field.getActor()).setCanvasY(y);
+                    if (field.getActor() instanceof Vader) {
+                        ((Vader) field.getActor()).setCanvasX(x);
+                        ((Vader) field.getActor()).setCanvasY(y);
                     }
                     displayActor(field, x, y);
                     continue;
                 }
-                if (displayDecorations(field, x, y)){
+                if (displayDecorations(field, x, y)) {
                     continue;
-                }
-                else if (field.getItem() != null) {
+                } else if (field.getItem() != null) {
                     GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                     GameTiles.drawTile(context, field.getTileName(), x, y);
                 } else {
@@ -458,7 +410,7 @@ public class GameController {
                 }
                 displayAnimations(x, y);
                 checkForNextLevel();
-                actuallyLvl();// to mogłoby być gdzie indziej
+                actualLevel();
             }
         }
         refreshingThePlayerStatusDisplay();
@@ -477,7 +429,7 @@ public class GameController {
         });
     }
 
-    private void displayActor(Field field, int x, int y){
+    private void displayActor(Field field, int x, int y) {
         Actor actor = field.getActor();
         changeColorName(field);
         context.fillText(actor.getName(), x * 64, y * 64 - 15);
@@ -486,33 +438,25 @@ public class GameController {
         GameTiles.drawTile(context, field.getTileName(), x, y);
     }
 
-    private boolean displayDecorations(Field field, int x, int y){
-        switch (field.getType()){
+    private boolean displayDecorations(Field field, int x, int y) {
+        switch (field.getType()) {
             case EMPTY:
                 GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
                 return true;
             case ENGINE:
                 Field engine = new Field(map, FieldType.ENGINE, x, y, new Random().nextInt(1, 3));
-                GameTiles.drawTile(context, engine.getTileName(), x ,y);
-                GameTiles.drawTile(context, FieldType.EMPTY.getTileName(), x ,y);
+                GameTiles.drawTile(context, engine.getTileName(), x, y);
+                GameTiles.drawTile(context, FieldType.EMPTY.getTileName(), x, y);
                 return true;
             case BOX_SMALL:
                 GameTiles.drawTile(context, field.getTileName(), x, y);
                 return true;
             case BOX_BIG:
                 GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
-                GameTiles.drawTile(context, field.getTileName(), x ,y);
+                GameTiles.drawTile(context, field.getTileName(), x, y);
                 return true;
             default:
                 return false;
-        }
-    }
-
-
-    private static void checkForNextLevel() {
-        if (map.getPlayer().getField().getType().equals(FieldType.NEXT)) {
-            level++;
-            map = MapLoader.loadMap(player, level);
         }
     }
 
@@ -527,8 +471,8 @@ public class GameController {
      */
     private void displayAnimations(int x, int y) {
         if (x == player.getViewRange() / 2 + 1 && y == player.getViewRange() / 2 + 1) {
-            if (player.isAttacking()){
-                if (player.hasLightsaber()){
+            if (player.isAttacking()) {
+                if (player.hasLightsaber()) {
                     String imageName = (player.isFacingRight()) ? "sword flash right" : "sword flash left";
                     GameTiles.drawTile(context, imageName, x, y);
                 } else {
@@ -536,17 +480,15 @@ public class GameController {
                     GameTiles.drawTile(context, imageName, x, y);
                 }
             }
-            if (player.isHealing()){
+            if (player.isHealing()) {
                 String imageName = (new Random().nextBoolean()) ? "Player heal 1" : "Player heal 2";
                 GameTiles.drawTile(context, imageName, x, y);
             }
         }
-
-
-        for (Actor npc : map.getNpcs()){
-            if(npc instanceof Vader & npc.isAttacking()){
+        for (Actor npc : map.getNpcs()) {
+            if (npc instanceof Vader & npc.isAttacking()) {
                 String imageName = (npc.isFacingRight()) ? "Vader sword flash right" : "Vader sword flash left";
-                GameTiles.drawTile(context, imageName, ((Vader) npc).getCanvasX() + 1,((Vader) npc).getCanvasY() + 1);
+                GameTiles.drawTile(context, imageName, ((Vader) npc).getCanvasX() + 1, ((Vader) npc).getCanvasY() + 1);
             }
         }
     }
@@ -564,7 +506,6 @@ public class GameController {
 
         String line = "-";
         if (health * 100 / player.getMaxHealth() > 75) {
-
             line = "----";
         } else if (health * 100 / player.getMaxHealth() > 50) {
             line = "---";
