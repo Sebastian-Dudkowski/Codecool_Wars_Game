@@ -247,10 +247,9 @@ public class GameController {
                 "←, A - LEFT\n" +
                 "→, D - RIGHT\n" +
                 "SPACE - Attack\n" +
-                "K - Open Door\n" +
-                "E - Pick up Item\n" +
-                "Z - close Game\n" +
-                "N - show Button Action\n");
+                "F - Open Door\n" +
+                "E - Pick Up Item\n" +
+                "BACKSPACE - Quit The Game\n");
     }
 
     public void setupKeys() {
@@ -280,7 +279,7 @@ public class GameController {
             case SPACE:
                 map.getPlayer().attack();
                 break;
-            case K:
+            case F:
                 if (player.getInventory().getItems() != null) {
                     for (Item item : player.getInventory().getItems()) {
                         if (item instanceof Key) {
@@ -300,7 +299,7 @@ public class GameController {
             case N:
                 toggleAction();
                 break;
-            case Z:
+            case BACK_SPACE:
                 System.exit(0);
                 break;
             case O:
