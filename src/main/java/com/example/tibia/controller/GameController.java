@@ -39,8 +39,7 @@ public class GameController {
 
     public static GraphicsContext context;
     public static GraphicsContext contextEQ;
-    private static String userName;
-    Clip clipOpening;
+    private Clip clipOpening;
     @FXML
     private Label playerName;
     @FXML
@@ -149,7 +148,7 @@ public class GameController {
 
         clipOpening = playSound(UFO, (float) 0.8);
         actionButton();
-        userName = HelloController.getUserName();
+        String userName = HelloController.getUserName();
         level = 1;
         context = canvas.getGraphicsContext2D();
         contextEQ = canvasEQ.getGraphicsContext2D();
@@ -238,16 +237,21 @@ public class GameController {
         r2d2.setVisible(false);
     }
 
+    @FXML
     private void actionButton() {
-        getActionLabel().setText("Button Action\n" +
-                "↑, W - UP\n" +
-                "↓, S - DOWN\n" +
-                "←, A - LEFT\n" +
-                "→, D - RIGHT\n" +
-                "SPACE - Attack\n" +
-                "F - Open Door\n" +
-                "E - Pick Up Item\n" +
-                "BACKSPACE - Quit The Game\n");
+        getActionLabel().setText("""
+                  Key Bindings:
+                  ↑, W - UP
+                  ↓, S - DOWN
+                  ←, A - LEFT
+                  →, D - RIGHT
+                  SPACE - Attack
+                  F - Open Door
+                  E - Pick Up Item
+
+                  press BACKSPACE to\s
+                  Quit The Game
+                """);
     }
 
     public void setupKeys() {
@@ -256,28 +260,18 @@ public class GameController {
 
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case W:
-            case UP:
-                map.getPlayer().move(0, -1);
-                break;
-            case S:
-            case DOWN:
-                map.getPlayer().move(0, 1);
-                break;
-            case A:
-            case LEFT:
+            case W, UP -> map.getPlayer().move(0, -1);
+            case S, DOWN -> map.getPlayer().move(0, 1);
+            case A, LEFT -> {
                 map.getPlayer().move(-1, 0);
                 map.getPlayer().setFacingRight(false);
-                break;
-            case D:
-            case RIGHT:
+            }
+            case D, RIGHT -> {
                 map.getPlayer().move(1, 0);
                 map.getPlayer().setFacingRight(true);
-                break;
-            case SPACE:
-                map.getPlayer().attack();
-                break;
-            case F:
+            }
+            case SPACE -> map.getPlayer().attack();
+            case F -> {
                 if (player.getInventory().getItems() != null) {
                     for (Item item : player.getInventory().getItems()) {
                         if (item instanceof Key) {
@@ -286,21 +280,16 @@ public class GameController {
                         }
                     }
                 }
-                break;
-            case E:
+            }
+            case E -> {
                 player.pickUpItem(player.getField());
                 displayEQ();
-                break;
-            case H:
-                player.heal();
-                break;
-            case BACK_SPACE:
-                System.exit(0);
-                break;
-            case O:
-                dialog();
-                break;
-            default:
+            }
+            case H -> player.heal();
+            case BACK_SPACE -> System.exit(0);
+            case O -> dialog();
+            default -> {
+            }
         }
     }
 
@@ -388,23 +377,28 @@ public class GameController {
 
     private boolean displayDecorations(Field field, int x, int y) {
         switch (field.getType()) {
-            case EMPTY:
+            case EMPTY -> {
                 GameTiles.drawTile(context, map.generateRandomEmptyField(x, y).getTileName(), x, y);
                 return true;
-            case ENGINE:
+            }
+            case ENGINE -> {
                 Field engine = new Field(map, FieldType.ENGINE, x, y, new Random().nextInt(1, 3));
                 GameTiles.drawTile(context, engine.getTileName(), x, y);
                 GameTiles.drawTile(context, FieldType.EMPTY.getTileName(), x, y);
                 return true;
-            case BOX_SMALL:
+            }
+            case BOX_SMALL -> {
                 GameTiles.drawTile(context, field.getTileName(), x, y);
                 return true;
-            case BOX_BIG:
+            }
+            case BOX_BIG -> {
                 GameTiles.drawTile(context, FieldType.FLOOR.getTileName(), x, y);
                 GameTiles.drawTile(context, field.getTileName(), x, y);
                 return true;
-            default:
+            }
+            default -> {
                 return false;
+            }
         }
     }
 
@@ -452,7 +446,7 @@ public class GameController {
 
     private String HPline(int health) {
 
-        String line = "-";
+        String line;
         if (health * 100 / player.getMaxHealth() > 75) {
             line = "----";
         } else if (health * 100 / player.getMaxHealth() > 50) {
