@@ -60,8 +60,6 @@ public class GameController {
     @FXML
     private Canvas canvasEQ;
     @FXML
-    private Pane actionButton;
-    @FXML
     private Label actionLabel;
     @FXML
     private Label lvlPlayer;
@@ -296,9 +294,6 @@ public class GameController {
             case H:
                 player.heal();
                 break;
-            case N:
-                toggleAction();
-                break;
             case BACK_SPACE:
                 System.exit(0);
                 break;
@@ -306,17 +301,6 @@ public class GameController {
                 dialog();
                 break;
             default:
-        }
-    }
-
-    private void toggleAction() {
-        if (!actionButton.isVisible()) {
-            actionButton.setVisible(true);
-            actionLabel.setOpacity(1.0);
-        } else {
-            actionButton.setVisible(false);
-            actionLabel.setOpacity(0.0);
-
         }
     }
 
