@@ -383,7 +383,7 @@ public class GameController {
         }
     }
 
-    public void displayMap() {
+    public synchronized void displayMap() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         for (int x = 0; x < player.getViewRange(); x++) {
