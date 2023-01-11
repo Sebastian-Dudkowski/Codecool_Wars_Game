@@ -70,8 +70,6 @@ public class GameController {
     @FXML
     private ProgressBar progressExpToNextLvl;
     @FXML
-    private Label characterStats;
-    @FXML
     private BorderPane borderpane;
     @FXML
     private Pane paneText;
@@ -123,10 +121,6 @@ public class GameController {
         return pickUpButton;
     }
 
-    public void setPickUpButton(Button pickUpButton) {
-        this.pickUpButton = pickUpButton;
-    }
-
     public Label getActionLabel() {
         return actionLabel;
     }
@@ -141,10 +135,6 @@ public class GameController {
 
     public ProgressBar getProgressExpToNextLvl() {
         return progressExpToNextLvl;
-    }
-
-    public Label getCharacterStats() {
-        return characterStats;
     }
 
     public Canvas getCanvas() {
@@ -181,7 +171,6 @@ public class GameController {
         getAmountOfHealth().setText("HP : " + player.getHealth() + "/" + maxHealth);
         getAmountOfMana().setText("Mana : " + player.getMana() + "/" + maxMana);
         actualLevel();
-        characterStatsText();
         displayEQ();
         getPickUpButton().addEventFilter(MouseEvent.MOUSE_CLICKED, (e) -> {
             inventory.addItem(map.getPlayer().getField().getItem());
@@ -260,16 +249,8 @@ public class GameController {
                 "SPACE - Attack\n" +
                 "K - Open Door\n" +
                 "E - Pick up Item\n" +
-                "B - Show Skills\n" +
                 "Z - close Game\n" +
                 "N - show Button Action\n");
-    }
-
-    private void characterStatsText() {
-        getCharacterStats().setText("SKILL" + userName + "\n" +
-                "Armor : " + player.getArmor() + "\n" +
-                "Strength : " + player.getStrength() + "\n" +
-                "Power : 0" + "\n");
     }
 
     public void setupKeys() {
@@ -319,10 +300,6 @@ public class GameController {
             case N:
                 toggleAction();
                 break;
-            case B:
-                characterStatsText();
-                toggleSkills();
-                break;
             case Z:
                 System.exit(0);
                 break;
@@ -340,18 +317,6 @@ public class GameController {
         } else {
             actionButton.setVisible(false);
             actionLabel.setOpacity(0.0);
-
-        }
-    }
-
-    private void toggleSkills() {
-        if (!actionButton.isVisible()) {
-            actionButton.setVisible(true);
-            characterStats.setOpacity(1.0);
-
-        } else {
-            actionButton.setVisible(false);
-            characterStats.setOpacity(0.0);
 
         }
     }
